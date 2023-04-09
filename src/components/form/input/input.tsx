@@ -13,8 +13,9 @@ export default function Input({ variation = "filled" }: Props) {
         type="text"
         placeholder="sldkfje"
         className={clsx(
-          "px-5 py-[22px] text-body-1 leading-5 outline-none",
-          variation === "filled" && "bg-white"
+          "px-5 py-[22px] text-body-1 leading-5 outline-none border-[1px]",
+          variation === "filled" && "bg-white",
+          variation === "outlined" && "border-"
         )}
       />
     </div>
