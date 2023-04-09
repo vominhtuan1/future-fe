@@ -2,7 +2,6 @@ import clsx from "clsx";
 import React from "react";
 
 interface Props {
-  variation?: "outlined" | "filled";
   placehodler?: string;
   label?: string;
   helperText?: string;
@@ -10,8 +9,7 @@ interface Props {
   className?: string;
 }
 
-export default function Input({
-  variation = "filled",
+export default function TextArea({
   placehodler = "aA",
   label,
   helperText,
@@ -27,13 +25,10 @@ export default function Input({
           {label}
         </h3>
       )}
-      <input
-        type="text"
+      <textarea
         placeholder={placehodler}
         className={clsx(
-          "px-5 py-[22px] text-body-1 leading-5 outline-none border-[1px]",
-          variation === "filled" && "bg-white border-white",
-          variation === "outlined" && "border-light-gray bg-transparent",
+          "px-5 py-[22px] text-body-1 resize-none leading-5 outline-none border-[1px] border-light-gray bg-transparent",
           error && "border-red-500",
           className && className
         )}

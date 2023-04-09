@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../form/button/button";
+import Input from "../form/input/input";
 
 export default function Subcribe() {
   return (
@@ -12,11 +13,14 @@ export default function Subcribe() {
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry standard dummy text.
         </p>
-        <Button
-          type="primary"
-          title="Subcribe"
-          className="py-5 font-bold px-9 text-heading-6"
-        />
+        <div className="flex">
+          <Input placehodler="Your email here..." className="w-[437px]" />
+          <Button
+            type="primary"
+            title="Subcribe"
+            className="py-5 font-bold px-9 text-heading-6"
+          />
+        </div>
       </div>
       <img
         src="/person.png"

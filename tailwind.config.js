@@ -48,27 +48,34 @@ module.exports = {
 					},
 				],
 				"heading-6": [
+					"1.25rem",
+					{
+						lineHeight: "1.25rem",
+						letterSpacing: "-0.03125rem",
+					},
+				],
+				"heading-7": [
 					"1.125rem",
 					{
 						lineHeight: "1.125rem",
 						letterSpacing: "-0.03125rem",
 					},
 				],
-				"heading-7": [
+				"heading-8": [
 					"0.875rem",
 					{
 						lineHeight: "0.875rem",
 						letterSpacing: "-0.03125rem",
 					},
 				],
-				"heading-8": [
+				"heading-9": [
 					"0.75rem",
 					{
 						lineHeight: "0.75rem",
 						letterSpacing: "-0.03125rem",
 					},
 				],
-				"heading-9": [
+				"heading-10": [
 					"0.625rem",
 					{
 						lineHeight: "0.625rem",
