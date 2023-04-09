@@ -1,10 +1,17 @@
 import React from "react";
+import BannerHome from "./components/ui/banner/banner-home";
+import CategoryCard from "./components/ui/cateogry/category-card";
+import Input from "./components/form/input/input";
 
 function App() {
   return (
     <div>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <p className="text-dark-slate-gray">test test text</p>
+      <BannerHome />
+      <div className="grid grid-cols-2 mt-6 gap-x-5">
+        <CategoryCard />
+        <CategoryCard />
+      </div>
+      <Input variation="filled" />
     </div>
   );
 }
