@@ -8,6 +8,7 @@ module.exports = {
 				wheat: "#F8DFB6",
 				black: "#000201",
 				scarlet: "#F8F8F8",
+				"light-gray": "#D9D9D9",
 				"philippine-gray": "#8F8F8F",
 			},
 			fontSize: {
