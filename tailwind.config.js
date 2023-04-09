@@ -8,6 +8,7 @@ module.exports = {
 				wheat: "#F8DFB6",
 				black: "#000201",
 				scarlet: "#F8F8F8",
+				"light-gray": "#D9D9D9",
 				"philippine-gray": "#8F8F8F",
 			},
 			fontSize: {
@@ -15,84 +16,84 @@ module.exports = {
 					"4rem",
 					{
 						lineHeight: "4rem",
-						letterSpacing: "-0.125rem",
+						letterSpacing: "-0.03125rem",
 					},
 				],
 				"heading-2": [
 					"3rem",
 					{
 						lineHeight: "3rem",
-						letterSpacing: "-0.125rem",
+						letterSpacing: "-0.03125rem",
 					},
 				],
 				"heading-3": [
 					"2.5rem",
 					{
 						lineHeight: "2.5rem",
-						letterSpacing: "-0.125rem",
+						letterSpacing: "-0.03125rem",
 					},
 				],
 				"heading-4": [
 					"2.25rem",
 					{
 						lineHeight: "2.25rem",
-						letterSpacing: "-0.125rem",
+						letterSpacing: "-0.03125rem",
 					},
 				],
 				"heading-5": [
 					"1.5rem",
 					{
 						lineHeight: "1.5rem",
-						letterSpacing: "-0.125rem",
+						letterSpacing: "-0.03125rem",
 					},
 				],
 				"heading-6": [
 					"1.125rem",
 					{
 						lineHeight: "1.125rem",
-						letterSpacing: "-0.125rem",
+						letterSpacing: "-0.03125rem",
 					},
 				],
 				"heading-7": [
 					"0.875rem",
 					{
 						lineHeight: "0.875rem",
-						letterSpacing: "-0.125rem",
+						letterSpacing: "-0.03125rem",
 					},
 				],
 				"heading-8": [
 					"0.75rem",
 					{
 						lineHeight: "0.75rem",
-						letterSpacing: "-0.125rem",
+						letterSpacing: "-0.03125rem",
 					},
 				],
 				"heading-9": [
 					"0.625rem",
 					{
 						lineHeight: "0.625rem",
-						letterSpacing: "-0.125rem",
+						letterSpacing: "-0.03125rem",
 					},
 				],
 				"body-1": [
 					"1.125rem",
 					{
 						lineHeight: "2.1875rem",
-						letterSpacing: "-0.125rem",
+						letterSpacing: "-0.03125rem",
 					},
 				],
 				"body-2": [
 					"1rem",
 					{
 						lineHeight: "2.1875rem",
-						letterSpacing: "-0.125rem",
+						letterSpacing: "-0.03125rem",
 					},
 				],
 				"body-3": [
 					"0.875rem",
 					{
 						lineHeight: "2.1875rem",
-						letterSpacing: "-0.125rem",
+						letterSpacing: "-0.03125rem",
 					},
 				],
 			},
