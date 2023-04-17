@@ -1,5 +1,4 @@
 import React from "react";
-import TextArea from "./components/form/input/text-area";
 
 function App() {
   return (
