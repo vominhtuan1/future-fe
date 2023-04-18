@@ -1,9 +1,6 @@
 import React from "react";
 import CircleBtn from "../../form/button-circle/social-btn";
-import RocketIcon from "../../icon/rocket";
-import LockIcon from "../../icon/lock";
-import ReloadIcon from "../../icon/reload";
-import PhoneIcon from "../../icon/phone";
+import { RocketIcon, LockIcon, ReloadIcon, PhoneIcon } from "../../icon";
 
 interface Props {
   children?: React.ReactNode;

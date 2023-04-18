@@ -1,6 +1,6 @@
 import React from "react";
 
-import Future from "../../icon/future-icon";
+import Future from "../../icon/future";
 
 const Footer = () => {
   return (

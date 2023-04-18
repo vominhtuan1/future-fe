@@ -1,6 +1,6 @@
 import React from "react";
 
-import Future from "../../icon/future-icon";
+import Future from "../../icon/future";
 import Cart from "../../icon/cart";
 import Search from "../../icon/search";
 import User from "../../icon/user";
