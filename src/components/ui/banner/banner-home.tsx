@@ -15,7 +15,7 @@ export default function BannerHome() {
         </h3>
         <Button
           title="Shop now"
-          type="secondary"
+          variant="secondary"
           className="px-[60px] w-fit py-5 capitalize text-heading-6"
         />
       </div>

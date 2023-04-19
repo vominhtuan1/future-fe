@@ -14,9 +14,9 @@ export default function Subcribe() {
           industry. Lorem Ipsum has been the industry standard dummy text.
         </p>
         <div className="flex">
-          <Input placehodler="Your email here..." className="w-[437px]" />
+          <Input placeholder="Your email here..." className="w-[437px]" />
           <Button
-            type="primary"
+            variant="primary"
             title="Subcribe"
             className="py-5 font-bold px-9 text-heading-6"
           />

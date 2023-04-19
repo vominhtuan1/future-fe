@@ -1,15 +1,24 @@
 import React from "react";
 
 interface Props {
-  type: "primary" | "secondary" | "teritary";
+  variant: "primary" | "secondary" | "teritary";
   title: string;
   className?: string;
+  type?: "button" | "submit" | "reset";
   onClick?: () => void;
+  form?: string;
 }
 
-export default function Button({ type, title, className, onClick }: Props) {
+export default function Button({
+  variant,
+  title,
+  className,
+  onClick,
+  type = "button",
+  form,
+}: Props) {
   const handleBtnColor = () => {
-    switch (type) {
+    switch (variant) {
       case "primary":
         return "bg-dark-slate-gray text-wheat";
       case "secondary":
@@ -22,6 +31,8 @@ export default function Button({ type, title, className, onClick }: Props) {
   return (
     <button
       onClick={onClick}
+      form={form}
+      type={type}
       className={`font-body ${handleBtnColor()} ${className}`}
     >
       {title}

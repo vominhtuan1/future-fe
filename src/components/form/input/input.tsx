@@ -1,23 +1,64 @@
 import clsx from "clsx";
 import React from "react";
+import { RegisterOptions, UseFormRegister } from "react-hook-form";
 
 interface Props {
   variation?: "outlined" | "filled";
-  placehodler?: string;
+  placeholder?: string;
   label?: string;
-  helperText?: string;
-  error?: boolean;
+  error?: string;
   className?: string;
+  register?: UseFormRegister<any>;
+  option?: RegisterOptions;
+  type?: "text" | "password" | "number";
+  name?: string;
 }
 
 export default function Input({
   variation = "filled",
-  placehodler = "aA",
+  placeholder = "aA",
   label,
-  helperText,
   error,
   className,
+  register,
+  option,
+  name,
+  type,
 }: Props) {
+  if (register && name) {
+    return (
+      <div>
+        {label && (
+          <h3
+            className={clsx(
+              "text-heading-6 mb-[15px]",
+              error && "text-red-500"
+            )}
+          >
+            {label}
+          </h3>
+        )}
+        <input
+          {...register(name, { ...option })}
+          type={type}
+          placeholder={placeholder}
+          className={clsx(
+            "px-5 py-[22px] text-body-1 leading-5 outline-none border-[1px]",
+            variation === "filled" && "bg-white border-white",
+            variation === "outlined" && "border-light-gray bg-transparent",
+            error && "border-red-500",
+            className && className
+          )}
+        />
+        {error && (
+          <p className={clsx("text-body-3", error && "text-red-500")}>
+            {error}
+          </p>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div>
       {label && (
@@ -28,8 +69,8 @@ export default function Input({
         </h3>
       )}
       <input
-        type="text"
-        placeholder={placehodler}
+        type={type}
+        placeholder={placeholder}
         className={clsx(
           "px-5 py-[22px] text-body-1 leading-5 outline-none border-[1px]",
           variation === "filled" && "bg-white border-white",
@@ -38,10 +79,8 @@ export default function Input({
           className && className
         )}
       />
-      {helperText && (
-        <p className={clsx("text-body-3", error && "text-red-500")}>
-          {helperText}
-        </p>
+      {error && (
+        <p className={clsx("text-body-3", error && "text-red-500")}>{error}</p>
       )}
     </div>
   );
