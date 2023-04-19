@@ -1,8 +1,7 @@
 import React from "react";
-import ContactUs from "./components/ui/contact-us";
 
 function App() {
-  return <ContactUs />;
+  return <div>hello</div>;
 }
 
 export default App;
