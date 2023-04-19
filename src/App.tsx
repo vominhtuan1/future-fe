@@ -5,29 +5,8 @@ import Button from "./components/form/button/button";
 import Accordion from "./components/ui/Accordion/Accordion";
 import FormComment from "./components/ui/form/form-comment";
 
-interface FormValue {
-  from: number;
-  to: number;
-}
-
 function App() {
-  const {
-    register,
-    getValues,
-    formState: { errors },
-    handleSubmit,
-  } = useForm<FormValue>({
-    defaultValues: {
-      from: 0,
-      to: 0,
-    },
-  });
-
-  const onSubmit = (value: FormValue) => {
-    console.log("value: ", value);
-  };
-
-  return <FormComment />;
+  return <div>hello world</div>;
 }
 
 export default App;
