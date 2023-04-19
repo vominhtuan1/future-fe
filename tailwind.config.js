@@ -10,6 +10,8 @@ module.exports = {
 				scarlet: "#F8F8F8",
 				"light-gray": "#D9D9D9",
 				"philippine-gray": "#8F8F8F",
+				yellow: "#FF9533",
+				"red-accent": "#FF5050",
 			},
 			fontSize: {
 				"heading-1": [

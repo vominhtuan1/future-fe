@@ -7,6 +7,7 @@ interface Props {
   helperText?: string;
   error?: boolean;
   className?: string;
+  labelClassName?: string;
 }
 
 export default function TextArea({
@@ -15,12 +16,17 @@ export default function TextArea({
   helperText,
   error,
   className,
+  labelClassName,
 }: Props) {
   return (
     <div>
       {label && (
         <h3
-          className={clsx("text-heading-6 mb-[15px]", error && "text-red-500")}
+          className={clsx(
+            "text-heading-6 mb-[15px]",
+            labelClassName,
+            error && "text-red-500"
+          )}
         >
           {label}
         </h3>
