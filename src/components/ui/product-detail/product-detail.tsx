@@ -47,7 +47,7 @@ export default function ProductDetail({ product }: Props) {
   };
 
   return (
-    <div className="grid grid-cols-7 gap-x-[47px] px-[75px]">
+    <div className="grid grid-cols-7 gap-x-[47px]">
       <div className="relative col-span-3 space-y-3">
         <Swiper
           loop
