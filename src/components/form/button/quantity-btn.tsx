@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import CircleMinus from "../../icon/circle-minus";
-import CirclePlus from "../../icon/circle-plus";
+import { CircleMinus, CirclePlus } from "../../icon";
 
 interface Props {
   quantity: number;
@@ -19,17 +18,17 @@ export default function QuantityBtn({ quantity, onChange }: Props) {
   };
 
   return (
-    <div className="relative flex items-center py-2 px-4 gap-x-9 border-[1px] border-black w-fit select-none">
+    <div className="relative flex items-center py-[10px] px-4 gap-x-9 border-[1px] border-black w-fit select-none">
       <CircleMinus
         onClick={() => handleChangeQuantity("minus")}
-        className="cursor-pointer"
+        className="w-6 h-6 cursor-pointer"
       />
       <span className="absolute text-body-1 left-1/2 -translate-x-[50%]">
         {quantity}
       </span>
       <CirclePlus
         onClick={() => handleChangeQuantity("plus")}
-        className="cursor-pointer"
+        className="cursor-pointer h-6-w-6"
       />
     </div>
   );

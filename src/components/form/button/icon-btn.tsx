@@ -1,25 +1,16 @@
 import React from "react";
-import Trash from "../../icon/trash";
-import Heart from "../../icon/heart";
+import clsx from "clsx";
 
 interface Props {
-  type: "wishList" | "trash";
+  icon: React.ReactNode;
   onClick?: () => void;
+  className?: string;
 }
 
-export default function IconBtn({ type, onClick }: Props) {
-  const handleCSS = () => {
-    switch (type) {
-      case "wishList":
-        return "border-[1px] border-light-gray";
-      case "trash":
-        return "bg-scarlet";
-    }
-  };
-
+export default function IconBtn({ icon, onClick, className }: Props) {
   return (
-    <button onClick={onClick} className={`p-3 ${handleCSS()}`}>
-      {type === "trash" ? <Trash /> : <Heart />}
+    <button onClick={onClick} className={clsx("p-3", className)}>
+      {icon}
     </button>
   );
 }

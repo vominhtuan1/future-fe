@@ -1,7 +1,6 @@
-// icon:bx-heart | Boxicons https://boxicons.com/ | Atisa
 import * as React from "react";
 
-function Heart(props: React.SVGProps<SVGSVGElement>) {
+export function Heart(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -14,5 +13,3 @@ function Heart(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-
-export default Heart;

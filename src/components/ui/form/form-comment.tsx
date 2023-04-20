@@ -39,7 +39,7 @@ export default function FormComment({ defaultValue }: Props) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h3 className="mb-10 text-center text-heading-5">Write your review</h3>
+      <h3 className="mb-10 text-center text-heading-6">Write your review</h3>
 
       <Controller
         name={"rate"}
@@ -56,7 +56,7 @@ export default function FormComment({ defaultValue }: Props) {
           <div className="mb-5">
             <h5
               className={clsx(
-                "mb-5 text-heading-7",
+                "mb-5 text-heading-8",
                 invalid && "text-red-accent"
               )}
             >
@@ -89,7 +89,7 @@ export default function FormComment({ defaultValue }: Props) {
         label="Your Review"
         placehodler="Write your review here...."
         className="w-full text-body-3 py-[13px] px-[22px]"
-        labelClassName="text-heading-7"
+        labelClassName="text-heading-8"
         register={register}
         name="review"
         option={{ required: { value: true, message: "Review is required" } }}
