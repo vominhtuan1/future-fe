@@ -1,13 +1,18 @@
 import React from "react";
-import Input from "./components/form/input/input";
-import { useForm } from "react-hook-form";
-import Button from "./components/form/button/button";
-import Accordion from "./components/ui/Accordion/Accordion";
-import FormComment from "./components/ui/form/form-comment";
-import ProductDetail from "./components/ui/product-detail/product-detail";
+import { Route, Routes } from "react-router-dom";
+import MainLayout from "./layout/main-layout";
+import Home from "./pages/home";
+import About from "./pages/about";
 
 function App() {
-  return <div>hello world</div>;
+  return (
+    <Routes>
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<Home />} />
+        <Route path="about" element={<About />} />
+      </Route>
+    </Routes>
+  );
 }
 
 export default App;
