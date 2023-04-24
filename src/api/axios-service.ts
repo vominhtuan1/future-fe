@@ -1,11 +1,12 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const axiosService = axios.create({
   baseURL: "https://api.example.com",
 });
 axiosService.interceptors.request.use(
   async function (config) {
-    const token = 'getCookie("Authorization")';
+    const token = Cookies.get("Authorization");
 
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
