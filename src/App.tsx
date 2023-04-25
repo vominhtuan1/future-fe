@@ -1,15 +1,17 @@
 import React from "react";
-import TextArea from "./components/form/input/text-area";
-import Checkout from "./components/ui/checkout/checkout";
-import { Footer } from "./components/ui/footer";
-import Input from "./components/form/input/input";
-import Button from "./components/form/button/button";
+import { Route, Routes } from "react-router-dom";
+import MainLayout from "./layout/main-layout";
+import Home from "./pages/home";
+import About from "./pages/about";
+
 function App() {
   return (
-    <div>
-      <h1>Hello world</h1>
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<Home />} />
+        <Route path="about" element={<About />} />
+      </Route>
+    </Routes>
   );
 }
 

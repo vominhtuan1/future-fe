@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Form, Field } from "react-final-form";
 import Input from "../../form/input/input";
 import TextArea from "../../form/input/text-area";
 import CircleBtn from "../../form/button-circle/social-btn";
@@ -46,26 +45,26 @@ const Checkout = () => {
           <div className="grid grid-cols-2 place-content-between">
             <div className="">
               <Input
-                placehodler="Your first name here..."
+                placeholder="Your first name here..."
                 variation="outlined"
                 label="First Name"
                 className="w-full bg-gray-50 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               />
             </div>
             <Input
-              placehodler="Your last name here..."
+              placeholder="Your last name here..."
               variation="outlined"
               label="Last Name"
               className="w-full bg-gray-50 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
             <Input
-              placehodler="Your phone here..."
+              placeholder="Your phone here..."
               variation="outlined"
               label="Phone"
               className="w-full bg-gray-50 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
             <Input
-              placehodler="Your email here..."
+              placeholder="Your email here..."
               variation="outlined"
               label="Email"
               className="w-full bg-gray-50 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -159,7 +158,7 @@ const Checkout = () => {
               <span>$&ensp;10</span>
             </div>
             <Button
-              type="primary"
+              variant="primary"
               title="Place Order"
               className="w-full min-h-[56px] font-bold pl-[10px] pr-[10px]"
             />

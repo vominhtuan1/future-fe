@@ -1,22 +1,28 @@
 import React from "react";
 import Button from "../../form/button/button";
 
-export default function CategoryCard() {
+interface Props {
+  title: string;
+  subTitle: string;
+  image: string;
+}
+
+export default function CategoryCard({ title, subTitle, image }: Props) {
   return (
     <div className="grid grid-cols-2 bg-scarlet h-[350px]">
       <div className="pt-[35px] pl-[30px]">
         <p className="capitalize text-body-1 mb-[25px] text-dark-slate-gray">
-          Living room
+          {title}
         </p>
-        <h3 className="text-heading-4 mb-[35px]">The best foam padded chair</h3>
+        <h3 className="text-heading-4 mb-[35px]">{subTitle}</h3>
         <Button
           title="Shop now"
-          type="secondary"
+          variant="secondary"
           className="px-10 py-3 capitalize"
         />
       </div>
       <div className="flex items-center justify-center h-full overflow-hidden">
-        <img src="/chair.png" className="object-contain w-auto h-full" />
+        <img src={image} className="object-contain w-auto h-full" />
       </div>
     </div>
   );

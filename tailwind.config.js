@@ -10,6 +10,8 @@ module.exports = {
 				scarlet: "#F8F8F8",
 				"light-gray": "#D9D9D9",
 				"philippine-gray": "#8F8F8F",
+				yellow: "#FF9533",
+				"red-accent": "#FF5050",
 			},
 			fontSize: {
 				"heading-1": [
@@ -41,41 +43,48 @@ module.exports = {
 					},
 				],
 				"heading-5": [
+					"2rem",
+					{
+						lineHeight: "2rem",
+						letterSpacing: "-0.03125rem",
+					},
+				],
+				"heading-6": [
 					"1.5rem",
 					{
 						lineHeight: "1.5rem",
 						letterSpacing: "-0.03125rem",
 					},
 				],
-				"heading-6": [
+				"heading-7": [
 					"1.25rem",
 					{
 						lineHeight: "1.25rem",
 						letterSpacing: "-0.03125rem",
 					},
 				],
-				"heading-7": [
+				"heading-8": [
 					"1.125rem",
 					{
 						lineHeight: "1.125rem",
 						letterSpacing: "-0.03125rem",
 					},
 				],
-				"heading-8": [
+				"heading-9": [
 					"0.875rem",
 					{
 						lineHeight: "0.875rem",
 						letterSpacing: "-0.03125rem",
 					},
 				],
-				"heading-9": [
+				"heading-10": [
 					"0.75rem",
 					{
 						lineHeight: "0.75rem",
 						letterSpacing: "-0.03125rem",
 					},
 				],
-				"heading-10": [
+				"heading-11": [
 					"0.625rem",
 					{
 						lineHeight: "0.625rem",
