@@ -49,9 +49,9 @@ const DescriptionReview = () => {
         </div>
 
         <div className="flex justify-center items-center mt-10 mb-5">
-          <div className="w-[10px] h-[10px] rounded-full bg-teal-500 mr-4"></div>
-          <div className="w-[10px] h-[10px] rounded-full bg-teal-800 mr-4"></div>
-          <div className="w-[10px] h-[10px] rounded-full bg-teal-500"></div>
+          <button className="w-[10px] h-[10px] rounded-full bg-teal-500 mr-4"></button>
+          <button className="w-[10px] h-[10px] rounded-full bg-teal-800 mr-4"></button>
+          <button className="w-[10px] h-[10px] rounded-full bg-teal-500"></button>
         </div>
       </div>
     </div>
