@@ -19,10 +19,13 @@ export default function Input({
   className,
 }: Props) {
   return (
-    <div>
+    <div className="pr-[10px]">
       {label && (
         <h3
-          className={clsx("text-heading-6 mb-[15px]", error && "text-red-500")}
+          className={clsx(
+            "text-heading-6 mb-[15px] mt-[10px]",
+            error && "text-red-500"
+          )}
         >
           {label}
         </h3>
