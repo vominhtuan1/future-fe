@@ -15,6 +15,7 @@ export { default as TwitterIcon } from "./twitter";
 export { default as UserIcon } from "./user";
 export { default as WhiteHeartIcon } from "./white-heart";
 export { default as UnderlineIcon } from "./underline";
+export { default as MobileIcon } from "./mobile";
 export * from "./heart-fill";
 export * from "./chervon-left";
 export * from "./chervon-right";

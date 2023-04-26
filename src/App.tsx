@@ -7,13 +7,15 @@ import OrderHistory from "./pages/order-history";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="order-history" element={<OrderHistory />} />
-      </Route>
-    </Routes>
+    <div>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="order-history" element={<OrderHistory />} />
+        </Route>
+      </Routes>
+    </div>
   );
 }
 
