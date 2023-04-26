@@ -25,3 +25,4 @@ export * from "./circle-minus";
 export * from "./circle-plus";
 export * from "./edit";
 export * from "./delete";
+export * from "./bike";

@@ -60,7 +60,7 @@ export default function Input({
   }
 
   return (
-    <div className="pr-[10px]">
+    <div>
       {label && (
         <h3
           className={clsx("text-heading-7 mb-[15px]", error && "text-red-500")}

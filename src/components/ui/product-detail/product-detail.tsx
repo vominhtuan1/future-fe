@@ -14,7 +14,7 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Pagination } from "swiper";
-import { convertPrice } from "../../../utils/string-utils";
+import { formatPrice } from "../../../utils/string-utils";
 
 const StyledRating = styled(Rating)({
   "& .MuiRating-icon": {
@@ -89,7 +89,7 @@ export default function ProductDetail({ product }: Props) {
         />
 
         <p className="font-bold text-heading-4 text-dark-slate-gray mb-[30px]">
-          {convertPrice(product.price)}
+          {formatPrice(product.price)}
         </p>
 
         <div className="text-body-1 line-clamp-3 mb-[30px]">
