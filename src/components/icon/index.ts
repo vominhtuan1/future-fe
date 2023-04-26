@@ -23,3 +23,5 @@ export * from "./trash";
 export * from "./heart";
 export * from "./circle-minus";
 export * from "./circle-plus";
+export * from "./edit";
+export * from "./delete";
