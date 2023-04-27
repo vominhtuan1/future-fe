@@ -8,6 +8,11 @@ import OrderChekoutCard from "../card/order-checkout-card";
 import { orderApi } from "../../../api/order.api";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import ZaloPay from "../../icon/zalopay";
+import Visa from "../../icon/visa";
+import MasterCard from "../../icon/master-card";
+import JCB from "../../icon/jcb";
+import clsx from "clsx";
 
 interface Product {
   id: number;
@@ -43,6 +48,7 @@ const FormCheckout = () => {
   const navigate = useNavigate();
 
   const [paymentMethod, setPaymentMethod] = useState("COD");
+  const [zaloPayMethod, setZaloPayMethod] = useState<string>();
   const [subTotal, setSubTotal] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
 
@@ -58,11 +64,11 @@ const FormCheckout = () => {
       ),
     },
     {
-      title: "VNPay",
+      title: "ZaloPay",
       icon: (
         <CreditCard
           className={
-            paymentMethod === "VNPay" ? "text-wheat" : "text-philippine-gray"
+            paymentMethod === "ZaloPay" ? "text-wheat" : "text-philippine-gray"
           }
         />
       ),
@@ -73,28 +79,64 @@ const FormCheckout = () => {
     setPaymentMethod(method);
   };
 
+  const handleClickZaloPayMethod = (method: string) => {
+    setZaloPayMethod(method);
+  };
+
   const handlePlaceOrder = async () => {
     try {
-      toast.loading("Placing order ...", { id: "toastCreatOrder" });
-      const body: ICreateOrder = {
-        address: "6444e1985e256d1e8182a2ee",
-        orderItems: cartProds.map((prod) => ({
-          product: prod._id,
-          price: prod.price,
-          quantity: prod.quantity,
-        })),
-      };
-      await orderApi.createOrder(body);
-      toast.dismiss("toastCreatOrder");
-      toast.success("Place order successfully");
+      if (paymentMethod === "COD") {
+        toast.loading("Placing order ...", { id: "toastCreatOrder" });
+        const body: ICreateOrder = {
+          address: "6444e1985e256d1e8182a2ee",
+          orderItems: cartProds.map((prod) => ({
+            product: prod._id,
+            price: prod.price,
+            quantity: prod.quantity,
+          })),
+        };
+        await orderApi.createOrder(body);
+        toast.dismiss("toastCreatOrder");
+        toast.success("Place order successfully");
 
-      navigate({
-        pathname: "/order-history",
-        search: createSearchParams({
-          status: "pending",
-        }).toString(),
-      });
+        navigate({
+          pathname: "/order-history",
+          search: createSearchParams({
+            status: "pending",
+          }).toString(),
+        });
+      } else {
+        if (!zaloPayMethod) {
+          toast.error("Please choose one of the payment methods of ZaloPay");
+          return;
+        }
+        toast.loading("Placing order ...", { id: "toastCreatOrder" });
+        // Create order
+        const body: ICreateOrder = {
+          address: "6444e1985e256d1e8182a2ee",
+          orderItems: cartProds.map((prod) => ({
+            product: prod._id,
+            price: prod.price,
+            quantity: prod.quantity,
+          })),
+        };
+        const orderId = await orderApi.createOrder(body);
+
+        // Create ZaloPay Payment URL
+        const amount = cartProds.reduce(
+          (total, prod) => total + prod.quantity * prod.price,
+          0
+        );
+        const paymentURL = await orderApi.createZaloPayPaymentURL({
+          amount,
+          order_id: orderId,
+          bank_code: zaloPayMethod,
+        });
+        toast.dismiss("toastCreatOrder");
+        window.location.replace(paymentURL);
+      }
     } catch (error) {
+      toast.dismiss("toastCreatOrder");
       console.log("error: ", error);
     }
   };
@@ -141,6 +183,47 @@ const FormCheckout = () => {
                 />
               ))}
             </div>
+            {paymentMethod === "ZaloPay" && (
+              <div className="mt-8">
+                <h4 className="mb-5 text-heading-8">
+                  Select one of ZaloPay methods:
+                </h4>
+
+                <div className="flex gap-x-5">
+                  <div
+                    onClick={() => handleClickZaloPayMethod("QR")}
+                    className={clsx(
+                      "flex p-3 border-2 cursor-pointer gap-x-5 w-fit",
+                      zaloPayMethod === "QR" &&
+                        "border-emerald-700 bg-slate-200"
+                    )}
+                  >
+                    <ZaloPay className="drop-shadow-md" />
+                    <div className="flex flex-col justify-around">
+                      <h5 className="font-semibold select-none text-heading-9">
+                        Open ZaloPay app
+                      </h5>
+                      <p className="select-none text-heading-10 text-philippine-gray">
+                        Scan QR for payment
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    onClick={() => handleClickZaloPayMethod("CC")}
+                    className={clsx(
+                      "flex items-center p-3 border-2 cursor-pointer gap-x-5 w-fit",
+                      zaloPayMethod === "CC" &&
+                        "border-emerald-700 bg-slate-200"
+                    )}
+                  >
+                    <Visa />
+                    <MasterCard />
+                    <JCB />
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
         <div className="bg-scarlet px-7 py-[34px] h-fit">

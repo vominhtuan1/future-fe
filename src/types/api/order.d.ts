@@ -21,3 +21,13 @@ declare interface ICreateOrder {
   }[];
   address: string;
 }
+
+declare interface ICreateZaloPayOrder {
+  amount: number;
+  order_id: string;
+  bank_code: string;
+}
+
+declare interface IQueryOrderZaloPayStatusRes {
+  orderStatus: number;
+}

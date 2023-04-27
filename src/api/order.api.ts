@@ -22,4 +22,21 @@ export const orderApi = {
 
     return response.data.data;
   },
+
+  createZaloPayPaymentURL: async (body: ICreateZaloPayOrder) => {
+    const response = await axiosService.post<IResponseSuccess<string>>(
+      `${URL}/pay-with-zalopay`,
+      body
+    );
+
+    return response.data.data;
+  },
+
+  queryZaloPayOrderStatus: async (app_trans_id: string) => {
+    const response = await axiosService.post<
+      IResponseSuccess<IQueryOrderZaloPayStatusRes>
+    >(`${URL}/query-zalopay-order-status`, { app_trans_id });
+
+    return response.data.data;
+  },
 };

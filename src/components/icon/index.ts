@@ -28,3 +28,4 @@ export * from "./delete";
 export * from "./bike";
 export * from "./loading";
 export * from "./pay-online";
+export * from "./zalopay";
