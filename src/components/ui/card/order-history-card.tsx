@@ -1,6 +1,7 @@
 import React from "react";
-import { convertPrice } from "../../../utils/string-utils";
+import { formatPrice } from "../../../utils/string-utils";
 import Button from "../../form/button/button";
+import OrderChekoutCard from "./order-checkout-card";
 
 interface Props {
   order: IOrderHistory;
@@ -15,20 +16,12 @@ export default function OrderHistoryCard({ order }: Props) {
           {new Date(order.createdAt).toLocaleDateString()}
         </h4>
       </div>
-      <div className="flex gap-x-4">
-        <img src="./chair2.jpg" className="w-32 h-32" />
-        <div className="flex flex-col justify-evenly">
-          <h4 className="font-bold text-heading-7">
-            {order.firstProduct.name}
-          </h4>
-          <span className="text-philippine-gray">
-            x{order.firstProduct.quantity}
-          </span>
-          <p className="font-bold text-heading-7 text-dark-slate-gray">
-            {convertPrice(order.firstProduct.price)}
-          </p>
-        </div>
-      </div>
+      <OrderChekoutCard
+        imgUrl={order.firstProduct.thumbnail}
+        name={order.firstProduct.name}
+        price={order.firstProduct.price}
+        quantity={order.firstProduct.quantity}
+      />
       {order.orderItemsLength > 1 && (
         <p className="text-heading-8">
           and{" "}

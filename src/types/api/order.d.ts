@@ -12,3 +12,12 @@ declare interface IOrderHistory {
   };
   orderItemsLength: number;
 }
+
+declare interface ICreateOrder {
+  orderItems: {
+    product: string;
+    price: number;
+    quantity: number;
+  }[];
+  address: string;
+}

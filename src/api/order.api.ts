@@ -13,4 +13,13 @@ export const orderApi = {
 
     return response.data.data;
   },
+
+  createOrder: async (body: ICreateOrder) => {
+    const response = await axiosService.post<IResponseSuccess<string>>(
+      `${URL}`,
+      body
+    );
+
+    return response.data.data;
+  },
 };

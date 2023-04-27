@@ -15,7 +15,7 @@ export default function OrderHistory() {
   const navigate = useNavigate();
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const [seletedStatus, setSelectedStatus] = useState<string | null>(null);
+  const [seletedStatus, setSelectedStatus] = useState<string>();
   const [orders, setOrders] = useState<IOrderHistory[]>([]);
 
   const handleClickStatus = (status: string) => () => {
@@ -48,13 +48,15 @@ export default function OrderHistory() {
           status: "pending",
         }).toString(),
       });
+    } else {
+      setSelectedStatus(status);
     }
   }, []);
 
   useEffect(() => {
     const status = searchParams.get("status");
     if (status) {
-      setSelectedStatus(status);
+      console.log("status: ", status);
       handleFetchOrders(status);
     }
   }, [searchParams.get("status")]);
