@@ -5,6 +5,7 @@ import Home from "./pages/home";
 import About from "./pages/about";
 import OrderHistory from "./pages/order-history";
 import Addresses from "./pages/addresses";
+import ZaloPayResult from "./pages/zalo-pay-result";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="about" element={<About />} />
         <Route path="order-history" element={<OrderHistory />} />
         <Route path="addresses" element={<Addresses />} />
+        <Route path="zalo-pay-result" element={<ZaloPayResult />} />
       </Route>
     </Routes>
   );
