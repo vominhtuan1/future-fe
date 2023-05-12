@@ -1,31 +1,41 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import {
-  decrement,
-  increment,
-  selectCounter,
-} from "../redux/reducers/counter-slice";
+import BannerHome from "../components/ui/banner/banner-home";
+import { selectCategories } from "../redux/reducers/category-slice";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper";
+import CategoryCard from "../components/ui/category/category-card";
 
 export default function Home() {
-  const counter = useAppSelector(selectCounter).value;
-  const dispatch = useAppDispatch();
+  const categories = useAppSelector(selectCategories);
 
   return (
     <div>
-      <h3>This is home page</h3>
-      <button
-        className="p-2 rounded-lg bg-slate-300"
-        onClick={() => dispatch(increment())}
-      >
-        Increment
-      </button>
-      <span>{counter}</span>
-      <button
-        className="p-2 rounded-lg bg-slate-300"
-        onClick={() => dispatch(decrement())}
-      >
-        Decrement
-      </button>
+      <BannerHome />
+      <div className="mt-20 mx-[75px]">
+        <Swiper
+          slidesPerView={2}
+          spaceBetween={20}
+          pagination={true}
+          modules={[Pagination]}
+        >
+          {categories.length > 0 &&
+            categories.map((item, index) => (
+              <SwiperSlide key={item._id}>
+                <CategoryCard
+                  _id={item._id}
+                  image={item.image}
+                  title={item.name}
+                  subTitle={
+                    "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+                  }
+                />
+              </SwiperSlide>
+            ))}
+        </Swiper>
+      </div>
     </div>
   );
 }
