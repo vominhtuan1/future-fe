@@ -2,60 +2,49 @@ import React, { useState } from "react";
 import CircleBtn from "../../form/button-circle/social-btn";
 import CartIcon from "../../icon/cart";
 import WhiteHeartIcon from "../../icon/white-heart";
+import { formatPrice } from "../../../utils/string-utils";
 
 interface Props {
-  // children: React.ReactNode;
-  sourceImage: string;
+  product: IProductCard;
 }
 
-const ProductCard = ({ sourceImage }: Props) => {
-  console.log(sourceImage);
-  const [state, setState] = useState<boolean>(false);
-  const handleMouseEnter = () => {
-    setState(true);
-  };
-  const handleMouseLeft = () => {
-    setState(false);
-  };
+const ProductCard = ({ product }: Props) => {
   return (
-    <div
-      className="flex relative rounded w-72 h-96 hover:cursor-pointer"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeft}
-    >
+    <div className="relative group flex h-[400px] rounded hover:cursor-pointer overflow-hidden select-none">
       <img
-        src={sourceImage}
-        alt="product"
-        className="rounded-xl min-w-full min-h-full"
+        src={product.thumbnail}
+        alt="product thumbnail"
+        className="min-w-full min-h-full rounded-xl"
       />
-      <div className="absolute top-5 right-3 flex justify-center items-center bg-red-600 w-11 h-6 text-white text-sm rounded-lg ">
-        <div className="text-red">New</div>
+      <span
+        className="absolute text-body-3 leading-[21px] px-2 
+            py-[2px] text-white bg-red-600 rounded-lg top-5 right-4"
+      >
+        New
+      </span>
+
+      <div className="absolute transition-all duration-300 inset-y-32 group-hover:right-3 -right-12">
+        <CircleBtn
+          type="black"
+          className="mb-5 transition duration-300 ease-in-out delay-150 hover:-translate-y-1"
+        >
+          <WhiteHeartIcon className="text-white" />
+        </CircleBtn>
+
+        <CircleBtn
+          type="wheat"
+          className="transition duration-300 ease-in-out delay-150 hover:-translate-y-1"
+        >
+          <CartIcon />
+        </CircleBtn>
       </div>
-      {state ? (
-        <div className="absolute inset-y-32 right-3">
-          <CircleBtn
-            type="black"
-            className="mb-5 hover:bg-white transition ease-in-out delay-150 hover:-translate-y-1 duration-300"
-          >
-            <WhiteHeartIcon />
-          </CircleBtn>
-          <CircleBtn
-            type="wheat"
-            className="hover:bg-white transition ease-in-out delay-150 hover:-translate-y-1 duration-300"
-          >
-            <CartIcon />
-          </CircleBtn>
+      <div className="absolute bottom-4 left-4 right-4">
+        <div className="mb-[15px] px-[14px] py-[7px] leading-[21px] text-white rounded-[10px] text-body-3 w-fit bg-emerald-700">
+          {product.category.name}
         </div>
-      ) : (
-        <></>
-      )}
-      <div className="absolute bottom-4 left-4">
-        <div className="flex justify-center items-center w-28 h-8 text-white bg-emerald-700 rounded-lg mb-3">
-          Living Room
-        </div>
-        <div className="flex justify-center items-center w-64 h-12 bg-white rounded-lg ">
-          <div className="mr-20 font-bold">Teak wood chair</div>
-          <div className="text-green-700">$24</div>
+        <div className="px-[14px] py-[15px] bg-white rounded-lg ">
+          <p className="font-bold line-clamp-1">{product.name}</p>
+          <p className="text-green-700">{formatPrice(product.price)}</p>
         </div>
       </div>
     </div>
