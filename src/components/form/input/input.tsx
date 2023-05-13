@@ -31,7 +31,7 @@ export default function Input({
         {label && (
           <h3
             className={clsx(
-              "text-heading-6 mb-[15px]",
+              "text-heading-7 mb-[15px]",
               error && "text-red-500"
             )}
           >
@@ -60,13 +60,10 @@ export default function Input({
   }
 
   return (
-    <div className="pr-[10px]">
+    <div>
       {label && (
         <h3
-          className={clsx(
-            "text-heading-6 mb-[15px] mt-[10px]",
-            error && "text-red-500"
-          )}
+          className={clsx("text-heading-7 mb-[15px]", error && "text-red-500")}
         >
           {label}
         </h3>

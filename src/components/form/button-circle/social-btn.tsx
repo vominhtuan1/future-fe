@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React from "react";
 
 interface Props {
@@ -40,7 +41,7 @@ const CircleBtn = ({ type, image, className, children, onClick }: Props) => {
           {children}
         </button>
       ) : (
-        <button className={`w-10 h-10 rounded-full`}>
+        <button className={clsx(`w-10 h-10 rounded-full`, className)}>
           <img src={image} alt="avatar" className="rounded-full" />
         </button>
       )}

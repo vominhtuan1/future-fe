@@ -20,7 +20,7 @@ export default function Button({
   const handleBtnColor = () => {
     switch (variant) {
       case "primary":
-        return "bg-dark-slate-gray text-wheat";
+        return "bg-dark-slate-gray text-wheat border-2 border-dark-slate-gray";
       case "secondary":
         return "text-dark-slate-gray border-2 border-dark-slate-gray";
       case "teritary":

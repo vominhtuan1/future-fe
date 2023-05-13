@@ -6,3 +6,8 @@ declare interface IProductInfo {
   description: string;
   price: number;
 }
+
+declare type FavoriteProduct = Pick<IProductInfo, "_id" | "name" | "price"> & {
+  thumbnail: string;
+  isStock: boolean;
+};
