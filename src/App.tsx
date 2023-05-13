@@ -5,10 +5,11 @@ import Home from "./pages/home";
 import About from "./pages/about";
 import CartItem from "./components/ui/CarItem/CarItem";
 import WishList from "./components/ui/WishList/WishList";
+import ProductCard from "./components/ui/ProductCard/product-card";
 function App() {
   return (
     <div>
-      <WishList></WishList>
+      <CartItem></CartItem>
     </div>
   );
 }
