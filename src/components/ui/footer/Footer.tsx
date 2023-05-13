@@ -61,42 +61,42 @@ const Footer = () => {
           <div className="flex flex-wrap">
             <div className="w-[80px] h-[80px] overflow-hidden flex bg-slate-200 mr-4 mb-4">
               <img
-                src="/src/images/footer6.png"
+                src="./footer6.png"
                 alt="6"
                 className="inline-block object-cover"
               />
             </div>
             <div className="w-[80px] h-[80px] overflow-hidden flex bg-slate-200 mr-4 mb-4">
               <img
-                src="/src/images/footer5.png"
+                src="./footer5.png"
                 alt="5"
                 className="inline-block object-cover"
               />
             </div>
             <div className="w-[80px] h-[80px] overflow-hidden flex bg-slate-200 mr-4 mb-4">
               <img
-                src="/src/images/footer4.png"
+                src="./footer4.png"
                 alt="4"
                 className="inline-block object-cover"
               />
             </div>
             <div className="w-[80px] h-[80px] overflow-hidden flex bg-slate-200 mr-4 mb-4">
               <img
-                src="/src/images/footer3.png"
+                src="./footer3.png"
                 alt="3"
                 className="inline-block object-cover"
               />
             </div>
             <div className="w-[80px] h-[80px] overflow-hidden flex bg-slate-200 mr-4 mb-4">
               <img
-                src="/src/images/footer2.png"
+                src="./footer2.png"
                 alt="2"
                 className="inline-block object-cover"
               />
             </div>
             <div className="w-[80px] h-[80px] overflow-hidden flex bg-slate-200 mr-4 mb-4">
               <img
-                src="/src/images/footer1.png"
+                src="./footer1.png"
                 alt="1"
                 className="inline-block object-cover"
               />

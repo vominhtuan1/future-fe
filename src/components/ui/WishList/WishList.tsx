@@ -1,6 +1,6 @@
 import React from "react";
 import { RecycleIcon } from "../../icon";
-import { convertPrice } from "../../../utils/string-utils";
+import { formatPrice } from "../../../utils/string-utils";
 import Button from "../../form/button/button";
 
 interface Props {
@@ -36,7 +36,7 @@ const WishList = ({ product }: Props) => {
               {product.name}
             </h2>
             <p className="text-xl font-bold text-green-800">
-              {convertPrice(product.price)}
+              {formatPrice(product.price)}
             </p>
           </div>
         </div>
