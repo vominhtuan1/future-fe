@@ -24,10 +24,14 @@ function AboutCard({ children, title, icon, className }: Props) {
   };
 
   return (
-    <div className={`${className} flex flex-col py-5 w-64 h-52`}>
-      <CircleBtn type="gray">{returnIcon()}</CircleBtn>
-      <h2 className="pt-8 text-xl font-black">{title}</h2>
-      <span className="text-sm text-gray-500">{children}</span>
+    <div className={`${className}`}>
+      <CircleBtn type="gray" className="p-[15px] w-[60px] h-[60px]">
+        {returnIcon()}
+      </CircleBtn>
+      <h2 className="mt-10 mb-[15px] font-bold text-heading-7">{title}</h2>
+      <span className="text-body-3 leading-[25px] text-philippine-gray">
+        {children}
+      </span>
     </div>
   );
 }

@@ -9,7 +9,7 @@ export default function Subcribe() {
         <h3 className="mb-[10px] text-heading-3 leading-[60px]">
           Subscribe now and get 10% off all items
         </h3>
-        <p className="mb-10 text-body-2">
+        <p className="mb-10 text-body-2 text-philippine-gray">
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry standard dummy text.
         </p>
@@ -18,7 +18,7 @@ export default function Subcribe() {
           <Button
             variant="primary"
             title="Subcribe"
-            className="py-5 font-bold px-9 text-heading-6"
+            className="py-5 font-bold px-9 text-heading-8"
           />
         </div>
       </div>

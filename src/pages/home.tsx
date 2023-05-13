@@ -12,6 +12,7 @@ import { toast } from "react-hot-toast";
 import { productAPI } from "../api/product.api";
 import ProductCard from "../components/ui/ProductCard/product-card";
 import Strengths from "../components/ui/Strengths/Strengths";
+import Subcribe from "../components/ui/subcribe";
 
 export default function Home() {
   const categories = useAppSelector(selectCategories);
@@ -85,8 +86,14 @@ export default function Home() {
           </Swiper>
         </div>
       </div>
-
-      <Strengths />
+      {/* Strength */}
+      <div className="px-[76px] mb-[100px]">
+        <Strengths />
+      </div>
+      {/* Subcribe */}
+      <div className="px-[76px] mb-[100px]">
+        <Subcribe />
+      </div>
     </div>
   );
 }

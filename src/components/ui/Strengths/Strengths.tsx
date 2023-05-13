@@ -3,12 +3,12 @@ import AboutCard from "./AboutCard";
 
 function Strengths() {
   return (
-    <div className="flex gap-x-[85px] px-[76px]">
-      <div>
+    <div className="flex gap-x-[85px]">
+      <div className="w-1/2">
         <h1 className="font-bold text-heading-3">
           We guarantee the safety of your shopping
         </h1>
-        <div className="pt-10 columns-2">
+        <div className="mt-[50px] grid grid-cols-2 gap-[50px]">
           <AboutCard title="Fast Shipping" icon="rocket">
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry Lorem Ipsum has
@@ -27,7 +27,7 @@ function Strengths() {
           </AboutCard>
         </div>
       </div>
-      <div className="">
+      <div className="w-1/2">
         <img
           src="/strength_img.png"
           alt="strength image"

@@ -7,6 +7,11 @@ declare interface IProductInfo {
   price: number;
 }
 
+declare type FavoriteProduct = Pick<IProductInfo, "_id" | "name" | "price"> & {
+  thumbnail: string;
+  isStock: boolean;
+};
+
 declare interface IProductCard {
   _id: string;
   name: string;
