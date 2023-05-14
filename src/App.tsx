@@ -9,6 +9,7 @@ import Checkout from "./pages/checkout";
 import toast, { Toaster, useToasterStore } from "react-hot-toast";
 import ZaloPayResult from "./pages/zalo-pay-result";
 
+import ProductCard from "./components/ui/ProductCard/product-card";
 function App() {
   const { toasts } = useToasterStore();
   const TOAST_LIMIT = 1;
