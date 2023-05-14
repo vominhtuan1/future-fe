@@ -9,6 +9,7 @@ import Checkout from "./pages/checkout";
 import toast, { Toaster, useToasterStore } from "react-hot-toast";
 import ZaloPayResult from "./pages/zalo-pay-result";
 import ContactUs from "./pages/contact-us";
+import ErrorPage from "./pages/error";
 
 function App() {
   const { toasts } = useToasterStore();
@@ -32,6 +33,7 @@ function App() {
           <Route path="checkout" element={<Checkout />} />
           <Route path="zalo-pay-result" element={<ZaloPayResult />} />
           <Route path="contact-us" element={<ContactUs />} />
+          <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
       <Toaster
