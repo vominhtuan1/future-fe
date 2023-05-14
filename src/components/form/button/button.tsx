@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Props {
-  variant: "primary" | "secondary" | "teritary";
+  variant: "primary" | "secondary" | "teritary" | "wheat";
   title: string;
   className?: string;
   type?: "button" | "submit" | "reset";
@@ -25,6 +25,8 @@ export default function Button({
         return "text-dark-slate-gray border-2 border-dark-slate-gray";
       case "teritary":
         return "bg-black text-white";
+      case "wheat":
+        return "bg-wheat text-dark-slate-gray";
     }
   };
 

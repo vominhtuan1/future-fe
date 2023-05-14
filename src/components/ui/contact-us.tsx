@@ -4,9 +4,9 @@ import Input from "../form/input/input";
 import TextArea from "../form/input/text-area";
 import Button from "../form/button/button";
 
-export default function ContactUs() {
+export default function ContactUsFreqQuestionAndForm() {
   return (
-    <div className="flex justify-between">
+    <div className="flex gap-x-[70px]">
       <div className="w-[585px] space-y-[30px]">
         <h1 className="font-black text-heading-5 !mb-[50px]">
           Frequently asked questions
@@ -46,7 +46,7 @@ export default function ContactUs() {
         <TextArea
           label="Your Message"
           placehodler="Write your review here"
-          className="w-full h-60"
+          className="w-full h-40"
         />
         <Button
           title="Send"

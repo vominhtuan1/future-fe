@@ -15,16 +15,16 @@ function Accordion({ title, content }: Props) {
           <>
             <Disclosure.Button
               className={`${open ? "text-emerald-500 border-b-0" : ""}
-              flex w-full justify-between bg-transparent px-4 text-left text-sm font-medium text-black-900 hover:text-emerald-500 focus:outline-none`}
+              flex w-full justify-between bg-transparent text-left text-sm font-medium text-black-900 hover:text-emerald-500 focus:outline-none`}
             >
               <h3 className="text-heading-6">{title}</h3>
               <ChevronDownIcon
                 className={`${
                   open ? "rotate-180 text-emerald-500" : ""
-                } h-5 w-5 text-black-500 transition-transform ease-linear`}
+                } h-6 w-6 text-black-500 transition-transform ease-linear`}
               />
             </Disclosure.Button>
-            <Disclosure.Panel className="px-4 pt-5 !mt-0 text-sm text-gray-500">
+            <Disclosure.Panel className="pt-5 !mt-0 text-sm text-gray-500">
               {content}
             </Disclosure.Panel>
           </>
