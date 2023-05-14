@@ -11,6 +11,7 @@ import ZaloPayResult from "./pages/zalo-pay-result";
 import ContactUs from "./pages/contact-us";
 import ErrorPage from "./pages/error";
 
+import ProductCard from "./components/ui/ProductCard/product-card";
 function App() {
   const { toasts } = useToasterStore();
   const TOAST_LIMIT = 1;

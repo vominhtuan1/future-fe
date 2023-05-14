@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <div>
       <BannerHome />
-      <div className="mt-20 mx-[75px] mb-[100px]">
+      <div className="mt-20 mx-[32px]">
         <Swiper
           slidesPerView={2}
           spaceBetween={20}
