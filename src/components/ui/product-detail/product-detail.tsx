@@ -23,7 +23,7 @@ const StyledRating = styled(Rating)({
 });
 
 interface Props {
-  product: IProductInfo;
+  product: IProductDetail;
 }
 
 export default function ProductDetail({ product }: Props) {
@@ -56,7 +56,7 @@ export default function ProductDetail({ product }: Props) {
           modules={[Pagination]}
           className="mySwiper"
         >
-          {product.images.map((imgUrl) => (
+          {[product.thumbnail, ...product.images].map((imgUrl) => (
             <SwiperSlide key={imgUrl}>
               <img
                 className="h-[500px] object-cover object-center aspect-square"
@@ -81,7 +81,7 @@ export default function ProductDetail({ product }: Props) {
       <div className="col-span-4">
         <h3 className="font-bold text-heading-5 mb-[15px]">{product.name}</h3>
         <StyledRating
-          value={product.star}
+          value={product.rating}
           icon={<Star className="text-yellow" />}
           emptyIcon={<Star className="text-light-gray" />}
           readOnly

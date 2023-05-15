@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CircleMinus } from "../../icon";
+import { CircleMinus, Delete, RecycleIcon, Trash } from "../../icon";
 import { CirclePlus } from "../../icon";
 import QuantityBtn from "../../form/button/quantity-btn";
 
@@ -38,7 +38,9 @@ const CartItem = ({ count }: Props) => {
         </div> */}
         <QuantityBtn quantity={quantity} onChange={handleQuantityChange} />
         <p>$ 75.00</p>
-        <button>Delete</button>
+        <button>
+          <Trash />
+        </button>
       </div>
     </div>
   );

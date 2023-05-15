@@ -10,6 +10,8 @@ import toast, { Toaster, useToasterStore } from "react-hot-toast";
 import ZaloPayResult from "./pages/zalo-pay-result";
 
 import ProductCard from "./components/ui/ProductCard/product-card";
+import CarItem from "./components/ui/CarItem/CarItem";
+import ProductDetailPage from "./pages/product-detail";
 function App() {
   const { toasts } = useToasterStore();
   const TOAST_LIMIT = 1;
@@ -31,6 +33,7 @@ function App() {
           <Route path="addresses" element={<Addresses />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="zalo-pay-result" element={<ZaloPayResult />} />
+          <Route path="product/:id" element={<ProductDetailPage />} />
         </Route>
       </Routes>
       <Toaster
