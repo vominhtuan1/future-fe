@@ -23,16 +23,19 @@ declare interface IProductDetail {
     _id: string;
     name: string;
   };
-  comments: {
-    _id: string;
-    content: string;
-    rate: number;
-    user: {
-      _id: string;
-      name: string;
-      avatar: string;
-    };
-  }[];
+  comments: IComment[];
   quantity: number;
   thumbnail: string;
+}
+
+declare interface IComment {
+  _id: string;
+  content: string;
+  rate: number;
+  user: {
+    _id: string;
+    name: string;
+    avatar: string;
+  };
+  createAt: string;
 }

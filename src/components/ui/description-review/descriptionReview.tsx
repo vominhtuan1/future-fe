@@ -11,7 +11,11 @@ import CommentCard from "../card/comment-card";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import { ChervonLeft, ChervonRight } from "../../icon";
 
-const DescriptionReview = () => {
+interface Props {
+  decription: string;
+  comments: IComment[];
+}
+const DescriptionReview = ({ decription, comments }: Props) => {
   const categories = useAppSelector(selectCategories);
   const [tab, setTab] = useState<"description" | "comment">("description");
 
@@ -20,7 +24,7 @@ const DescriptionReview = () => {
   };
 
   return (
-    <div className="flex px-8 py-5">
+    <div className="mt-[90px] flex px-[76px] py-5">
       <div className="flex-1 mr-6">
         <div className="relative">
           <ul className="flex gap-x-12">
@@ -57,48 +61,15 @@ const DescriptionReview = () => {
 
         {tab === "description" && (
           <div className="mt-6">
-            <p className="text-justify">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry&rsquo;s standard dummy
-              text ever since the 1500s, when an unknown printer took a galley
-              of type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum
-            </p>
+            <p className="text-justify">{decription}</p>
           </div>
         )}
 
         {tab === "comment" && (
           <div className="mt-6 space-y-8">
-            <CommentCard
-              comment={{
-                _id: "lsdkf",
-                avatar:
-                  "https://i.pinimg.com/564x/09/ef/89/09ef89ddb9d42172c6adfc52cfd607cc.jpg",
-                content:
-                  "Tôi đã mua cái cốc Contigo Autoseal West Loop trên Amazon và tôi rất hài lòng với nó. Cốc này có nắp đậy tự động, không bị rò rỉ khi mang đi. ",
-                date: "Sun Dec 17 1995 03:24:00 GMT+0700",
-                star: 4,
-                name: "Nguyễn Hải Phong",
-              }}
-            />
-            <CommentCard
-              comment={{
-                _id: "lsdkf",
-                avatar:
-                  "https://i.pinimg.com/564x/09/ef/89/09ef89ddb9d42172c6adfc52cfd607cc.jpg",
-                content:
-                  "Tôi đã mua cái cốc Contigo Autoseal West Loop trên Amazon và tôi rất hài lòng với nó. Cốc này có nắp đậy tự động, không bị rò rỉ khi mang đi. ",
-                date: "Sun Dec 17 1995 03:24:00 GMT+0700",
-                star: 4,
-                name: "Nguyễn Hải Phong",
-              }}
-            />
-
+            {comments.map((item) => (
+              <CommentCard comment={item} key={item._id} />
+            ))}
             <div className="flex justify-center gap-x-1">
               <ChervonLeft />
               <p>1</p>/<p>4</p>

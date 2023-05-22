@@ -37,7 +37,6 @@ export default function Home() {
             ))}
         </Swiper>
       </div>
-      <DescriptionReview />
     </div>
   );
 }
