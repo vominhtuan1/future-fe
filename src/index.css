@@ -38,3 +38,8 @@
 		@apply font-body;
 	}
 }
+
+.swiper-pagination {
+	position: relative !important;
+	bottom: 0 !important;
+}

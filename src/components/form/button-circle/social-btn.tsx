@@ -4,7 +4,7 @@ import React from "react";
 interface Props {
   children?: React.ReactNode;
   // type bên dưới là để chọn background cho button
-  type: "green" | "wheat" | "black" | "gray" | "avatar" | "notbutton";
+  type: "green" | "wheat" | "black" | "gray" | "white" | "avatar" | "notbutton";
   image?: string;
   onClick?: () => void;
   className?: string;
@@ -14,13 +14,15 @@ const CircleBtn = ({ type, image, className, children, onClick }: Props) => {
   const handleBackground = () => {
     switch (type) {
       case "green":
-        return "bg-lime-700";
+        return "bg-dark-slate-gray";
       case "black":
         return "bg-black";
       case "wheat":
         return "bg-wheat";
       case "gray":
         return "bg-gray-200";
+      case "white":
+        return "bg-white";
       case "notbutton":
         return "bg-gray-100";
     }
