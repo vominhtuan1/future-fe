@@ -63,7 +63,7 @@ export default function FormComment({ defaultValue, onSubmit }: Props) {
             </h5>
             <StyledRating
               value={Number(value)}
-              onChange={(e, newValue) => {
+              onChange={(e: any, newValue: any) => {
                 onChange(newValue);
               }}
               icon={<Star className="text-yellow" />}

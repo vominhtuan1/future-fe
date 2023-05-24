@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "./layout/main-layout";
-import Home from "./pages/home";
 import About from "./pages/about";
 import OrderHistory from "./pages/order-history";
 import Addresses from "./pages/addresses";
+import Login from "./pages/login";
+import Register from "./components/ui/register/register";
 import Checkout from "./pages/checkout";
 import toast, { Toaster, useToasterStore } from "react-hot-toast";
 import ZaloPayResult from "./pages/zalo-pay-result";
 import ContactUs from "./pages/contact-us";
 import ErrorPage from "./pages/error";
-
-import ProductCard from "./components/ui/ProductCard/product-card";
-import CarItem from "./components/ui/CarItem/CarItem";
 import ProductDetailPage from "./pages/product-detail";
+import Home from "./pages/home";
+
 function App() {
   const { toasts } = useToasterStore();
   const TOAST_LIMIT = 1;
@@ -30,6 +30,8 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
           <Route path="about" element={<About />} />
           <Route path="order-history" element={<OrderHistory />} />
           <Route path="addresses" element={<Addresses />} />
