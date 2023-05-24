@@ -3,15 +3,23 @@ import CircleBtn from "../../form/button-circle/social-btn";
 import CartIcon from "../../icon/cart";
 import WhiteHeartIcon from "../../icon/white-heart";
 import { formatPrice } from "../../../utils/string-utils";
+import { useNavigate } from "react-router";
 
 interface Props {
   product: IProductCard;
 }
 
 const ProductCard = ({ product }: Props) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/product/${product._id}`);
+  };
+
   return (
     <div className="relative group flex h-[400px] rounded hover:cursor-pointer overflow-hidden select-none">
       <img
+        onClick={handleClick}
         src={product.thumbnail}
         alt="product thumbnail"
         className="min-w-full min-h-full rounded-xl"

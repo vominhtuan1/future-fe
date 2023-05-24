@@ -13,6 +13,7 @@ import ContactUs from "./pages/contact-us";
 import ErrorPage from "./pages/error";
 import ProductDetailPage from "./pages/product-detail";
 import Home from "./pages/home";
+import ScrollToTop from "./components/ui/scroll-to-top";
 
 function App() {
   const { toasts } = useToasterStore();
@@ -27,21 +28,23 @@ function App() {
 
   return (
     <>
-      <Routes>
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route path="about" element={<About />} />
-          <Route path="order-history" element={<OrderHistory />} />
-          <Route path="addresses" element={<Addresses />} />
-          <Route path="checkout" element={<Checkout />} />
-          <Route path="zalo-pay-result" element={<ZaloPayResult />} />
-          <Route path="product/:id" element={<ProductDetailPage />} />
-          <Route path="contact-us" element={<ContactUs />} />
-          <Route path="*" element={<ErrorPage />} />
-        </Route>
-      </Routes>
+      <ScrollToTop>
+        <Routes>
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Home />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="about" element={<About />} />
+            <Route path="order-history" element={<OrderHistory />} />
+            <Route path="addresses" element={<Addresses />} />
+            <Route path="checkout" element={<Checkout />} />
+            <Route path="zalo-pay-result" element={<ZaloPayResult />} />
+            <Route path="product/:id" element={<ProductDetailPage />} />
+            <Route path="contact-us" element={<ContactUs />} />
+            <Route path="*" element={<ErrorPage />} />
+          </Route>
+        </Routes>
+      </ScrollToTop>
       <Toaster
         toastOptions={{
           className: "z-[500]",

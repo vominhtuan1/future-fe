@@ -59,7 +59,7 @@ export default function ProductDetail({ product }: Props) {
           {[product.thumbnail, ...product.images].map((imgUrl) => (
             <SwiperSlide key={imgUrl}>
               <img
-                className="w-full object-cover object-center aspect-square"
+                className="object-cover object-center w-full aspect-square"
                 src={imgUrl}
               />
             </SwiperSlide>
@@ -79,7 +79,9 @@ export default function ProductDetail({ product }: Props) {
         </button>
       </div>
       <div className="col-span-4">
-        <h3 className="font-bold text-heading-5 mb-[15px]">{product.name}</h3>
+        <h3 className="font-bold text-heading-5 leading-[48px] mb-[15px]">
+          {product.name}
+        </h3>
         <StyledRating
           value={product.rating}
           icon={<Star className="text-yellow" />}
