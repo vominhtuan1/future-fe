@@ -8,8 +8,9 @@ import "swiper/css/grid";
 import "swiper/css/pagination";
 import { Grid, Pagination } from "swiper";
 import CategoryCard from "../components/ui/category/category-card";
+import DescriptionReview from "../components/ui/description-review/descriptionReview";
 import { toast } from "react-hot-toast";
-import { productAPI } from "../api/product.api";
+import { productApi } from "../api/product.api";
 import ProductCard from "../components/ui/ProductCard/product-card";
 import Strengths from "../components/ui/Strengths/Strengths";
 import Subcribe from "../components/ui/subcribe";
@@ -20,7 +21,7 @@ export default function Home() {
 
   const handleFetchNewestProducts = async () => {
     try {
-      const res = await productAPI.getNewestProds();
+      const res = await productApi.getNewestProds();
       setNewestProds(res);
     } catch (error) {
       toast.error((error as IResponseError).error);

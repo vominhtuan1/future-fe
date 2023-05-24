@@ -6,6 +6,8 @@ import TextArea from "../../form/input/text-area";
 import Button from "../../form/button/button";
 import { Controller, useForm } from "react-hook-form";
 import clsx from "clsx";
+import { useParams } from "react-router-dom";
+import { commentApi } from "../../../api/comment.api";
 
 interface FormValue {
   rate: number;
@@ -20,9 +22,11 @@ const StyledRating = styled(Rating)({
 
 interface Props {
   defaultValue?: FormValue;
+  onSubmit: (value: FormValue) => void;
 }
 
-export default function FormComment({ defaultValue }: Props) {
+export default function FormComment({ defaultValue, onSubmit }: Props) {
+  const { id } = useParams();
   const {
     register,
     control,
@@ -31,11 +35,6 @@ export default function FormComment({ defaultValue }: Props) {
   } = useForm<FormValue>({
     defaultValues: defaultValue,
   });
-
-  const onSubmit = (value: FormValue) => {
-    console.log("value: ", value);
-    console.log(typeof value.rate);
-  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

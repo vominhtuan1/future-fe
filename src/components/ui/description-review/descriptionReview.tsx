@@ -1,59 +1,104 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useAppSelector } from "../../../store/hooks";
+import { selectCategories } from "../../../redux/reducers/category-slice";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper";
+import CategoryCard from "../category/category-card";
+import clsx from "clsx";
+import CommentCard from "../card/comment-card";
+import { ArrowLeftIcon } from "@heroicons/react/20/solid";
+import { ChervonLeft, ChervonRight } from "../../icon";
 
-const DescriptionReview = () => {
+interface Props {
+  decription: string;
+  comments: IComment[];
+}
+const DescriptionReview = ({ decription, comments }: Props) => {
+  const categories = useAppSelector(selectCategories);
+  const [tab, setTab] = useState<"description" | "comment">("description");
+
+  const handleTabClick = (tab: "description" | "comment") => () => {
+    setTab(tab);
+  };
+
   return (
-    <div className="flex px-10 py-5">
+    <div className="mt-[90px] flex px-[76px] py-5">
       <div className="flex-1 mr-6">
-        <div>
-          <ul className="flex">
-            <li className="mr-6 text-teal-800 font-bold border-b-amber-200 border-b-2">
-              Description
+        <div className="relative">
+          <ul className="flex gap-x-12">
+            <li
+              onClick={handleTabClick("description")}
+              className={clsx(
+                "font-bold tab cursor-pointer transition-all duration-300",
+                tab === "description" ? "text-teal-800" : "text-black"
+              )}
+            >
+              <p className="relative z-10 leading-6 text-heading-6 font-heading text-end">
+                Mô tả
+              </p>
+              {tab === "description" && (
+                <p className="relative bottom-0 z-0 -translate-y-[130%] h-[6px] bg-wheat"></p>
+              )}
             </li>
-            <li className="text-black font-bold">Review</li>
+            <li
+              onClick={handleTabClick("comment")}
+              className={clsx(
+                "font-bold tab cursor-pointer transition-all duration-300",
+                tab === "comment" ? "text-teal-800" : "text-black"
+              )}
+            >
+              <p className="relative z-10 leading-6 text-heading-6 font-heading text-end">
+                Đánh giá
+              </p>
+              {tab === "comment" && (
+                <p className="relative bottom-0 z-0 -translate-y-[130%] h-[6px] bg-wheat"></p>
+              )}
+            </li>
           </ul>
         </div>
 
-        <div className="mt-6">
-          <p className="text-justify">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry&rsquo;s standard dummy
-            text ever since the 1500s, when an unknown printer took a galley of
-            type and scrambled it to make a type specimen book. It has survived
-            not only five centuries, but also the leap into electronic
-            typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum
-            passages, and more recently with desktop publishing software like
-            Aldus PageMaker including versions of Lorem Ipsum
-          </p>
-        </div>
+        {tab === "description" && (
+          <div className="mt-6">
+            <p className="text-justify">{decription}</p>
+          </div>
+        )}
+
+        {tab === "comment" && (
+          <div className="mt-6 space-y-8">
+            {comments.map((item) => (
+              <CommentCard comment={item} key={item._id} />
+            ))}
+            <div className="flex justify-center gap-x-1">
+              <ChervonLeft />
+              <p>1</p>/<p>4</p>
+              <ChervonRight />
+            </div>
+          </div>
+        )}
       </div>
 
-      <div className="bg-slate-200 flex-1 flex flex-col p-4 ml-6">
-        <div className="flex">
-          <div className="flex flex-col justify-between flex-1">
-            <a href="#" className="text-teal-800 mb-8">
-              Living Room
-            </a>
-            <h2 className="text-4xl mb-8">The best foam padded chair</h2>
-            <button className="border-teal-800 border-2 w-[100px] h-[30px]">
-              Shop Now
-            </button>
-          </div>
-          <div className="flex-1 overflow-hidden">
-            <img
-              src="/public/chair.png"
-              alt="chair"
-              className="inline-block object-cover"
-            />
-          </div>
-        </div>
-
-        <div className="flex justify-center items-center mt-10 mb-5">
-          <button className="w-[10px] h-[10px] rounded-full bg-teal-500 mr-4"></button>
-          <button className="w-[10px] h-[10px] rounded-full bg-teal-800 mr-4"></button>
-          <button className="w-[10px] h-[10px] rounded-full bg-teal-500"></button>
-        </div>
-      </div>
+      <Swiper
+        className="flex-1 h-fit"
+        slidesPerView={1}
+        pagination={true}
+        modules={[Pagination]}
+      >
+        {categories.length > 0 &&
+          categories.map((item) => (
+            <SwiperSlide key={item._id}>
+              <CategoryCard
+                _id={item._id}
+                image={item.image}
+                title={item.name}
+                subTitle={
+                  "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+                }
+              />
+            </SwiperSlide>
+          ))}
+      </Swiper>
     </div>
   );
 };

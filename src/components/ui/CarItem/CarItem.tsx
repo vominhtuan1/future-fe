@@ -1,18 +1,15 @@
 import React, { useState } from "react";
-import { CircleMinus } from "../../icon";
+import { CircleMinus, Delete, RecycleIcon, Trash } from "../../icon";
 import { CirclePlus } from "../../icon";
+import QuantityBtn from "../../form/button/quantity-btn";
 
 interface Props {
   count?: number;
 }
 const CartItem = ({ count }: Props) => {
-  const [countNumber, setCountNumber] = useState<number>(count || 1);
-
-  const handleDecrease = () => {
-    setCountNumber(countNumber - 1);
-  };
-  const handleIncrease = () => {
-    setCountNumber(countNumber + 1);
+  const [quantity, setQuantity] = useState<number>(1);
+  const handleQuantityChange = (value: number) => {
+    setQuantity(value);
   };
   return (
     <div className="w-[800px] h-[100px] bg-slate-50 m-[30px] p-2 flex flex-1">
@@ -30,19 +27,20 @@ const CartItem = ({ count }: Props) => {
         </div>
       </div>
       <div className="flex items-center justify-between flex-1 p-10">
-        <div className="border-2 border-slate-400 ">
-          {/* giảm */}
+        {/* <div className="border-2 border-slate-400 ">
           <button onClick={handleDecrease} className="rounded-full w-7 h-5">
             <CircleMinus></CircleMinus>
           </button>
           {countNumber}
-          {/* tăng */}
           <button onClick={handleIncrease} className="rounded-full w-7 h-5">
             <CirclePlus></CirclePlus>
           </button>
-        </div>
+        </div> */}
+        <QuantityBtn quantity={quantity} onChange={handleQuantityChange} />
         <p>$ 75.00</p>
-        <button>Delete</button>
+        <button>
+          <Trash />
+        </button>
       </div>
     </div>
   );
