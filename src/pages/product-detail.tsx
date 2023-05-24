@@ -25,7 +25,7 @@ export default function ProductDetailPage() {
     console.log("value: ", value);
     console.log(typeof value.rate);
     try {
-      const reponse = await commentApi.CreateComment({
+      const reponse = await commentApi.createComment({
         content: value.review,
         productId: id as string,
         rate: value.rate,
@@ -41,6 +41,7 @@ export default function ProductDetailPage() {
   useEffect(() => {
     handleGetProduct();
   }, []);
+
   return (
     <div>
       {product && (
