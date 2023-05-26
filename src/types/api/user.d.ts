@@ -8,7 +8,4 @@ declare interface UserInfoLogin {
 
 type AuthenticateLogin = Pick<UserInfoLogin, "username" | "password">;
 
-declare interface EmailVerify {
-  email: string;
-  code: string;
-}
+type EmailVerify = Pick<UserInfoLogin, "email">;
