@@ -2,6 +2,7 @@ import React from "react";
 import { RecycleIcon } from "../../icon";
 import { formatPrice } from "../../../utils/string-utils";
 import Button from "../../form/button/button";
+import { userApi } from "../../../api/user.api";
 
 interface Props {
   product: FavoriteProduct;
@@ -9,7 +10,7 @@ interface Props {
 
 const WishList = ({ product }: Props) => {
   const handleDelete = () => {
-    console.log("product._id: ", product._id);
+    userApi.deleteWishlistItem(product._id);
   };
 
   const handleAddToCart = () => {
@@ -17,11 +18,11 @@ const WishList = ({ product }: Props) => {
   };
 
   return (
-    <div className="m-[30px] p-2 flex ">
-      <div className="flex items-center">
+    <div className="m-[30px] p-2 flex w-full">
+      <div className="flex items-center justify-center flex-1">
         <div
           onClick={handleDelete}
-          className="flex items-center p-[13px] cursor-pointer bg-gray-100 justify-center mx-8"
+          className="flex items-center p-[13px] cursor-pointer bg-gray-100 justify-center mr-8"
         >
           <RecycleIcon></RecycleIcon>
         </div>
@@ -41,16 +42,19 @@ const WishList = ({ product }: Props) => {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-between flex-1 ml-36">
+      <div className="flex items-center justify-center flex-1">
         {product.isStock ? (
           <p className="font-bold text-green-700">Còn hàng</p>
         ) : (
           <p className="font-bold text-red-accent">Hết hàng</p>
         )}
+      </div>
+      <div className="flex items-center justify-center flex-1">
         <Button
           variant="teritary"
           title="Thêm vào giỏ hàng"
-          className="p-1 px-6 py-3"
+          className="px-7 py-4"
+          onClick={handleAddToCart}
         />
       </div>
     </div>
