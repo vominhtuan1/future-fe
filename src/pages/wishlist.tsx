@@ -29,11 +29,11 @@ export default function WishListPage() {
       <h2 className="flex items-center justify-center text-3xl my-[30px]">
         Wishlist
       </h2>
-      <div className="m-[30px] flex flex-col">
-        <header className="mx-[30px] p-2 flex w-full text-xl font-bold text-dark-slate-gray">
-          <h3 className="flex items-center justify-center flex-1">Product</h3>
-          <h3 className="flex-1 flex items-center justify-center">Stock</h3>
-          <h3 className="flex-1 flex items-center justify-center">Action</h3>
+      <div className="m-[30px]">
+        <header className="mx-[30px] p-2 grid grid-cols-10 font-bold text-center text-heading-7 leading-[35px] text-dark-slate-gray">
+          <h3 className="col-span-5">Product</h3>
+          <h3 className="col-span-2">Stock</h3>
+          <h3 className="col-span-3">Action</h3>
         </header>
         <div>
           {wishlist?.map((item) => (
