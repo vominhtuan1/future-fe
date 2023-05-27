@@ -1,8 +1,21 @@
 declare interface IComment {
   _id: string;
-  name: string;
-  avatar: string;
-  date: string;
   content: string;
-  star: number;
+  rate: number;
+  user: {
+    _id: string;
+    name: string;
+    avatar: string;
+  };
+}
+
+declare interface CreateComment {
+  content: string;
+  rate: number;
+  productId: string;
+}
+declare interface ICreateComment {
+  productId: string;
+  content: string;
+  rate: number;
 }

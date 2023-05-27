@@ -1,69 +1,72 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "@mui/material/Slider";
-
-interface Category {
-  name: string;
-  quantity: number;
-}
-
-// cái này để tạm, gọi API sau.
-const categories: Category[] = [
-  { name: "Chair", quantity: 9 },
-  { name: "Lamp", quantity: 9 },
-  { name: "Table", quantity: 9 },
-  { name: "Sofa", quantity: 9 },
-  { name: "Clock", quantity: 9 },
-  { name: "Pillow", quantity: 9 },
-];
-
-function valuetext(value: number) {
-  console.log(value);
-  return value * 20;
-}
-const minDistance = 5;
+import { useAppSelector } from "../../../store/hooks";
+import { selectCategories } from "../../../redux/reducers/category-slice";
+import {
+  Link,
+  createSearchParams,
+  useSearchParams,
+  useNavigate,
+} from "react-router-dom";
+import { productApi } from "../../../api/product.api";
+import { formatPrice } from "../../../utils/string-utils";
+import Button from "../../form/button/button";
 
 export default function Filter() {
-  const [value, setValue] = React.useState<number[]>([0, 100]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [value, setValue] = useState<number[]>([0, 100]);
+  const [maxPrice, setMaxPrice] = useState(0);
+
+  const categories = useAppSelector(selectCategories);
+  const navigate = useNavigate();
 
   const handleChange = (
     event: Event,
     newValue: number | number[],
     activeThumb: number
   ) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
-
-    if (newValue[1] - newValue[0] < minDistance) {
-      if (activeThumb === 0) {
-        const clamped = Math.min(newValue[0], 100 - minDistance);
-        setValue([clamped, clamped + minDistance]);
-      } else {
-        const clamped = Math.max(newValue[1], minDistance);
-        setValue([clamped - minDistance, clamped]);
-      }
-    } else {
-      setValue(newValue as number[]);
-    }
+    setValue(newValue as number[]);
   };
 
+  const handleGetMaxPrice = async () => {
+    const categoryName = searchParams.get("category");
+
+    const category = categories.find((item) => item.name === categoryName);
+    const max = await productApi.getMaxPrice(category?._id);
+
+    setMaxPrice(max);
+  };
+
+  const handleApply = async () => {
+    setSearchParams((values) => {
+      values.append("from", ((value[0] * maxPrice) / 100).toString());
+      values.append("to", ((value[1] * maxPrice) / 100).toString());
+
+      return values;
+    });
+  };
+
+  useEffect(() => {
+    handleGetMaxPrice();
+  }, [searchParams]);
+
   return (
-    <div className="w-[233px] pl-5">
-      <h2 className="pt-8 text-xl font-black">Filter By Price</h2>
-      <div className="flex py-4">
+    <div className="w-[250px] shrink-0 sticky top-8">
+      <h2 className="text-xl font-black">Lọc theo giá</h2>
+      <div className="flex justify-between py-4">
         <input
           disabled={true}
-          placeholder={`$ ${valuetext(value[0])}`}
+          placeholder={`${formatPrice((value[0] * maxPrice) / 100)}`}
           className={
-            "pl-1 w-2/5 border-[1px] outline-none border-light-gray bg-transparent rounded"
+            "w-2/5 border-[1px] px-[7px] py-[5px] text-sm outline-none border-light-gray bg-transparent rounded"
           }
         />
-        <span className="w-1/5 text-center">-</span>
+        <span className="text-center">-</span>
         <input
           disabled={true}
-          placeholder={`$ ${valuetext(value[1])}`}
+          placeholder={`${formatPrice((value[1] * maxPrice) / 100)}`}
           className={
-            "pl-1 w-2/5 border-[1px] outline-none border-light-gray bg-transparent rounded"
+            "w-2/5 border-[1px] px-[7px] py-[5px] text-sm outline-none border-light-gray bg-transparent rounded"
           }
         />
       </div>
@@ -78,16 +81,26 @@ export default function Filter() {
         valueLabelDisplay="off"
         disableSwap
       />
-      <h2 className="pt-8 text-xl font-black">Product Categories</h2>
-      <ul className="flex-col flex">
+      <Button
+        onClick={handleApply}
+        title="Áp dụng"
+        variant="secondary"
+        className="w-full py-3 text-sm"
+      />
+      <h2 className="pt-8 text-xl font-black">Danh mục</h2>
+      <ul className="flex flex-col">
         {categories.map((cate, index) => (
-          <a
+          <Link
             key={index}
-            href="#"
-            className="text-sm text-gray-500 py-2 focus:text-emerald-800"
+            to={{
+              search: `${createSearchParams({
+                category: cate.name,
+              })}`,
+            }}
+            className="py-2 text-sm text-gray-500 focus:text-emerald-800"
           >
-            {cate.name}({cate.quantity})
-          </a>
+            {cate.name} ({cate.numberOfProducts})
+          </Link>
         ))}
       </ul>
     </div>

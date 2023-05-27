@@ -18,16 +18,16 @@ export default function CommentCard({ comment }: Props) {
   return (
     <div>
       <div className="flex gap-x-4">
-        <img className="w-12 h-12 rounded-full" src={comment.avatar} />
+        <img className="w-12 h-12 rounded-full" src={comment.user.avatar} />
         <div className="flex items-center justify-between flex-1">
           <div className="space-y-2">
-            <p className="text-heading-9">{comment.name}</p>
+            <p className="text-heading-9">{comment.user.name}</p>
             <p className="text-gray-500 text-heading-10">
-              {new Date(comment.date).toLocaleDateString("vi-VN")}
+              {new Date(comment.createAt).toLocaleDateString("vi-VN")}
             </p>
           </div>
           <StyledRating
-            value={comment.star}
+            value={comment.rate}
             icon={<Star className="text-yellow" />}
             emptyIcon={<Star className="text-light-gray" />}
           />

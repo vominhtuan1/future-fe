@@ -86,35 +86,35 @@ export default function About() {
             <CardTeam
               name="Nguyễn Hải Đăng"
               position="Giám đốc tài chính"
-              avatar="https://s3-alpha-sig.figma.com/img/9c1a/b700/6fc120580122cc5c1443394d7cbd3883?Expires=1684713600&Signature=lHoQpPdONyrCM8ei801nqHqCMp-Aks4zNMKzfVR47SUChVHtbSqhN51yldB3WKP1B8nteuW2ofs10DgTVW3atSvD46uKJfOXJGYhsZd3dFiDLQR92QrEES6ikDdGBOp2xgdd-VfSJWPvdJIjcYNIkbZCy4ANcsXJEzWMtJwfXe331befPfdH8hNt2rzuld9x5fdLb5p6T8l6q6gS3Yhwq--YP99JWPQn0XPJ2KdNaBV9yWxiIyTWxczajlyKBhIpBdpITXXY949Ab0ysLUCxyT5tFBrRjVpViBtOgQPTJBQK~OtetLzt-aDo8siUxNxb8qfN9F8gaOVTK4QCX04Ybw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+              avatar="./user1.jpg"
             />
           </SwiperSlide>
           <SwiperSlide>
             <CardTeam
               name="Nguyễn Hải Đăng"
               position="Giám đốc tài chính"
-              avatar="https://s3-alpha-sig.figma.com/img/602b/2ffa/f0f8e7e53d15b3080c055a0ef4867ed2?Expires=1684713600&Signature=R6GO1I41l3xU9jX~2LhpzjUgRzA-0W9sHKn0~9IZRG~~b0SBeudEb-WIYLKRTQ8KucpDTsrqj13hwA7bkczRxM~YC2hi35sHyKry9tEgPMe9zlr44X-BlsoirB2E19ObVtceaHrPXOr7a7bLxkd1vchVeZW5lnLYkQOfB22Klz7nSvgCzHlENgXi5mJpVu0-7tHDfyjClBxVg3n9WFgoqwAU5j36JcRJ1SSv87ZKrvL~cZd0xFTWBZaeuIEy9kkY6lPx5Obvcv5sWG4~JfCgTthj~1SQ0rbenmFDGesISiMa5g10l6MKgaPkjhl3qMu0Gk7T2AICIm9-exESHYsOGQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+              avatar="./user1.jpg"
             />
           </SwiperSlide>
           <SwiperSlide>
             <CardTeam
               name="Nguyễn Hải Đăng"
               position="Giám đốc tài chính"
-              avatar="https://s3-alpha-sig.figma.com/img/fa9b/3712/dc205d7da0301ec0abcfe6a3a914b65a?Expires=1684713600&Signature=U0UQRAh~G8ilqSePNj1OoaW4G1ibbro7Upani42Qh991wleTybO8j3tS20rOJ4Jqd0uP0ykMKpbrhL23lLCypFdhVS0hMgUpjswva1UwFiNaCUdGK12lKlr-wRjFrxciwTyHlQXPU01cG8Fe50jTQmpNAbuJmHiK75V3fH8K3fido5c5Ik26l3h4h~zN5HgFH56pODNT3W-mVNR4-feZ5x4Cbu46JEWHt0gsvw41RZT40xeRtAmL6RkOAhAVU2WdFH1mAk8eFzJPhOOI-YHKlxyX120DFwC8uCpsajidlhucwuSDdT3fKTUBqVl1bipitH4ixvtVpzIbvYsS3W570g__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+              avatar="./user1.jpg"
             />
           </SwiperSlide>
           <SwiperSlide>
             <CardTeam
               name="Nguyễn Hải Đăng"
               position="Giám đốc tài chính"
-              avatar="https://s3-alpha-sig.figma.com/img/c610/6f23/35bdeac4a66818b5162da24b5042474a?Expires=1684713600&Signature=nLzPjNjAFdsGksWyrPCyInKu89aSoDdrwx4xucRew7IZWu~3j1CLCoiB-5uG9vafHRoWKpyJVbzptlIBHZRPPtmjDsSBtS5gqAij4dN1PfS8uXjJkiNKkiNPhhDDSOY4vFctrYV3jDfI1C5olYBmaD7Ure54tZUBAO3ilAtHrfUTcS9lyTo6Op460W4~XJIWcWRgbqSBuwZEbvCuqDSHbaRfAVPylFof37EMnUJxra7h4AQhfN68KrvAeoLup8h0k0Nj~2CRgo7V5zFnNwkrzDNJOEP638aiB02YCQASsqtpvTCoGYrA6gl68sNFhhX4FuH~V-m9YruwNDD6uj5byw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+              avatar="./user1.jpg"
             />
           </SwiperSlide>
           <SwiperSlide>
             <CardTeam
               name="Nguyễn Hải Đăng"
               position="Giám đốc tài chính"
-              avatar="https://s3-alpha-sig.figma.com/img/9c1a/b700/6fc120580122cc5c1443394d7cbd3883?Expires=1684713600&Signature=lHoQpPdONyrCM8ei801nqHqCMp-Aks4zNMKzfVR47SUChVHtbSqhN51yldB3WKP1B8nteuW2ofs10DgTVW3atSvD46uKJfOXJGYhsZd3dFiDLQR92QrEES6ikDdGBOp2xgdd-VfSJWPvdJIjcYNIkbZCy4ANcsXJEzWMtJwfXe331befPfdH8hNt2rzuld9x5fdLb5p6T8l6q6gS3Yhwq--YP99JWPQn0XPJ2KdNaBV9yWxiIyTWxczajlyKBhIpBdpITXXY949Ab0ysLUCxyT5tFBrRjVpViBtOgQPTJBQK~OtetLzt-aDo8siUxNxb8qfN9F8gaOVTK4QCX04Ybw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+              avatar="./user1.jpg"
             />
           </SwiperSlide>
         </Swiper>

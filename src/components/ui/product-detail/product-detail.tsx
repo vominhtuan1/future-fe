@@ -23,7 +23,7 @@ const StyledRating = styled(Rating)({
 });
 
 interface Props {
-  product: IProductInfo;
+  product: IProductDetail;
 }
 
 export default function ProductDetail({ product }: Props) {
@@ -47,8 +47,8 @@ export default function ProductDetail({ product }: Props) {
   };
 
   return (
-    <div className="grid grid-cols-7 gap-x-[47px]">
-      <div className="relative col-span-3 space-y-3">
+    <div className="px-[76px] mt-[45px] grid grid-cols-7 gap-x-[47px]">
+      <div className="relative col-span-3">
         <Swiper
           loop
           ref={prodSwiperRef}
@@ -56,10 +56,10 @@ export default function ProductDetail({ product }: Props) {
           modules={[Pagination]}
           className="mySwiper"
         >
-          {product.images.map((imgUrl) => (
+          {[product.thumbnail, ...product.images].map((imgUrl) => (
             <SwiperSlide key={imgUrl}>
               <img
-                className="h-[500px] object-cover object-center aspect-square"
+                className="object-cover object-center w-full aspect-square"
                 src={imgUrl}
               />
             </SwiperSlide>
@@ -79,9 +79,11 @@ export default function ProductDetail({ product }: Props) {
         </button>
       </div>
       <div className="col-span-4">
-        <h3 className="font-bold text-heading-5 mb-[15px]">{product.name}</h3>
+        <h3 className="font-bold text-heading-5 leading-[48px] mb-[15px]">
+          {product.name}
+        </h3>
         <StyledRating
-          value={product.star}
+          value={product.rating}
           icon={<Star className="text-yellow" />}
           emptyIcon={<Star className="text-light-gray" />}
           readOnly
