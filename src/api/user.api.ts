@@ -13,4 +13,18 @@ export const userApi = {
 
     return response.data.data;
   },
+  getWishlist: async () => {
+    const response = await axiosService.get<
+      IResponseSuccess<FavoriteProduct[]>
+    >(`${URL}/wishlist`);
+
+    return response.data.data;
+  },
+  deleteWishlistItem: async (productId: string) => {
+    const response = await axiosService.delete<
+      IResponseSuccess<FavoriteProduct>
+    >(`${URL}/wishlist/${productId}`);
+
+    return response.data.data;
+  },
 };

@@ -43,6 +43,9 @@ export const productApi = {
     if (data.to) {
       url += `&from=${data.from}&to=${data.to}`;
     }
+    if (data.sort) {
+      url += `&sort=${data.sort}`;
+    }
 
     const response = await axiosService.get<IResponseSuccess<IProductCard[]>>(
       url

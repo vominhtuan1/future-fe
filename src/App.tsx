@@ -15,6 +15,7 @@ import ProductDetailPage from "./pages/product-detail";
 import Home from "./pages/home";
 import ScrollToTop from "./components/ui/scroll-to-top";
 import Shop from "./pages/shop";
+import WishListPage from "./pages/wishlist";
 
 function App() {
   const { toasts } = useToasterStore();
@@ -43,6 +44,7 @@ function App() {
             <Route path="zalo-pay-result" element={<ZaloPayResult />} />
             <Route path="product/:id" element={<ProductDetailPage />} />
             <Route path="contact-us" element={<ContactUs />} />
+            <Route path="wishlist" element={<WishListPage />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>
