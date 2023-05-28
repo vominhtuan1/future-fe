@@ -1,6 +1,6 @@
 import React from "react";
 
-function Search() {
+function Search(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -8,6 +8,7 @@ function Search() {
       height="19"
       fill="none"
       viewBox="0 0 19 19"
+      {...props}
     >
       <path
         fill="#000201"
