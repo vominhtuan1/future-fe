@@ -11,6 +11,20 @@ export const userApi = {
 
     return response.data.data;
   },
+  updateUserInfo: async (body: UpdateUser) => {
+    const response = await axiosService.put<IResponseSuccess<IAddress>>(
+      `${URL}/setting`,
+      {
+        name: body.name,
+        email: body.email,
+        avatar: body.avatar,
+        addresses: body.address,
+        birthday: body.birthday,
+      }
+    );
+
+    return response.data.data;
+  },
   getAddresses: async () => {
     const response = await axiosService.get<IResponseSuccess<IAddress[]>>(
       `${URL}/addresses`

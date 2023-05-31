@@ -11,9 +11,11 @@ declare interface IUser {
   email: string;
   password: string;
   avatar: string;
-  birthday: string;
-  address: IAddress;
+  birthday: string | Date;
+  address: IAddress[];
 }
+
+type UpdateUser = Omit<IUser, "password">;
 
 type AuthenticateLogin = Pick<UserInfoLogin, "username" | "password">;
 

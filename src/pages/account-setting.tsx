@@ -6,28 +6,47 @@ import Button from "../components/form/button/button";
 import moment from "moment";
 
 /* This is a test for user setting, which will be deleted after complete redux store */
-const test: IUser = {
+const test: UpdateUser = {
   name: "trung",
   email: "maihuynhtrung",
-  password: "123456",
   avatar: "./user1.jpg",
   birthday: "2022-03-25",
-  address: {
-    _id: "string",
-    default: true,
-    district: "Khu pho 6, Linh Trung, Thu Duc, Thanh pho Ho Chi Minh",
-    phone: "0987654321",
-    province: "Thu Duc",
-    receiver: "string",
-    specificAddress: "string",
-    ward: "Khu pho 6",
-  },
+  address: [
+    {
+      _id: "string",
+      default: true,
+      district: "Khu pho 6, Linh Trung, Thu Duc, Thanh pho Ho Chi Minh",
+      phone: "0987654321",
+      province: "Thu Duc",
+      receiver: "string",
+      specificAddress: "string",
+      ward: "Khu pho 6",
+    },
+    {
+      _id: "string1",
+      default: false,
+      district: "Khu pho 6, Linh Trung, Thu Duc, Thanh pho Ho Chi Minh",
+      phone: "0987654321",
+      province: "Thu Duc",
+      receiver: "string",
+      specificAddress: "string",
+      ward: "Khu pho 6",
+    },
+  ],
 };
 
 export default function AccountSettingPage() {
-  const [userInfo, setUserInfo] = useState<IUser>(test);
+  const [userInfo, setUserInfo] = useState<UpdateUser>(test);
   const [userAvatar, setUserAvatar] = useState<string>(userInfo.avatar);
+  const [userName, setUserName] = useState<string>(userInfo.name);
+  const [userEmail, setUserEmail] = useState<string>(userInfo.email);
+  const [userBirthday, setUserBirthday] = useState<string | Date>(
+    userInfo.birthday
+  );
+  const [userAddress, setUserAddress] = useState<IAddress[]>(userInfo.address);
   const [isChange, setIsChange] = useState<boolean>(false);
+  const [defaultAddress, setDefaultAddress] = useState<number>();
+
   const avatarRef = useRef<HTMLInputElement>(null);
   const { id } = useParams();
   const handleGetUserInfo = async () => {
@@ -53,21 +72,25 @@ export default function AccountSettingPage() {
 
   const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
+    setUserName(inputValue);
   };
 
   const handleChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
+    setUserEmail(inputValue);
   };
 
   const handleChangeBirthday = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
+    setUserBirthday(inputValue);
   };
 
   const handleChangeAddress = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
+    // setUserAddress(inputValue);
   };
 
-  const handleAvatarInput = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleAvatarInput = () => {
     const file = avatarRef.current?.files?.[0];
     if (file) {
       setUserAvatar(URL.createObjectURL(file));
@@ -89,21 +112,25 @@ export default function AccountSettingPage() {
             className="inline-block object-cover"
           />
         </div>
-        <form className="flex justify-end w-[300px]">
-          <input
-            type="file"
-            accept=".png"
-            ref={avatarRef}
-            style={{ display: "none" }}
-            onChange={handleAvatarInput}
-          />
-          <Button
-            title="Change your photo"
-            variant="secondary"
-            className="px-2 py-3 text-heading-10"
-            onClick={handleChangeAvatar}
-          />
-        </form>
+        {isChange ? (
+          <form className="flex justify-end w-[300px]">
+            <input
+              type="file"
+              accept=".png"
+              ref={avatarRef}
+              style={{ display: "none" }}
+              onChange={handleAvatarInput}
+            />
+            <Button
+              title="Choose file"
+              variant="secondary"
+              className="px-2 py-3 text-heading-10"
+              onClick={handleChangeAvatar}
+            />
+          </form>
+        ) : (
+          <React.Fragment></React.Fragment>
+        )}
       </div>
 
       <form className="space-y-[30px] bg-scarlet px-7 py-[34px] h-fit">
@@ -117,11 +144,11 @@ export default function AccountSettingPage() {
                 {isChange ? (
                   <Input
                     variation="outlined"
-                    placeholder={userInfo.name}
+                    placeholder={userName}
                     className="w-[300px] h-[35px]"
                   />
                 ) : (
-                  <p className="text-philippine-gray">{userInfo.name}</p>
+                  <p className="text-philippine-gray">{userName}</p>
                 )}
               </div>
             </div>
@@ -133,11 +160,11 @@ export default function AccountSettingPage() {
                 {isChange ? (
                   <Input
                     variation="outlined"
-                    placeholder={userInfo.email}
+                    placeholder={userEmail}
                     className="w-[300px] h-[35px]"
                   />
                 ) : (
-                  <p className="text-philippine-gray">{userInfo.email}</p>
+                  <p className="text-philippine-gray">{userEmail}</p>
                 )}
               </div>
             </div>
@@ -149,16 +176,14 @@ export default function AccountSettingPage() {
                 {isChange ? (
                   <input
                     type="date"
-                    placeholder={moment(userInfo.birthday)
-                      .format("L")
-                      .toString()}
+                    placeholder={moment(userBirthday).format("L").toString()}
                     className={`w-[300px] h-[35px] px-5 py-[22px] text-body-1 leading-5 outline-none 
                     border-[1px] border-light-gray bg-transparent text-philippine-gray`}
                     onChange={handleChangeBirthday}
                   />
                 ) : (
                   <p className="text-philippine-gray">
-                    {moment(userInfo.birthday).format("L")}
+                    {moment(userBirthday).format("L")}
                   </p>
                 )}
               </div>
@@ -168,29 +193,53 @@ export default function AccountSettingPage() {
                 Address
               </h3>
               <div>
-                {isChange ? (
-                  <React.Fragment>
-                    <Input
-                      variation="outlined"
-                      placeholder={userInfo.address.phone}
-                      className="w-[300px] h-[35px] mb-4"
-                    />
-                    <Input
-                      variation="outlined"
-                      placeholder={`${userInfo.address.district}`}
-                      className="w-[300px] h-[35px]"
-                    />
-                  </React.Fragment>
-                ) : (
-                  <React.Fragment>
-                    <p className="text-philippine-gray mb-4">
-                      {userInfo.address.phone}
-                    </p>
-                    <p className="text-philippine-gray">
-                      {`${userInfo.address.district}`}
-                    </p>
-                  </React.Fragment>
-                )}
+                {userAddress.map((address, addressIndex) => (
+                  <div key={addressIndex} className="mb-5">
+                    <div className="flex items-center mb-5">
+                      <h4>{`Address ${addressIndex + 1}`}</h4>
+                      <div className="w-[200px] flex justify-end items-center">
+                        <input
+                          disabled={!isChange}
+                          id="default"
+                          type="checkbox"
+                          checked={address.default}
+                          className="w-4 h-4"
+                          onClick={() => setDefaultAddress(addressIndex)}
+                        />
+                        <label
+                          htmlFor="default"
+                          className="text-sm font-medium text-dark-slate-gray ml-2"
+                        >
+                          Default
+                        </label>
+                      </div>
+                    </div>
+
+                    {isChange ? (
+                      <React.Fragment>
+                        <Input
+                          variation="outlined"
+                          placeholder={address.phone}
+                          className="w-[300px] h-[35px] mb-4"
+                        />
+                        <Input
+                          variation="outlined"
+                          placeholder={`${address.district}`}
+                          className="w-[300px] h-[35px]"
+                        />
+                      </React.Fragment>
+                    ) : (
+                      <React.Fragment>
+                        <p className="text-philippine-gray mb-4">
+                          {address.phone}
+                        </p>
+                        <p className="text-philippine-gray">
+                          {`${address.district}`}
+                        </p>
+                      </React.Fragment>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
