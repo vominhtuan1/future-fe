@@ -6,6 +6,15 @@ declare interface UserInfoLogin {
   avatar: string;
 }
 
+declare interface IUser {
+  name: string;
+  email: string;
+  password: string;
+  avatar: string;
+  birthday: string;
+  address: IAddress;
+}
+
 type AuthenticateLogin = Pick<UserInfoLogin, "username" | "password">;
 
 declare interface EmailVerify {

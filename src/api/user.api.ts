@@ -6,6 +6,11 @@ const ENDPOINT = "users";
 const URL = `${API}/${ENDPOINT}`;
 
 export const userApi = {
+  getUserInfo: async () => {
+    const response = await axiosService.get<IResponseSuccess<IUser>>(`${URL}`);
+
+    return response.data.data;
+  },
   getAddresses: async () => {
     const response = await axiosService.get<IResponseSuccess<IAddress[]>>(
       `${URL}/addresses`
