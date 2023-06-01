@@ -7,20 +7,16 @@ const URL = `${API}/${ENDPOINT}`;
 
 export const userApi = {
   getUserInfo: async () => {
-    const response = await axiosService.get<IResponseSuccess<IUser>>(`${URL}`);
+    const response = await axiosService.get<IResponseSuccess<UpdateUser>>(
+      `${URL}`
+    );
 
     return response.data.data;
   },
-  updateUserInfo: async (body: UpdateUser) => {
-    const response = await axiosService.put<IResponseSuccess<IAddress>>(
+  updateUserInfo: async (body: FormData) => {
+    const response = await axiosService.put<IResponseSuccess<UpdateUser>>(
       `${URL}/setting`,
-      {
-        name: body.name,
-        email: body.email,
-        avatar: body.avatar,
-        addresses: body.address,
-        birthday: body.birthday,
-      }
+      body
     );
 
     return response.data.data;

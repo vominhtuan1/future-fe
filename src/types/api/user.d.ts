@@ -15,7 +15,7 @@ declare interface IUser {
   address: IAddress[];
 }
 
-type UpdateUser = Omit<IUser, "password">;
+type UpdateUser = Omit<IUser, "password", "address">;
 
 type AuthenticateLogin = Pick<UserInfoLogin, "username" | "password">;
 

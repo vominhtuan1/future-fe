@@ -1,67 +1,40 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { userApi } from "../api/user.api";
-import { useParams } from "react-router-dom";
 import Input from "../components/form/input/input";
 import Button from "../components/form/button/button";
 import moment from "moment";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 
-/* This is a test for user setting, which will be deleted after complete redux store */
-const test: UpdateUser = {
-  name: "trung",
-  email: "maihuynhtrung",
-  avatar: "./user1.jpg",
-  birthday: "2022-03-25",
-  address: [
-    {
-      _id: "string",
-      default: true,
-      district: "Khu pho 6, Linh Trung, Thu Duc, Thanh pho Ho Chi Minh",
-      phone: "0987654321",
-      province: "Thu Duc",
-      receiver: "string",
-      specificAddress: "string",
-      ward: "Khu pho 6",
-    },
-    {
-      _id: "string1",
-      default: false,
-      district: "Khu pho 6, Linh Trung, Thu Duc, Thanh pho Ho Chi Minh",
-      phone: "0987654321",
-      province: "Thu Duc",
-      receiver: "string",
-      specificAddress: "string",
-      ward: "Khu pho 6",
-    },
-  ],
-};
-
+interface FormValue {
+  name: string;
+  email: string;
+  birthday: string;
+}
 export default function AccountSettingPage() {
-  const [userInfo, setUserInfo] = useState<UpdateUser>(test);
-  const [userAvatar, setUserAvatar] = useState<string>(userInfo.avatar);
-  const [userName, setUserName] = useState<string>(userInfo.name);
-  const [userEmail, setUserEmail] = useState<string>(userInfo.email);
-  const [userBirthday, setUserBirthday] = useState<string | Date>(
-    userInfo.birthday
+  const [userInfo, setUserInfo] = useState<UpdateUser>();
+  const [userAvatar, setUserAvatar] = useState<string>(
+    "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"
   );
-  const [userAddress, setUserAddress] = useState<IAddress[]>(userInfo.address);
+  const [file, setFile] = useState<File>();
   const [isChange, setIsChange] = useState<boolean>(false);
-  const [defaultAddress, setDefaultAddress] = useState<number>();
+  const { register, handleSubmit } = useForm<FormValue>({
+    defaultValues: {
+      name: "",
+      email: "",
+      birthday: "",
+    },
+  });
 
   const avatarRef = useRef<HTMLInputElement>(null);
-  const { id } = useParams();
   const handleGetUserInfo = async () => {
-    if (id) {
-      const data = await userApi.getUserInfo();
-      setUserInfo(data);
-    }
+    const data = await userApi.getUserInfo();
+    setUserInfo(data);
+    setUserAvatar(data.avatar);
   };
 
   const handleChange = () => {
     setIsChange(true);
-  };
-
-  const handleConfirm = () => {
-    setIsChange(false);
   };
 
   const handleChangeAvatar = () => {
@@ -70,34 +43,39 @@ export default function AccountSettingPage() {
     }
   };
 
-  const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
-    setUserName(inputValue);
-  };
-
-  const handleChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
-    setUserEmail(inputValue);
-  };
-
-  const handleChangeBirthday = (event: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
-    setUserBirthday(inputValue);
-  };
-
-  const handleChangeAddress = (event: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
-    // setUserAddress(inputValue);
-  };
-
   const handleAvatarInput = () => {
     const file = avatarRef.current?.files?.[0];
     if (file) {
       setUserAvatar(URL.createObjectURL(file));
-      console.log(URL.createObjectURL(file));
+      setFile(file);
     }
   };
 
+  const onSubmit = async (value: FormValue) => {
+    try {
+      const formData = new FormData();
+      if (file) {
+        formData.append("avatar", file);
+      }
+      if (value.name) {
+        formData.append("name", value.name);
+      }
+      if (value.email) {
+        formData.append("email", value.email);
+      }
+      if (value.birthday) {
+        formData.append("birthday", value.birthday);
+      }
+      const res = await userApi.updateUserInfo(formData);
+      setUserInfo(res);
+      setUserAvatar(res.avatar);
+      setIsChange(false);
+      toast.success("Update user info successful");
+    } catch (error) {
+      console.log(error);
+      toast.error("Update user info fail");
+    }
+  };
   useEffect(() => {
     handleGetUserInfo();
   }, []);
@@ -109,7 +87,7 @@ export default function AccountSettingPage() {
           <img
             src={userAvatar}
             alt="avatar"
-            className="inline-block object-cover"
+            className="inline-block object-cover w-[100px] h-[100px]"
           />
         </div>
         {isChange ? (
@@ -133,7 +111,10 @@ export default function AccountSettingPage() {
         )}
       </div>
 
-      <form className="space-y-[30px] bg-scarlet px-7 py-[34px] h-fit">
+      <form
+        className="space-y-[30px] bg-scarlet px-7 py-[34px] h-fit"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="flex">
           <div className="mr-4 flex flex-col justify-between">
             <div className="flex items-center mb-4">
@@ -144,11 +125,15 @@ export default function AccountSettingPage() {
                 {isChange ? (
                   <Input
                     variation="outlined"
-                    placeholder={userName}
+                    placeholder={userInfo ? userInfo.name : "Name"}
                     className="w-[300px] h-[35px]"
+                    register={register}
+                    name="name"
                   />
                 ) : (
-                  <p className="text-philippine-gray">{userName}</p>
+                  <p className="text-philippine-gray">
+                    {userInfo ? userInfo.name : "Name"}
+                  </p>
                 )}
               </div>
             </div>
@@ -160,11 +145,15 @@ export default function AccountSettingPage() {
                 {isChange ? (
                   <Input
                     variation="outlined"
-                    placeholder={userEmail}
+                    placeholder={userInfo ? userInfo.email : "Email"}
                     className="w-[300px] h-[35px]"
+                    register={register}
+                    name="email"
                   />
                 ) : (
-                  <p className="text-philippine-gray">{userEmail}</p>
+                  <p className="text-philippine-gray">
+                    {userInfo ? userInfo.email : "Email"}
+                  </p>
                 )}
               </div>
             </div>
@@ -176,70 +165,20 @@ export default function AccountSettingPage() {
                 {isChange ? (
                   <input
                     type="date"
-                    placeholder={moment(userBirthday).format("L").toString()}
+                    placeholder={moment(
+                      userInfo ? userInfo.birthday : "2023/01/01"
+                    ).format("L")}
                     className={`w-[300px] h-[35px] px-5 py-[22px] text-body-1 leading-5 outline-none 
                     border-[1px] border-light-gray bg-transparent text-philippine-gray`}
-                    onChange={handleChangeBirthday}
+                    {...register("birthday")}
                   />
                 ) : (
                   <p className="text-philippine-gray">
-                    {moment(userBirthday).format("L")}
+                    {moment(userInfo ? userInfo.birthday : "2023/01/01").format(
+                      "L"
+                    )}
                   </p>
                 )}
-              </div>
-            </div>
-            <div className="flex items-center mb-[50px]">
-              <h3 className="w-[100px] leading-[35px] font-bold mr-[50px]">
-                Address
-              </h3>
-              <div>
-                {userAddress.map((address, addressIndex) => (
-                  <div key={addressIndex} className="mb-5">
-                    <div className="flex items-center mb-5">
-                      <h4>{`Address ${addressIndex + 1}`}</h4>
-                      <div className="w-[200px] flex justify-end items-center">
-                        <input
-                          disabled={!isChange}
-                          id="default"
-                          type="checkbox"
-                          checked={address.default}
-                          className="w-4 h-4"
-                          onClick={() => setDefaultAddress(addressIndex)}
-                        />
-                        <label
-                          htmlFor="default"
-                          className="text-sm font-medium text-dark-slate-gray ml-2"
-                        >
-                          Default
-                        </label>
-                      </div>
-                    </div>
-
-                    {isChange ? (
-                      <React.Fragment>
-                        <Input
-                          variation="outlined"
-                          placeholder={address.phone}
-                          className="w-[300px] h-[35px] mb-4"
-                        />
-                        <Input
-                          variation="outlined"
-                          placeholder={`${address.district}`}
-                          className="w-[300px] h-[35px]"
-                        />
-                      </React.Fragment>
-                    ) : (
-                      <React.Fragment>
-                        <p className="text-philippine-gray mb-4">
-                          {address.phone}
-                        </p>
-                        <p className="text-philippine-gray">
-                          {`${address.district}`}
-                        </p>
-                      </React.Fragment>
-                    )}
-                  </div>
-                ))}
               </div>
             </div>
           </div>
@@ -262,7 +201,8 @@ export default function AccountSettingPage() {
               title="Confirm"
               variant="primary"
               className="py-3 font-medium text-white px-14"
-              onClick={handleConfirm}
+              // onClick={handleConfirm}
+              type="submit"
             />
           </div>
         ) : (
