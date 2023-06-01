@@ -36,9 +36,16 @@ export const userApi = {
     return response.data.data;
   },
   deleteWishlistItem: async (productId: string) => {
-    const response = await axiosService.delete<
-      IResponseSuccess<FavoriteProduct>
-    >(`${URL}/wishlist/${productId}`);
+    const response = await axiosService.delete<IResponseSuccess<string>>(
+      `${URL}/wishlist/${productId}`
+    );
+
+    return response.data.data;
+  },
+  insertWishlistItem: async (productId: string) => {
+    const response = await axiosService.post<IResponseSuccess<FavoriteProduct>>(
+      `${URL}/wishlist/${productId}`
+    );
 
     return response.data.data;
   },

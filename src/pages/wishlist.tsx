@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { userApi } from "../api/user.api";
-import { useParams } from "react-router-dom";
 import WishList from "../components/ui/WishList/WishList";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { selectWishlist } from "../redux/reducers/wishlist-slice";
+import { getWishlist } from "../redux/actions/wishlist-action";
+import { toast } from "react-hot-toast";
 
 export default function WishListPage() {
-  const [wishlist, setWishlist] = useState<FavoriteProduct[]>();
-  /* This is a test for wishlist item, which will be deleted after complete redux store */
-  const test: FavoriteProduct = {
-    _id: "645e02347c79ac6e52aa4eb2",
-    name: "Thú bông Pokemon ham ngủ Kabigon Snorlax",
-    price: 129000,
-    thumbnail: "./footer2.png",
-    isStock: true,
-  };
-  const { id } = useParams();
+  const dispatch = useAppDispatch();
+  const wishlist = useAppSelector(selectWishlist).wishlist;
   const handleGetWishlist = async () => {
-    if (id) {
-      const data = await userApi.getWishlist();
-      setWishlist(data);
+    try {
+      await dispatch(getWishlist()).unwrap();
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -39,8 +35,6 @@ export default function WishListPage() {
           {wishlist?.map((item) => (
             <WishList product={item} key={item._id}></WishList>
           ))}
-          {/*This is a test for wishlist item, which will be deleted after complete redux store*/}
-          <WishList product={test}></WishList>
         </div>
       </div>
     </div>

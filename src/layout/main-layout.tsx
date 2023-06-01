@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { selectCategories } from "../redux/reducers/category-slice";
 import { getCategories } from "../redux/actions/category-action";
 import { toast } from "react-hot-toast";
+import { getWishlist } from "../redux/actions/wishlist-action";
 
 export default function MainLayout() {
   const categories = useAppSelector(selectCategories);
@@ -20,9 +21,16 @@ export default function MainLayout() {
       }
     }
   };
-
+  const handleGetWishlist = async () => {
+    try {
+      await dispatch(getWishlist()).unwrap();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     handleFetchCategories();
+    handleGetWishlist();
   }, []);
 
   return (
