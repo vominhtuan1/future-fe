@@ -15,6 +15,9 @@ import "swiper/css/pagination";
 // import required modules
 import { Pagination } from "swiper";
 import { formatPrice } from "../../../utils/string-utils";
+import { toast } from "react-hot-toast";
+import { useAppDispatch } from "../../../store/hooks";
+import { addToCart } from "../../../redux/actions/user-action";
 
 const StyledRating = styled(Rating)({
   "& .MuiRating-icon": {
@@ -29,6 +32,7 @@ interface Props {
 export default function ProductDetail({ product }: Props) {
   const [quantity, setQuantity] = useState<number>(1);
 
+  const dispatch = useAppDispatch();
   const prodSwiperRef = useRef<SwiperRef>(null);
 
   const handleQuantityChange = (value: number) => {
@@ -43,6 +47,20 @@ export default function ProductDetail({ product }: Props) {
   const hanleSlideToRight = () => {
     if (prodSwiperRef.current) {
       prodSwiperRef.current.swiper.slideNext();
+    }
+  };
+
+  const handleAddToCart = async () => {
+    try {
+      await dispatch(
+        addToCart({
+          productId: product._id,
+          quantity: quantity,
+        })
+      );
+      toast.success("Thêm sản phẩm vào giỏ hàng thành công");
+    } catch (error) {
+      toast.error((error as IResponseError).error);
     }
   };
 
@@ -101,6 +119,7 @@ export default function ProductDetail({ product }: Props) {
         <div className="flex gap-x-[15px]">
           <QuantityBtn quantity={quantity} onChange={handleQuantityChange} />
           <Button
+            onClick={handleAddToCart}
             title="Add to Cart"
             variant="teritary"
             className="px-[25px] py-[5px] text-body-1"
