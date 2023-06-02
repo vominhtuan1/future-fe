@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import counterSlice from "../redux/reducers/counter-slice";
 import addressesSlice from "../redux/reducers/address-slice";
 import categoriesSlice from "../redux/reducers/category-slice";
+import cartSlice from "../redux/reducers/cart-slice";
 import wishlistSlice from "../redux/reducers/wishlist-slice";
 export const store = configureStore({
   reducer: {
     counter: counterSlice,
     addresses: addressesSlice,
+    cart: cartSlice,
     categories: categoriesSlice,
     wishlist: wishlistSlice,
   },

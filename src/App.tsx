@@ -16,6 +16,7 @@ import Home from "./pages/home";
 import ScrollToTop from "./components/ui/scroll-to-top";
 import Shop from "./pages/shop";
 import WishListPage from "./pages/wishlist";
+import YourCart from "./pages/yourcart";
 import AccountSettingPage from "./pages/account-setting";
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
             <Route path="product/:id" element={<ProductDetailPage />} />
             <Route path="contact-us" element={<ContactUs />} />
             <Route path="wishlist" element={<WishListPage />} />
+            <Route path="cart" element={<YourCart />} />
             <Route path="setting" element={<AccountSettingPage />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>

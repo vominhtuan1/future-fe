@@ -2,46 +2,70 @@ import React, { useState } from "react";
 import { CircleMinus, Delete, RecycleIcon, Trash } from "../../icon";
 import { CirclePlus } from "../../icon";
 import QuantityBtn from "../../form/button/quantity-btn";
-
+import { formatPrice } from "../../../utils/string-utils";
+import { useAppDispatch } from "../../../store/hooks";
+import toast from "react-hot-toast";
+import { deleteCart, updateQuantity } from "../../../redux/actions/user-action";
 interface Props {
-  count?: number;
+  cartItem: CartItem;
 }
-const CartItem = ({ count }: Props) => {
-  const [quantity, setQuantity] = useState<number>(1);
-  const handleQuantityChange = (value: number) => {
-    setQuantity(value);
+const CartItem = ({ cartItem }: Props) => {
+  const dispatch = useAppDispatch();
+  const handleUpdateQuantity = async (value: number) => {
+    try {
+      const action = value > cartItem.quantity ? "increment" : "decrement";
+      await dispatch(
+        updateQuantity({
+          productId: cartItem._id,
+          action: action,
+        })
+      );
+    } catch (error) {
+      toast.error((error as IResponseError).error);
+    }
+  };
+  const handleDeleteItemCart = async () => {
+    try {
+      await dispatch(deleteCart(cartItem._id));
+      toast.success("Xóa sản phẩm thành công");
+    } catch (error) {
+      toast.error((error as IResponseError).error);
+    }
   };
   return (
-    <div className="w-[800px] h-[100px] bg-slate-50 m-[30px] p-2 flex flex-1">
-      <div className="flex">
-        <div className="w-[80px] h-[80px] flex">
+    <div className="bg-slate-50 grid grid-cols-5 gap-x-[50px] ">
+      <div className="flex col-span-2">
+        <div className="mr-[20px] shrink-0">
           <img
-            className="inline-block object-cover"
-            src="./chair1.jpg"
+            className="w-[120px] h-[120px] object-cover"
+            src={cartItem.thumbnail}
             alt="img"
           />
         </div>
         <div>
-          <h2>Complete set of sofa, pillows and bed sheets</h2>
-          <p className="text-green-600 font-bold text-xl">$ 75.00</p>
+          <h2 className="text-[20px] leading-[35px] font-bold mb-[15px] line-clamp-2">
+            {cartItem.name}
+          </h2>
+          <p className="text-green-600 text-[20px] leading-[30px] font-bold">
+            {formatPrice(cartItem.price)}
+          </p>
         </div>
       </div>
-      <div className="flex items-center justify-between flex-1 p-10">
-        {/* <div className="border-2 border-slate-400 ">
-          <button onClick={handleDecrease} className="rounded-full w-7 h-5">
-            <CircleMinus></CircleMinus>
-          </button>
-          {countNumber}
-          <button onClick={handleIncrease} className="rounded-full w-7 h-5">
-            <CirclePlus></CirclePlus>
-          </button>
-        </div> */}
-        <QuantityBtn quantity={quantity} onChange={handleQuantityChange} />
-        <p>$ 75.00</p>
-        <button>
-          <Trash />
-        </button>
+      <div className="flex items-center justify-center">
+        <QuantityBtn
+          quantity={cartItem.quantity}
+          onChange={handleUpdateQuantity}
+        />
       </div>
+      <p className="flex items-center justify-center">
+        {formatPrice(cartItem.quantity * cartItem.price)}
+      </p>
+      <button
+        onClick={handleDeleteItemCart}
+        className="flex items-center justify-center"
+      >
+        <Trash />
+      </button>
     </div>
   );
 };
