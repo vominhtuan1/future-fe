@@ -13,11 +13,11 @@ import RegisterInfo from "./components/ui/register/RegisterInfo";
 function App() {
   return (
     <Routes>
+      <Route path="login" element={<Login />} />
+      <Route path="/register/info" element={<RegisterInfo />} />
+      <Route path="register" element={<Register />} />
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
-        <Route path="/register/info" element={<RegisterInfo />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
         <Route path="about" element={<About />} />
         <Route path="order-history" element={<OrderHistory />} />
         <Route path="addresses" element={<Addresses />} />
