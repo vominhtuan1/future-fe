@@ -19,10 +19,7 @@ type UpdateUser = Omit<IUser, "password", "address">;
 
 type AuthenticateLogin = Pick<UserInfoLogin, "username" | "password">;
 
-declare interface EmailVerify {
-  email: string;
-  code: string;
-}
+type EmailVerify = Pick<UserInfoLogin, "email">;
 
 declare interface CartItem {
   _id: string;

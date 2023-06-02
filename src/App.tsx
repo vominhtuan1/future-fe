@@ -6,6 +6,7 @@ import OrderHistory from "./pages/order-history";
 import Addresses from "./pages/addresses";
 import Login from "./pages/login";
 import Register from "./components/ui/register/register";
+import RegisterInfo from "./components/ui/register/RegisterInfo";
 import Checkout from "./pages/checkout";
 import toast, { Toaster, useToasterStore } from "react-hot-toast";
 import ZaloPayResult from "./pages/zalo-pay-result";
@@ -36,6 +37,8 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
+            <Route path="login" element={<Home />} />
+            <Route path="/register/info" element={<RegisterInfo />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route path="shop" element={<Shop />} />

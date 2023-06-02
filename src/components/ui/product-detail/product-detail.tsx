@@ -18,8 +18,6 @@ import { formatPrice } from "../../../utils/string-utils";
 import { toast } from "react-hot-toast";
 import { useAppDispatch } from "../../../store/hooks";
 import { addToCart } from "../../../redux/actions/user-action";
-import toast from "react-hot-toast";
-import { userApi } from "../../../api/user.api";
 
 const StyledRating = styled(Rating)({
   "& .MuiRating-icon": {
