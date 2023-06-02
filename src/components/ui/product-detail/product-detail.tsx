@@ -15,6 +15,8 @@ import "swiper/css/pagination";
 // import required modules
 import { Pagination } from "swiper";
 import { formatPrice } from "../../../utils/string-utils";
+import toast from "react-hot-toast";
+import { userApi } from "../../../api/user.api";
 
 const StyledRating = styled(Rating)({
   "& .MuiRating-icon": {
@@ -105,7 +107,7 @@ export default function ProductDetail({ product }: Props) {
             variant="teritary"
             className="px-[25px] py-[5px] text-body-1"
           />
-          <WishlistBtn />
+          <WishlistBtn id={product._id} />
         </div>
       </div>
     </div>

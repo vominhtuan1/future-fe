@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CircleBtn from "../../form/button-circle/social-btn";
 import CartIcon from "../../icon/cart";
 import WhiteHeartIcon from "../../icon/white-heart";
 import { formatPrice } from "../../../utils/string-utils";
 import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
+import { userApi } from "../../../api/user.api";
+import { selectWishlist } from "../../../redux/reducers/wishlist-slice";
+import { useAppSelector } from "../../../store/hooks";
+import clsx from "clsx";
+import { HeartFill } from "../../icon";
 
 interface Props {
   product: IProductCard;
@@ -11,10 +17,31 @@ interface Props {
 
 const ProductCard = ({ product }: Props) => {
   const navigate = useNavigate();
+  const [love, setLove] = useState<boolean>(false);
+  const wishlist = useAppSelector(selectWishlist).wishlist;
+  const handleFavorite = async () => {
+    if (!love) {
+      await userApi.insertWishlistItem(product._id);
+      toast.success("Insert wishlist item success!");
+      setLove(true);
+    } else {
+      await userApi.deleteWishlistItem(product._id);
+      toast.success("Delete wishlist item success!");
+      setLove(false);
+    }
+  };
 
   const handleClick = () => {
     navigate(`/product/${product._id}`);
   };
+
+  useEffect(() => {
+    for (const items of wishlist) {
+      if (items._id === product._id) {
+        setLove(true);
+      }
+    }
+  }, [wishlist]);
 
   return (
     <div className="relative group flex h-[400px] rounded hover:cursor-pointer overflow-hidden select-none">
@@ -35,8 +62,13 @@ const ProductCard = ({ product }: Props) => {
         <CircleBtn
           type="black"
           className="mb-5 transition duration-300 ease-in-out delay-150 hover:-translate-y-1"
+          onClick={handleFavorite}
         >
-          <WhiteHeartIcon className="text-white" />
+          {love ? (
+            <HeartFill className="text-red-600" />
+          ) : (
+            <WhiteHeartIcon className="text-white" />
+          )}
         </CircleBtn>
 
         <CircleBtn

@@ -3,14 +3,23 @@ import { RecycleIcon } from "../../icon";
 import { formatPrice } from "../../../utils/string-utils";
 import Button from "../../form/button/button";
 import { userApi } from "../../../api/user.api";
+import { useAppDispatch } from "../../../store/hooks";
+import { deleteWishlist } from "../../../redux/actions/wishlist-action";
+import { toast } from "react-hot-toast";
 
 interface Props {
   product: FavoriteProduct;
 }
 
 const WishList = ({ product }: Props) => {
-  const handleDelete = () => {
-    userApi.deleteWishlistItem(product._id);
+  const dispatch = useAppDispatch();
+  const handleDelete = async () => {
+    try {
+      await dispatch(deleteWishlist(product._id)).unwrap();
+      toast.success("Delete wishlist item success!");
+    } catch (error) {
+      toast.error("Delete wishlist item fail!");
+    }
   };
 
   const handleAddToCart = () => {
