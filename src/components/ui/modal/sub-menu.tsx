@@ -28,6 +28,7 @@ export default function SubMenu() {
             <Menu.Item>
               {({ active }) => (
                 <button
+                  onClick={() => navigate("/account-setting")}
                   className={`${
                     active ? "bg-dark-slate-gray text-white" : "text-gray-900"
                   } group flex w-full items-center px-4 py-2 text-sm whitespace-nowrap`}

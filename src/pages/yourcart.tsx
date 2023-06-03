@@ -10,20 +10,27 @@ import { useNavigate } from "react-router-dom";
 
 export default function YourCart() {
   const navigate = useNavigate();
-  const handleShopNow = () => {
-    navigate("/");
-  };
-
   const cart = useAppSelector(selectCart);
+  const dispatch = useAppDispatch();
+
   const subToTal = cart.reduce(
     (sum, currItem) => sum + currItem.price * currItem.quantity,
     0
   );
   const shippingFee = cart.length > 0 ? 45000 : 0;
-  const dispatch = useAppDispatch();
+
   const handleGetCart = async () => {
     await dispatch(getCart());
   };
+
+  const handleShopNow = () => {
+    navigate("/");
+  };
+
+  const handleCheckout = () => {
+    navigate("/checkout");
+  };
+
   useEffect(() => {
     handleGetCart();
   }, []);
@@ -78,6 +85,7 @@ export default function YourCart() {
                 </p>
               </div>
               <Button
+                onClick={handleCheckout}
                 title="Checkout Now"
                 variant="primary"
                 className="py-[15px] w-full"

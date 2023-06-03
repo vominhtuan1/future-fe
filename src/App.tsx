@@ -35,14 +35,14 @@ function App() {
     <>
       <ScrollToTop>
         <Routes>
+          <Route path="login" element={<Login />} />
+          <Route path="/register/info" element={<RegisterInfo />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
-            <Route path="login" element={<Home />} />
-            <Route path="/register/info" element={<RegisterInfo />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route path="shop" element={<Shop />} />
             <Route path="about" element={<About />} />
+            <Route path="shop" element={<Shop />} />
+            <Route path="account-setting" element={<AccountSettingPage />} />
             <Route path="order-history" element={<OrderHistory />} />
             <Route path="addresses" element={<Addresses />} />
             <Route path="checkout" element={<Checkout />} />
@@ -50,8 +50,8 @@ function App() {
             <Route path="product/:id" element={<ProductDetailPage />} />
             <Route path="contact-us" element={<ContactUs />} />
             <Route path="wishlist" element={<WishListPage />} />
-            <Route path="cart" element={<YourCart />} />
             <Route path="setting" element={<AccountSettingPage />} />
+            <Route path="cart" element={<YourCart />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>
