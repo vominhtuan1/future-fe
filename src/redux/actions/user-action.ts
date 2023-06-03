@@ -48,3 +48,15 @@ export const deleteCart = createAsyncThunk(
     }
   }
 );
+
+export const deleteAllCart = createAsyncThunk(
+  "cart/deleteAll",
+  async (_data, thunkAPI) => {
+    try {
+      const response = await userApi.deleteAllCart();
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);

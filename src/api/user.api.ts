@@ -82,4 +82,12 @@ export const userApi = {
     );
     return response.data.data;
   },
+
+  deleteAllCart: async () => {
+    const response = await axiosService.delete<IResponseSuccess<string>>(
+      `${URL}/cart`
+    );
+
+    return response.data.data;
+  },
 };

@@ -3,6 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store/store";
 import {
   addToCart,
+  deleteAllCart,
   deleteCart,
   getCart,
   updateQuantity,
@@ -57,7 +58,13 @@ export const cartSlice = createSlice({
         if (deleteItemCart > -1) {
           state.splice(deleteItemCart, 1);
         }
-      });
+      })
+      .addCase(
+        deleteAllCart.fulfilled,
+        (state, action: PayloadAction<string>) => {
+          state.splice(0, state.length);
+        }
+      );
   },
 });
 

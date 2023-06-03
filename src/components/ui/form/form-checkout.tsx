@@ -13,6 +13,8 @@ import Visa from "../../icon/visa";
 import MasterCard from "../../icon/master-card";
 import JCB from "../../icon/jcb";
 import clsx from "clsx";
+import { useAppDispatch } from "../../../store/hooks";
+import { deleteAllCart } from "../../../redux/actions/user-action";
 
 interface Product {
   id: number;
@@ -45,6 +47,7 @@ const cartProds = [
 ];
 
 const FormCheckout = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const [paymentMethod, setPaymentMethod] = useState("COD");
@@ -94,8 +97,10 @@ const FormCheckout = () => {
             price: prod.price,
             quantity: prod.quantity,
           })),
+          paymentMethod: "COD",
         };
         await orderApi.createOrder(body);
+        await dispatch(deleteAllCart());
         toast.dismiss("toastCreatOrder");
         toast.success("Place order successfully");
 
@@ -119,6 +124,7 @@ const FormCheckout = () => {
             price: prod.price,
             quantity: prod.quantity,
           })),
+          paymentMethod: "ZaloPay",
         };
         const orderId = await orderApi.createOrder(body);
 
@@ -132,6 +138,8 @@ const FormCheckout = () => {
           order_id: orderId,
           bank_code: zaloPayMethod,
         });
+        await dispatch(deleteAllCart());
+
         toast.dismiss("toastCreatOrder");
         window.location.replace(paymentURL);
       }

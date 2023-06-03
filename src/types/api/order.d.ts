@@ -20,6 +20,7 @@ declare interface ICreateOrder {
     quantity: number;
   }[];
   address: string;
+  paymentMethod: string;
 }
 
 declare interface ICreateZaloPayOrder {
