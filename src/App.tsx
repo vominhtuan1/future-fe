@@ -19,6 +19,7 @@ import Shop from "./pages/shop";
 import WishListPage from "./pages/wishlist";
 import YourCart from "./pages/yourcart";
 import AccountSettingPage from "./pages/account-setting";
+import ProtectRoute from "./layout/protect-route";
 
 function App() {
   const { toasts } = useToasterStore();
@@ -42,16 +43,64 @@ function App() {
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
             <Route path="shop" element={<Shop />} />
-            <Route path="account-setting" element={<AccountSettingPage />} />
-            <Route path="order-history" element={<OrderHistory />} />
-            <Route path="addresses" element={<Addresses />} />
-            <Route path="checkout" element={<Checkout />} />
-            <Route path="zalo-pay-result" element={<ZaloPayResult />} />
+            <Route
+              path="account-setting"
+              element={
+                <ProtectRoute>
+                  <AccountSettingPage />
+                </ProtectRoute>
+              }
+            />
+            <Route
+              path="order-history"
+              element={
+                <ProtectRoute>
+                  <OrderHistory />
+                </ProtectRoute>
+              }
+            />
+            <Route
+              path="addresses"
+              element={
+                <ProtectRoute>
+                  <Addresses />
+                </ProtectRoute>
+              }
+            />
+            <Route
+              path="checkout"
+              element={
+                <ProtectRoute>
+                  <Checkout />
+                </ProtectRoute>
+              }
+            />
+            <Route
+              path="zalo-pay-result"
+              element={
+                <ProtectRoute>
+                  <ZaloPayResult />
+                </ProtectRoute>
+              }
+            />
             <Route path="product/:id" element={<ProductDetailPage />} />
             <Route path="contact-us" element={<ContactUs />} />
-            <Route path="wishlist" element={<WishListPage />} />
-            <Route path="setting" element={<AccountSettingPage />} />
-            <Route path="cart" element={<YourCart />} />
+            <Route
+              path="wishlist"
+              element={
+                <ProtectRoute>
+                  <WishListPage />
+                </ProtectRoute>
+              }
+            />
+            <Route
+              path="cart"
+              element={
+                <ProtectRoute>
+                  <YourCart />
+                </ProtectRoute>
+              }
+            />
             <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>

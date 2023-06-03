@@ -61,7 +61,7 @@ const DescriptionReview = ({ decription, comments }: Props) => {
 
         {tab === "description" && (
           <div className="mt-6">
-            <p className="text-justify">{decription}</p>
+            <p className="text-justify whitespace-pre-wrap">{decription}</p>
           </div>
         )}
 

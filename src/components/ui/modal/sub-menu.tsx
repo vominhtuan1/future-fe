@@ -2,9 +2,13 @@ import { Menu, Transition } from "@headlessui/react";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { UserIcon } from "../../icon";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export default function SubMenu() {
+  const location = useLocation();
+
+  const token = Cookies.get("Authorization");
   const navigate = useNavigate();
 
   return (
@@ -24,7 +28,7 @@ export default function SubMenu() {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute z-10 right-0 mt-2 origin-top-right bg-white rounded-md overflow-hidden shadow-lg w-fit focus:outline-none">
+          <Menu.Items className="absolute right-0 z-10 mt-2 overflow-hidden origin-top-right bg-white rounded-md shadow-lg w-fit focus:outline-none">
             <Menu.Item>
               {({ active }) => (
                 <button
@@ -51,17 +55,38 @@ export default function SubMenu() {
                 </button>
               )}
             </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <button
-                  className={`${
-                    active ? "bg-dark-slate-gray text-white" : "text-gray-900"
-                  } group flex w-full items-center px-4 py-2 text-sm whitespace-nowrap`}
-                >
-                  Đăng xuất
-                </button>
-              )}
-            </Menu.Item>
+            {token ? (
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    onClick={() => {
+                      Cookies.remove("Authorization");
+                      navigate("/");
+                    }}
+                    className={`${
+                      active ? "bg-dark-slate-gray text-white" : "text-gray-900"
+                    } group flex w-full items-center px-4 py-2 text-sm whitespace-nowrap`}
+                  >
+                    Đăng xuất
+                  </button>
+                )}
+              </Menu.Item>
+            ) : (
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    onClick={() => {
+                      navigate(`/login?redirectUrL=${location.pathname}`);
+                    }}
+                    className={`${
+                      active ? "bg-dark-slate-gray text-white" : "text-gray-900"
+                    } group flex w-full items-center px-4 py-2 text-sm whitespace-nowrap`}
+                  >
+                    Đăng nhập
+                  </button>
+                )}
+              </Menu.Item>
+            )}
           </Menu.Items>
         </Transition>
       </Menu>
