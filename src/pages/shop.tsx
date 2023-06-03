@@ -86,6 +86,7 @@ export default function Shop() {
 
   const handleSort = (value: "ascending" | "descending") => () => {
     setSearchParams((params) => {
+      params.delete("sort");
       params.append("sort", value);
       return params;
     });

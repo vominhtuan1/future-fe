@@ -165,9 +165,7 @@ export default function AccountSettingPage() {
                 {isChange ? (
                   <input
                     type="date"
-                    placeholder={moment(
-                      userInfo ? userInfo.birthday : "2023/01/01"
-                    ).format("L")}
+                    placeholder={"01-01-2023"}
                     className={`w-[300px] h-[35px] px-5 py-[22px] text-body-1 leading-5 outline-none 
                     border-[1px] border-light-gray bg-transparent text-philippine-gray`}
                     {...register("birthday")}

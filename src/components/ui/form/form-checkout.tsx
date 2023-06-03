@@ -13,6 +13,8 @@ import Visa from "../../icon/visa";
 import MasterCard from "../../icon/master-card";
 import JCB from "../../icon/jcb";
 import clsx from "clsx";
+import { useAppSelector } from "../../../store/hooks";
+import { selectCart } from "../../../redux/reducers/cart-slice";
 import { useAppDispatch } from "../../../store/hooks";
 import { deleteAllCart } from "../../../redux/actions/user-action";
 
@@ -22,33 +24,10 @@ interface Product {
   price: number;
 }
 
-const cartProds = [
-  {
-    _id: "6444d4f8d51d38f91006c7b0",
-    name: "sed eum tenetur asperiores corporis vero odio",
-    price: 12000,
-    imgUrl: "./chair1.jpg",
-    quantity: 2,
-  },
-  {
-    _id: "6444d271aeeb343923303a95",
-    name: "sed ros tenetur shan corporis vero odio",
-    price: 20000,
-    imgUrl: "./chair2.jpg",
-    quantity: 1,
-  },
-  {
-    _id: "6444d557f398f8b9b2fe4a88",
-    name: "qikl ros oksuej shan isk vero odio",
-    price: 24000,
-    imgUrl: "./chair3.jpg",
-    quantity: 3,
-  },
-];
-
 const FormCheckout = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const cart = useAppSelector(selectCart);
 
   const [paymentMethod, setPaymentMethod] = useState("COD");
   const [zaloPayMethod, setZaloPayMethod] = useState<string>();
@@ -92,7 +71,7 @@ const FormCheckout = () => {
         toast.loading("Placing order ...", { id: "toastCreatOrder" });
         const body: ICreateOrder = {
           address: "6444e1985e256d1e8182a2ee",
-          orderItems: cartProds.map((prod) => ({
+          orderItems: cart.map((prod) => ({
             product: prod._id,
             price: prod.price,
             quantity: prod.quantity,
@@ -119,7 +98,7 @@ const FormCheckout = () => {
         // Create order
         const body: ICreateOrder = {
           address: "6444e1985e256d1e8182a2ee",
-          orderItems: cartProds.map((prod) => ({
+          orderItems: cart.map((prod) => ({
             product: prod._id,
             price: prod.price,
             quantity: prod.quantity,
@@ -129,7 +108,7 @@ const FormCheckout = () => {
         const orderId = await orderApi.createOrder(body);
 
         // Create ZaloPay Payment URL
-        const amount = cartProds.reduce(
+        const amount = cart.reduce(
           (total, prod) => total + prod.quantity * prod.price,
           0
         );
@@ -150,12 +129,12 @@ const FormCheckout = () => {
   };
 
   useEffect(() => {
-    const tempSubTotal = cartProds.reduce(
+    const tempSubTotal = cart.reduce(
       (sum, prod) => sum + prod.price * prod.quantity,
       0
     );
     setSubTotal(tempSubTotal);
-    setTotal(tempSubTotal + 15000);
+    setTotal(tempSubTotal + 45000);
   }, []);
 
   return (
@@ -168,10 +147,10 @@ const FormCheckout = () => {
           <h2 className="mb-10 font-bold text-heading-6">Your Order</h2>
 
           <div className="mb-[50px] space-y-4 border-2 border-light-gray p-6">
-            {cartProds.map((prod) => (
+            {cart.map((prod) => (
               <OrderChekoutCard
                 key={prod.name}
-                imgUrl={prod.imgUrl}
+                imgUrl={prod.thumbnail}
                 name={prod.name}
                 price={prod.price}
                 quantity={prod.quantity}
@@ -270,7 +249,7 @@ const FormCheckout = () => {
                 Shipping
               </h5>
               <span className="text-body text-heading-7 leading-[30px] font-semibold">
-                {formatPrice(15000)}
+                {formatPrice(45000)}
               </span>
             </div>
             <div className="w-full h-[1px] bg-black"></div>

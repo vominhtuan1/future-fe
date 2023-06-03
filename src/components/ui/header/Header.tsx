@@ -33,7 +33,7 @@ const Header = () => {
   return (
     <header className="flex flex-col bg-teal-800">
       <div className="flex justify-between mt-2 px-10 bg-white items-center h-[60px]">
-        <FutureIcon></FutureIcon>
+        <FutureIcon className="cursor-pointer" onClick={() => navigate("/")} />
         <div className="flex items-center gap-x-[30px]">
           <form
             onSubmit={handleSubmit(handleSearch)}
@@ -48,7 +48,7 @@ const Header = () => {
           <div>
             <SubMenu />
           </div>
-          <div>
+          <div className="cursor-pointer" onClick={() => navigate("/cart")}>
             <CartIcon></CartIcon>
           </div>
         </div>

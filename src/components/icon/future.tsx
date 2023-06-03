@@ -1,6 +1,6 @@
-import React from "react";
+import React, { SVGProps } from "react";
 
-function Future() {
+function Future(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -8,6 +8,7 @@ function Future() {
       height="25"
       fill="none"
       viewBox="0 0 98 25"
+      {...props}
     >
       <path
         fill="#265E55"
