@@ -7,6 +7,7 @@ import { selectCategories } from "../redux/reducers/category-slice";
 import { getCategories } from "../redux/actions/category-action";
 import { toast } from "react-hot-toast";
 import { getWishlist } from "../redux/actions/wishlist-action";
+import { getCart } from "../redux/actions/user-action";
 
 export default function MainLayout() {
   const categories = useAppSelector(selectCategories);
@@ -28,9 +29,15 @@ export default function MainLayout() {
       console.log(error);
     }
   };
+
+  const handleGetCart = async () => {
+    await dispatch(getCart());
+  };
+
   useEffect(() => {
     handleFetchCategories();
     handleGetWishlist();
+    handleGetCart();
   }, []);
 
   return (

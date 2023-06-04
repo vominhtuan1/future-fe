@@ -113,7 +113,7 @@ const FormCheckout = () => {
           0
         );
         const paymentURL = await orderApi.createZaloPayPaymentURL({
-          amount,
+          amount: amount + 45000,
           order_id: orderId,
           bank_code: zaloPayMethod,
         });

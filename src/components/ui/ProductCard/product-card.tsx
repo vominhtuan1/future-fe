@@ -7,18 +7,22 @@ import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 import { userApi } from "../../../api/user.api";
 import { selectWishlist } from "../../../redux/reducers/wishlist-slice";
-import { useAppSelector } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import clsx from "clsx";
 import { HeartFill } from "../../icon";
+import { addToCart } from "../../../redux/actions/user-action";
 
 interface Props {
   product: IProductCard;
 }
 
 const ProductCard = ({ product }: Props) => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   const [love, setLove] = useState<boolean>(false);
   const wishlist = useAppSelector(selectWishlist).wishlist;
+
   const handleFavorite = async () => {
     if (!love) {
       await userApi.insertWishlistItem(product._id);
@@ -33,6 +37,11 @@ const ProductCard = ({ product }: Props) => {
 
   const handleClick = () => {
     navigate(`/product/${product._id}`);
+  };
+
+  const handleAddToCart = async () => {
+    await dispatch(addToCart({ productId: product._id, quantity: 1 }));
+    toast.success("Thêm sản phẩm vào giỏ hàng thành công");
   };
 
   useEffect(() => {
@@ -72,6 +81,7 @@ const ProductCard = ({ product }: Props) => {
         </CircleBtn>
 
         <CircleBtn
+          onClick={handleAddToCart}
           type="wheat"
           className="transition duration-300 ease-in-out delay-150 hover:-translate-y-1"
         >

@@ -19,10 +19,6 @@ export default function YourCart() {
   );
   const shippingFee = cart.length > 0 ? 45000 : 0;
 
-  const handleGetCart = async () => {
-    await dispatch(getCart());
-  };
-
   const handleShopNow = () => {
     navigate("/");
   };
@@ -31,10 +27,6 @@ export default function YourCart() {
     navigate("/checkout");
   };
 
-  useEffect(() => {
-    handleGetCart();
-  }, []);
-
   return (
     <div className="mx-[75px] ">
       <h2 className="flex items-center justify-center text-[40px] leading-[40px] font-bold mt-[50px] mb-[100px]">
@@ -42,7 +34,7 @@ export default function YourCart() {
       </h2>
       {cart.length > 0 ? (
         <div className="grid grid-cols-3 gap-x-[62px] mb-[140px]">
-          <div className="col-span-2  ">
+          <div className="col-span-2 ">
             <header className="grid grid-cols-5 text-center text-[20px] leading-[35px] font-semibold mb-[20px]">
               <h3 className="col-span-2 text-left">Sản phẩm</h3>
               <h3 className="">Số lượng</h3>
