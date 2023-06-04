@@ -20,6 +20,7 @@ export const cartSlice = createSlice({
       .addCase(
         getCart.fulfilled,
         (state, action: PayloadAction<CartItem[]>) => {
+          state.splice(0, state.length);
           state.push(...action.payload);
         }
       )

@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../../form/button/button";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   _id: string;
@@ -9,6 +10,7 @@ interface Props {
 }
 
 export default function CategoryCard({ title, subTitle, image, _id }: Props) {
+  const navigate = useNavigate();
   return (
     <div className="grid grid-cols-3 bg-scarlet">
       <div className="pt-[35px] pl-[30px] col-span-2">
@@ -17,6 +19,9 @@ export default function CategoryCard({ title, subTitle, image, _id }: Props) {
         </p>
         <h3 className="text-heading-6 mb-[35px]">{subTitle}</h3>
         <Button
+          onClick={() => {
+            navigate(`/shop?categoryName=${title}`);
+          }}
           title="Shop now"
           variant="secondary"
           className="px-10 py-3 mb-6 capitalize"

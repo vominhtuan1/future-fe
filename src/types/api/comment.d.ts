@@ -7,6 +7,7 @@ declare interface IComment {
     name: string;
     avatar: string;
   };
+  createdAt: string;
 }
 
 declare interface CreateComment {

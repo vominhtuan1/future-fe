@@ -94,7 +94,7 @@ export default function AccountSettingPage() {
           <form className="flex justify-end w-[300px]">
             <input
               type="file"
-              accept=".png"
+              accept="image/png, image/jpg, image/jpeg"
               ref={avatarRef}
               style={{ display: "none" }}
               onChange={handleAvatarInput}
@@ -116,7 +116,7 @@ export default function AccountSettingPage() {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="flex">
-          <div className="mr-4 flex flex-col justify-between">
+          <div className="flex flex-col justify-between mr-4">
             <div className="flex items-center mb-4">
               <h3 className="w-[100px] leading-[35px] font-bold mr-[50px]">
                 Name
@@ -180,7 +180,7 @@ export default function AccountSettingPage() {
               </div>
             </div>
           </div>
-          <div className="flex justify-end items-start">
+          <div className="flex items-start justify-end">
             {isChange ? (
               <React.Fragment></React.Fragment>
             ) : (

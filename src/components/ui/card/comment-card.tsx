@@ -23,10 +23,11 @@ export default function CommentCard({ comment }: Props) {
           <div className="space-y-2">
             <p className="text-heading-9">{comment.user.name}</p>
             <p className="text-gray-500 text-heading-10">
-              {new Date(comment.createAt).toLocaleDateString("vi-VN")}
+              {new Date(comment.createdAt).toLocaleDateString("vi-VN")}
             </p>
           </div>
           <StyledRating
+            readOnly
             value={comment.rate}
             icon={<Star className="text-yellow" />}
             emptyIcon={<Star className="text-light-gray" />}

@@ -6,6 +6,7 @@ import { userApi } from "../../../api/user.api";
 import { useAppDispatch } from "../../../store/hooks";
 import { deleteWishlist } from "../../../redux/actions/wishlist-action";
 import { toast } from "react-hot-toast";
+import { addToCart } from "../../../redux/actions/user-action";
 
 interface Props {
   product: FavoriteProduct;
@@ -22,8 +23,9 @@ const WishList = ({ product }: Props) => {
     }
   };
 
-  const handleAddToCart = () => {
-    console.log("product._id: ", product._id);
+  const handleAddToCart = async () => {
+    await dispatch(addToCart({ productId: product._id, quantity: 1 }));
+    toast.success("Thêm sản phẩm vào giỏ hàng thành công");
   };
 
   return (

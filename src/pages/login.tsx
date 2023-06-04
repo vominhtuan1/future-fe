@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Google from "../images/google-small.png";
 import { authenticateApi } from "../api/authenticate.api";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Button from "../components/form/button/button";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
@@ -9,6 +9,7 @@ import Logo_Login from "../images/logo_login.jpg";
 export default function Login() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [searchParams, setSearchParams] = useSearchParams();
   const [user, setUser] = useState<any>(null);
   const navigate = useNavigate();
   const google = () => {
@@ -18,6 +19,8 @@ export default function Login() {
   const loginButton = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
+      const redirectURL = searchParams.get("redirectUrL");
+
       if (username === "" || password === "") {
         toast.error("Username or Password is empty");
         return;
@@ -30,7 +33,7 @@ export default function Login() {
       const res = await authenticateApi.login(account);
       Cookies.set("Authorization", res.token, { expires: 7 });
       toast.success(`Welcome ${res.name} back!!`);
-      navigate("/");
+      navigate(redirectURL ? redirectURL : "/");
     } catch (error) {
       toast.error("Password or Username is not correct!");
     }
@@ -70,12 +73,12 @@ export default function Login() {
   // }, []);
   // console.log(user);
   return (
-    <div className="w-full h-screen flex items-center">
-      <div className="relative w-1/2 h-full flex flex-col">
+    <div className="flex items-center w-full h-screen">
+      <div className="relative flex flex-col w-1/2 h-full">
         <img
           src={Logo_Login}
           alt="login-logo"
-          className="w-full h-full object-cover"
+          className="object-cover w-full h-full"
         />
       </div>
       <div className="w-1/2 h-full bg-[#f5f5f5] flex flex-col p-20 justify-between items-center">
@@ -83,16 +86,16 @@ export default function Login() {
           Future Shop Decor
         </h1>
         <div className="w-full flex flex-col max-w-[500px]">
-          <div className="w-full flex flex-col mb-10">
-            <h3 className="text-3xl font-semibold mb-2">Login</h3>
-            <p className="text-base mb-2">
+          <div className="flex flex-col w-full mb-10">
+            <h3 className="mb-2 text-3xl font-semibold">Login</h3>
+            <p className="mb-2 text-base">
               Welcome back! Please enter your details below.
             </p>
           </div>
-          <div className="w-full flex flex-col">
+          <div className="flex flex-col w-full">
             <form
               onSubmit={loginButton}
-              className="flex flex-1 flex-col items-center"
+              className="flex flex-col items-center flex-1"
             >
               <input
                 className="w-full mb-[20px] pt-[15px] pb-[15px] pr-[20px] pl-[20px] border-2 focus:border-black"
@@ -108,8 +111,8 @@ export default function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <div className="w-full flex items-center justify-end">
-                <p className="text-sm font-medium whitespace-nowrap cursor-pointer underline underline-offset-2 hover:text-gray-500">
+              <div className="flex items-center justify-end w-full">
+                <p className="text-sm font-medium underline cursor-pointer whitespace-nowrap underline-offset-2 hover:text-gray-500">
                   <Link to={"/update-password"}>Forget password?</Link>
                 </p>
               </div>
@@ -121,7 +124,7 @@ export default function Login() {
               ></Button>
             </form>
           </div>
-          <div className="w-full flex items-center justify-center relative py-5">
+          <div className="relative flex items-center justify-center w-full py-5">
             <div className="w-full h-[1px] bg-gray-300"></div>
             <p className="absolute text-md text-black/80 bg-[#f5f5f5]">OR</p>
           </div>
@@ -133,10 +136,10 @@ export default function Login() {
             Sign in with Google
           </div>
         </div>
-        <div className="w-full flex justify-center items-center ">
+        <div className="flex items-center justify-center w-full ">
           <p className="text-sm font-normal text-[#060606]">
             Dont have an account?{" "}
-            <span className="font-semibold underline underline-offset-2 cursor-pointer hover:text-gray-500">
+            <span className="font-semibold underline cursor-pointer underline-offset-2 hover:text-gray-500">
               <Link to={"/register"}>Sign up for free</Link>
             </span>
           </p>
@@ -149,7 +152,7 @@ export default function Login() {
 {
   /* <div className="flex items-center justify-center h-[400px]">
       <div className="h-[75%] w-[60%] flex items-center shadow-lg p-[20px]">
-        <div className="flex flex-1 flex-col items-center">
+        <div className="flex flex-col items-center flex-1">
           <div
             className="w-[200px] pt-[15px] pr-[25px] pb-[15px] pl-[25px] mb-[20px] flex items-center font-bold bg-red-700 text-white  cursor-pointer"
             onClick={google}
@@ -169,7 +172,7 @@ export default function Login() {
             Github
           </div>
         </div>
-        <div className="h-full flex items-center justify-center">
+        <div className="flex items-center justify-center h-full">
           <div className="relative flex items-center justify-center bottom-0 left-0 right-0 top-0 w-[0.5px] h-3/4 m-auto bg-slate-400">
             <div className="absolute z-10 font-bold p-[10px] rounded-full border-2 border-solid bg-white border-slate-400">
               OR
@@ -179,7 +182,7 @@ export default function Login() {
         <div className="flex flex-1 flex-col items-center  p-[20px]">
           <form
             onSubmit={loginButton}
-            className="flex flex-1 flex-col items-center"
+            className="flex flex-col items-center flex-1"
           >
             <input
               className="w-[250px] mb-[20px] pt-[15px] pb-[15px] pr-[20px] pl-[20px] border-2 focus:border-black"
@@ -203,10 +206,10 @@ export default function Login() {
             ></Button>
           </form>
           <div className="flex space-x-16 w-[250px] py-3 ">
-            <span className="font-extrabold text-sm text-indigo-700 hover:text-indigo-300 cursor-pointer">
+            <span className="text-sm font-extrabold text-indigo-700 cursor-pointer hover:text-indigo-300">
               <Link to={"/register"}>Register</Link>
             </span>
-            <span className="font-extrabold text-sm text-indigo-700 hover:text-indigo-300 cursor-pointer">
+            <span className="text-sm font-extrabold text-indigo-700 cursor-pointer hover:text-indigo-300">
               <Link to={"/update-password"}>Forget password?</Link>
             </span>
           </div>

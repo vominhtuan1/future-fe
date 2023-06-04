@@ -31,7 +31,15 @@ export default function ProductDetailPage() {
         rate: value.rate,
       });
       if (product) {
-        setProduct({ ...product, comments: [...product.comments, reponse] });
+        const newRate =
+          (product.rating * product.comments.length + reponse.rate) /
+          (product.comments.length + 1);
+        console.log("newRate: ", newRate);
+        setProduct({
+          ...product,
+          rating: newRate,
+          comments: [...product.comments, reponse],
+        });
       }
     } catch (error) {
       console.log(error);

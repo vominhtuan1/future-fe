@@ -8,7 +8,6 @@ import { Pagination } from "swiper";
 import CategoryCard from "../category/category-card";
 import clsx from "clsx";
 import CommentCard from "../card/comment-card";
-import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import { ChervonLeft, ChervonRight } from "../../icon";
 
 interface Props {
@@ -18,9 +17,20 @@ interface Props {
 const DescriptionReview = ({ decription, comments }: Props) => {
   const categories = useAppSelector(selectCategories);
   const [tab, setTab] = useState<"description" | "comment">("description");
+  const [commentPage, setCommentPage] = useState<number>(1);
 
   const handleTabClick = (tab: "description" | "comment") => () => {
     setTab(tab);
+    setCommentPage(1);
+  };
+
+  const handlePageComment = (action: "next" | "previous") => () => {
+    console.log("vo");
+    if (action === "next") {
+      setCommentPage(commentPage + 1);
+    } else {
+      setCommentPage(commentPage - 1);
+    }
   };
 
   return (
@@ -61,21 +71,47 @@ const DescriptionReview = ({ decription, comments }: Props) => {
 
         {tab === "description" && (
           <div className="mt-6">
-            <p className="text-justify">{decription}</p>
+            <p className="text-justify whitespace-pre-wrap">{decription}</p>
           </div>
         )}
 
         {tab === "comment" && (
-          <div className="mt-6 space-y-8">
-            {comments.map((item) => (
-              <CommentCard comment={item} key={item._id} />
-            ))}
-            <div className="flex justify-center gap-x-1">
-              <ChervonLeft />
-              <p>1</p>/<p>4</p>
-              <ChervonRight />
-            </div>
-          </div>
+          <>
+            {comments.length > 0 ? (
+              <div className="mt-6 space-y-8">
+                {comments
+                  .slice((commentPage - 1) * 4, commentPage * 4)
+                  .map((item) => (
+                    <CommentCard comment={item} key={item._id} />
+                  ))}
+
+                <div className="flex justify-center gap-x-1">
+                  <button
+                    disabled={commentPage === 1}
+                    onClick={handlePageComment("previous")}
+                    className="disabled:cursor-not-allowed"
+                  >
+                    <ChervonLeft />
+                  </button>
+                  <p>{commentPage}</p>/
+                  <p>
+                    {comments.length % 4 > 0
+                      ? Math.floor(comments.length / 4 + 1)
+                      : Math.floor(comments.length / 4)}
+                  </p>
+                  <button
+                    disabled={commentPage * 4 >= comments.length}
+                    onClick={handlePageComment("next")}
+                    className="disabled:cursor-not-allowed"
+                  >
+                    <ChervonRight />
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <p>Sản phẩm hiện chưa có đánh giá</p>
+            )}
+          </>
         )}
       </div>
 

@@ -8,10 +8,13 @@ import { getCategories } from "../redux/actions/category-action";
 import { toast } from "react-hot-toast";
 import { getWishlist } from "../redux/actions/wishlist-action";
 import { getCart } from "../redux/actions/user-action";
+import Cookies from "js-cookie";
+import { selectWishlist } from "../redux/reducers/wishlist-slice";
 
 export default function MainLayout() {
   const categories = useAppSelector(selectCategories);
   const dispatch = useAppDispatch();
+  const token = Cookies.get("Authorization");
 
   const handleFetchCategories = async () => {
     if (categories.length === 0) {
@@ -31,14 +34,23 @@ export default function MainLayout() {
   };
 
   const handleGetCart = async () => {
-    await dispatch(getCart());
+    try {
+      await dispatch(getCart()).unwrap();
+    } catch (error) {
+      toast.error((error as IResponseError).error);
+    }
   };
 
   useEffect(() => {
     handleFetchCategories();
-    handleGetWishlist();
-    handleGetCart();
   }, []);
+
+  useEffect(() => {
+    if (token) {
+      handleGetWishlist();
+      handleGetCart();
+    }
+  }, [token]);
 
   return (
     <div>

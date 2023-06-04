@@ -6,8 +6,7 @@ import TextArea from "../../form/input/text-area";
 import Button from "../../form/button/button";
 import { Controller, useForm } from "react-hook-form";
 import clsx from "clsx";
-import { useParams } from "react-router-dom";
-import { commentApi } from "../../../api/comment.api";
+import { toast } from "react-hot-toast";
 
 interface FormValue {
   rate: number;
@@ -26,18 +25,24 @@ interface Props {
 }
 
 export default function FormComment({ defaultValue, onSubmit }: Props) {
-  const { id } = useParams();
   const {
     register,
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormValue>({
     defaultValues: defaultValue,
   });
 
+  const handleSubmitComment = (value: FormValue) => {
+    onSubmit(value);
+    reset();
+    toast.success("Đánh giá sản phẩm thành công");
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(handleSubmitComment)}>
       <h3 className="mb-10 text-center text-heading-6">Write your review</h3>
 
       <Controller
