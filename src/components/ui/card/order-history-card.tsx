@@ -2,12 +2,15 @@ import React from "react";
 import { formatPrice } from "../../../utils/string-utils";
 import Button from "../../form/button/button";
 import OrderChekoutCard from "./order-checkout-card";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   order: IOrderHistory;
 }
 
 export default function OrderHistoryCard({ order }: Props) {
+  const navigate = useNavigate();
+
   return (
     <div className="relative w-full p-5 space-y-4 border-2 border-dark-slate-gray">
       <div className="flex justify-between">
@@ -35,6 +38,7 @@ export default function OrderHistoryCard({ order }: Props) {
         className="absolute px-5 py-2 right-5 bottom-5"
         title="See Detail"
         variant="secondary"
+        onClick={() => navigate(`/order-history/${order._id}`)}
       />
     </div>
   );

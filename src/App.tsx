@@ -20,6 +20,7 @@ import WishListPage from "./pages/wishlist";
 import YourCart from "./pages/yourcart";
 import AccountSettingPage from "./pages/account-setting";
 import ProtectRoute from "./layout/protect-route";
+import OrderDetails from "./pages/order-detail";
 
 function App() {
   const { toasts } = useToasterStore();
@@ -56,6 +57,14 @@ function App() {
               element={
                 <ProtectRoute>
                   <OrderHistory />
+                </ProtectRoute>
+              }
+            />
+            <Route
+              path="order-history/:id"
+              element={
+                <ProtectRoute>
+                  <OrderDetails />
                 </ProtectRoute>
               }
             />

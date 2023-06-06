@@ -13,6 +13,36 @@ declare interface IOrderHistory {
   orderItemsLength: number;
 }
 
+declare interface IOrder {
+  _id: string;
+  address: {
+    _id: string;
+    province: string;
+    district: string;
+    ward: string;
+    specificAddress: string;
+    phone: string;
+    receiver: string;
+  };
+  orderItems: IOrderItemRes[];
+  total: number;
+  status: OrderStatus;
+  shortId: string;
+  paymentMethod: string;
+  createdAt: string;
+}
+
+declare interface IOrderItem {
+  _id: string;
+  price: number;
+  quantity: number;
+  product: {
+    _id: string;
+    name: string;
+    thumbnail: string;
+  };
+}
+
 declare interface ICreateOrder {
   orderItems: {
     product: string;
