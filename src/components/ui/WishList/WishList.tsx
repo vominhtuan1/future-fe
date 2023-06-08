@@ -2,7 +2,6 @@ import React from "react";
 import { RecycleIcon } from "../../icon";
 import { formatPrice } from "../../../utils/string-utils";
 import Button from "../../form/button/button";
-import { userApi } from "../../../api/user.api";
 import { useAppDispatch } from "../../../store/hooks";
 import { deleteWishlist } from "../../../redux/actions/wishlist-action";
 import { toast } from "react-hot-toast";
@@ -17,9 +16,9 @@ const WishList = ({ product }: Props) => {
   const handleDelete = async () => {
     try {
       await dispatch(deleteWishlist(product._id)).unwrap();
-      toast.success("Delete wishlist item success!");
+      toast.success("Xóa sản phẩm yêu thích thành công");
     } catch (error) {
-      toast.error("Delete wishlist item fail!");
+      toast.error("Xóa sản phẩm yêu thích thất bại");
     }
   };
 

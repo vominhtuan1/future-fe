@@ -17,17 +17,15 @@ import { useAppSelector } from "../../../store/hooks";
 import { selectCart } from "../../../redux/reducers/cart-slice";
 import { useAppDispatch } from "../../../store/hooks";
 import { deleteAllCart } from "../../../redux/actions/user-action";
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-}
+import { selectAddresses } from "../../../redux/reducers/address-slice";
 
 const FormCheckout = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const cart = useAppSelector(selectCart);
+  const address = useAppSelector(selectAddresses).addresses.find(
+    (address) => address.default === true
+  );
 
   const [paymentMethod, setPaymentMethod] = useState("COD");
   const [zaloPayMethod, setZaloPayMethod] = useState<string>();
@@ -67,60 +65,66 @@ const FormCheckout = () => {
 
   const handlePlaceOrder = async () => {
     try {
-      if (paymentMethod === "COD") {
-        toast.loading("Placing order ...", { id: "toastCreatOrder" });
-        const body: ICreateOrder = {
-          address: "6444e1985e256d1e8182a2ee",
-          orderItems: cart.map((prod) => ({
-            product: prod._id,
-            price: prod.price,
-            quantity: prod.quantity,
-          })),
-          paymentMethod: "COD",
-        };
-        await orderApi.createOrder(body);
-        await dispatch(deleteAllCart());
-        toast.dismiss("toastCreatOrder");
-        toast.success("Place order successfully");
+      if (address) {
+        if (paymentMethod === "COD") {
+          toast.loading("Đang tiến hành đặt hàng ...", {
+            id: "toastCreatOrder",
+          });
+          const body: ICreateOrder = {
+            address: address._id,
+            orderItems: cart.map((prod) => ({
+              product: prod._id,
+              price: prod.price,
+              quantity: prod.quantity,
+            })),
+            paymentMethod: "COD",
+          };
+          await orderApi.createOrder(body);
+          await dispatch(deleteAllCart());
+          toast.dismiss("toastCreatOrder");
+          toast.success("Đặt hàng thành công");
 
-        navigate({
-          pathname: "/order-history",
-          search: createSearchParams({
-            status: "pending",
-          }).toString(),
-        });
-      } else {
-        if (!zaloPayMethod) {
-          toast.error("Please choose one of the payment methods of ZaloPay");
-          return;
+          navigate({
+            pathname: "/order-history",
+            search: createSearchParams({
+              status: "pending",
+            }).toString(),
+          });
+        } else {
+          if (!zaloPayMethod) {
+            toast.error("Please choose one of the payment methods of ZaloPay");
+            return;
+          }
+          toast.loading("Placing order ...", { id: "toastCreatOrder" });
+          // Create order
+          const body: ICreateOrder = {
+            address: "6444e1985e256d1e8182a2ee",
+            orderItems: cart.map((prod) => ({
+              product: prod._id,
+              price: prod.price,
+              quantity: prod.quantity,
+            })),
+            paymentMethod: "ZaloPay",
+          };
+          const orderId = await orderApi.createOrder(body);
+
+          // Create ZaloPay Payment URL
+          const amount = cart.reduce(
+            (total, prod) => total + prod.quantity * prod.price,
+            0
+          );
+          const paymentURL = await orderApi.createZaloPayPaymentURL({
+            amount: amount + 45000,
+            order_id: orderId,
+            bank_code: zaloPayMethod,
+          });
+          await dispatch(deleteAllCart());
+
+          toast.dismiss("toastCreatOrder");
+          window.location.replace(paymentURL);
         }
-        toast.loading("Placing order ...", { id: "toastCreatOrder" });
-        // Create order
-        const body: ICreateOrder = {
-          address: "6444e1985e256d1e8182a2ee",
-          orderItems: cart.map((prod) => ({
-            product: prod._id,
-            price: prod.price,
-            quantity: prod.quantity,
-          })),
-          paymentMethod: "ZaloPay",
-        };
-        const orderId = await orderApi.createOrder(body);
-
-        // Create ZaloPay Payment URL
-        const amount = cart.reduce(
-          (total, prod) => total + prod.quantity * prod.price,
-          0
-        );
-        const paymentURL = await orderApi.createZaloPayPaymentURL({
-          amount: amount + 45000,
-          order_id: orderId,
-          bank_code: zaloPayMethod,
-        });
-        await dispatch(deleteAllCart());
-
-        toast.dismiss("toastCreatOrder");
-        window.location.replace(paymentURL);
+      } else {
+        toast.error("Vui lòng cung cấp đại chỉ nhận hàng");
       }
     } catch (error) {
       toast.dismiss("toastCreatOrder");
@@ -140,11 +144,11 @@ const FormCheckout = () => {
   return (
     <div>
       <h3 className="mb-[100px] flex justify-center text-heading-3 font-black">
-        Checkout
+        Thủ tục thanh toán
       </h3>
       <div className="grid grid-cols-3 gap-x-5">
         <div className="col-span-2">
-          <h2 className="mb-10 font-bold text-heading-6">Your Order</h2>
+          <h2 className="mb-10 font-bold text-heading-6">Đơn hàng của bạn</h2>
 
           <div className="mb-[50px] space-y-4 border-2 border-light-gray p-6">
             {cart.map((prod) => (
@@ -157,7 +161,9 @@ const FormCheckout = () => {
               />
             ))}
           </div>
-          <h2 className="mb-10 font-bold text-heading-6">Payment Method</h2>
+          <h2 className="mb-10 font-bold text-heading-6">
+            Phương thức thanh toán
+          </h2>
           <div>
             <div className="flex gap-x-5">
               {paymentMethods.map((method) => (
@@ -173,7 +179,7 @@ const FormCheckout = () => {
             {paymentMethod === "ZaloPay" && (
               <div className="mt-8">
                 <h4 className="mb-5 text-heading-8">
-                  Select one of ZaloPay methods:
+                  Chọn 1 trong các phương thức thanh toán của ZaloPay:
                 </h4>
 
                 <div className="flex gap-x-5">
@@ -188,10 +194,10 @@ const FormCheckout = () => {
                     <ZaloPay className="drop-shadow-md" />
                     <div className="flex flex-col justify-around">
                       <h5 className="font-semibold select-none text-heading-9">
-                        Open ZaloPay app
+                        Mở ứng dụng ZaloPay
                       </h5>
                       <p className="select-none text-heading-10 text-philippine-gray">
-                        Scan QR for payment
+                        Thanh toán bằng quét mã QR
                       </p>
                     </div>
                   </div>
@@ -216,29 +222,38 @@ const FormCheckout = () => {
         <div className="bg-scarlet px-7 py-[34px] h-fit">
           <div className="flex justify-between mb-[30px]">
             <h3 className="text-heading-7 leading-[35px] font-bold">
-              Your Address
+              Địa chỉ của bạn
             </h3>
             <Button
-              title="Change address"
+              onClick={() => navigate("/addresses")}
+              title="Đổi địa chỉ"
               variant="secondary"
               className="px-2 text-heading-9"
             />
           </div>
-          <div className="mb-[50px] space-y-4">
-            <h5 className="text-heading-7 leading-[30px]">Nguyen Van An</h5>
-            <h5 className="text-heading-7 leading-[30px]">0987654321</h5>
-            <p className="text-philippine-gray">
-              khu pho 6, Linh Trung, Thu Duc, Thanh pho Ho Chi Minh
-            </p>
-          </div>
+          {address ? (
+            <div className="mb-[50px] space-y-4">
+              <h5 className="text-heading-7 leading-[30px]">
+                {address.receiver}
+              </h5>
+              <h5 className="text-heading-7 leading-[30px]">{address.phone}</h5>
+              <p className="text-philippine-gray">
+                {`${address.specificAddress}, ${address.ward}, ${address.district}, ${address.province}`}
+              </p>
+            </div>
+          ) : (
+            <div className="mb-[50px] space-y-4">
+              <p className="text-philippine-gray">Chưa có địa chỉ</p>
+            </div>
+          )}
 
           <h3 className="text-heading-7 leading-[35px] font-bold mb-[30px]">
-            Order Info
+            Thông tin đơn hàng
           </h3>
           <div className="space-y-[25px] mb-[25px]">
             <div className="flex justify-between">
               <h5 className="text-heading-7 leading-[35px] text-philippine-gray">
-                Subtotal
+                Tổng tiền sản phẩm
               </h5>
               <span className="text-body text-heading-7 leading-[30px] font-semibold">
                 {formatPrice(subTotal)}
@@ -246,7 +261,7 @@ const FormCheckout = () => {
             </div>
             <div className="flex justify-between">
               <h5 className="text-heading-7 leading-[35px] text-philippine-gray">
-                Shipping
+                Phí vận chuyển
               </h5>
               <span className="text-body text-heading-7 leading-[30px] font-semibold">
                 {formatPrice(45000)}
@@ -255,7 +270,7 @@ const FormCheckout = () => {
             <div className="w-full h-[1px] bg-black"></div>
             <div className="flex justify-between">
               <h5 className="text-heading-7 leading-[35px] text-philippine-gray">
-                Total
+                Tổng tiền
               </h5>
               <span className="text-body text-heading-7 leading-[30px] font-semibold">
                 {formatPrice(total)}
@@ -266,7 +281,7 @@ const FormCheckout = () => {
           <Button
             onClick={handlePlaceOrder}
             variant="primary"
-            title="Place Order"
+            title="Đặt hàng"
             className="text-heading-8 leading-[27px] font-semibold py-[14px] w-full"
           />
         </div>

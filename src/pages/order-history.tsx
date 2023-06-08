@@ -39,6 +39,19 @@ export default function OrderHistory() {
     }
   };
 
+  const handleTitleButton = (title: string) => {
+    switch (title) {
+      case "pending":
+        return "Đang chuẩn bị";
+      case "delivering":
+        return "Đang giao";
+      case "completed":
+        return "Đã giao";
+      default:
+        return "";
+    }
+  };
+
   useEffect(() => {
     const status = searchParams.get("status");
     if (!status) {
@@ -63,7 +76,9 @@ export default function OrderHistory() {
 
   return (
     <div className="px-[75px] pt-[45px] pb-[100px]">
-      <h3 className="mb-[100px] text-center text-heading-3">Orders History</h3>
+      <h3 className="mb-[100px] text-center text-heading-3">
+        Lịch sử mua hàng
+      </h3>
       <div className="grid grid-cols-10 gap-x-10">
         <div className="col-span-3 space-y-5">
           {orderStatus.map((status) => {
@@ -73,7 +88,7 @@ export default function OrderHistory() {
                   key={status}
                   onClick={handleClickStatus(status)}
                   className="w-full py-3 capitalize"
-                  title={status}
+                  title={handleTitleButton(status)}
                   variant="primary"
                 />
               );
@@ -83,7 +98,7 @@ export default function OrderHistory() {
                 key={status}
                 onClick={handleClickStatus(status)}
                 className="w-full py-3 capitalize"
-                title={status}
+                title={handleTitleButton(status)}
                 variant="secondary"
               />
             );
@@ -96,7 +111,7 @@ export default function OrderHistory() {
             ))
           ) : (
             <div className="flex items-center justify-center h-full">
-              <p className="text-center text-body-1">No data</p>
+              <p className="text-center text-body-1">Không có dữ liệu</p>
             </div>
           )}
         </div>

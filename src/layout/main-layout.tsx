@@ -10,6 +10,7 @@ import { getWishlist } from "../redux/actions/wishlist-action";
 import { getCart } from "../redux/actions/user-action";
 import Cookies from "js-cookie";
 import { selectWishlist } from "../redux/reducers/wishlist-slice";
+import { getAddresses } from "../redux/actions/address-action";
 
 export default function MainLayout() {
   const categories = useAppSelector(selectCategories);
@@ -41,6 +42,14 @@ export default function MainLayout() {
     }
   };
 
+  const handleGetAddresses = async () => {
+    try {
+      await dispatch(getAddresses()).unwrap();
+    } catch (error) {
+      toast.error((error as IResponseError).error);
+    }
+  };
+
   useEffect(() => {
     handleFetchCategories();
   }, []);
@@ -49,6 +58,7 @@ export default function MainLayout() {
     if (token) {
       handleGetWishlist();
       handleGetCart();
+      handleGetAddresses();
     }
   }, [token]);
 

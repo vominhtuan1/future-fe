@@ -22,7 +22,7 @@ export default function Login() {
       const redirectURL = searchParams.get("redirectUrL");
 
       if (username === "" || password === "") {
-        toast.error("Username or Password is empty");
+        toast.error("Tên đăng nhập và mật khẩu không được bỏ trống");
         return;
       }
       const account: AuthenticateLogin = {
@@ -83,13 +83,13 @@ export default function Login() {
       </div>
       <div className="w-1/2 h-full bg-[#f5f5f5] flex flex-col p-20 justify-between items-center">
         <h1 className="w-full max-w-[500px] mx-auto text-4xl text-teal-700 font-extrabold">
-          Future Shop Decor
+          Shop đồ trang trí Future
         </h1>
         <div className="w-full flex flex-col max-w-[500px]">
           <div className="flex flex-col w-full mb-10">
-            <h3 className="mb-2 text-3xl font-semibold">Login</h3>
+            <h3 className="mb-2 text-3xl font-semibold">Đăng nhập</h3>
             <p className="mb-2 text-base">
-              Welcome back! Please enter your details below.
+              Mừng trở lại! Vui lòng nhập các thông tin phía dưới
             </p>
           </div>
           <div className="flex flex-col w-full">
@@ -100,33 +100,33 @@ export default function Login() {
               <input
                 className="w-full mb-[20px] pt-[15px] pb-[15px] pr-[20px] pl-[20px] border-2 focus:border-black"
                 type="text"
-                placeholder="Username"
+                placeholder="Tên đăng nhập"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
               <input
                 className="w-full mb-[20px] pt-[15px] pb-[15px] pr-[20px] pl-[20px] border-2 focus:border-black"
                 type="password"
-                placeholder="Password"
+                placeholder="Mật khẩu"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
               <div className="flex items-center justify-end w-full">
                 <p className="text-sm font-medium underline cursor-pointer whitespace-nowrap underline-offset-2 hover:text-gray-500">
-                  <Link to={"/update-password"}>Forget password?</Link>
+                  <Link to={"/update-password"}>Quên mật khẩu?</Link>
                 </p>
               </div>
               <Button
                 type="submit"
                 className="w-full mt-3 pt-[15px] pb-[15px] pr-[25px] pl-[25px] hover:bg-teal-700 active:bg-teal-900 "
                 variant={"primary"}
-                title="Login"
+                title="Đăng nhập"
               ></Button>
             </form>
           </div>
           <div className="relative flex items-center justify-center w-full py-5">
             <div className="w-full h-[1px] bg-gray-300"></div>
-            <p className="absolute text-md text-black/80 bg-[#f5f5f5]">OR</p>
+            <p className="absolute text-md text-black/80 bg-[#f5f5f5]">HOẶC</p>
           </div>
           <div
             className="w-full text-[#060606] my-2 font-semibold border-2 border-black p-4 text-center flex items-center justify-center cursor-pointer"

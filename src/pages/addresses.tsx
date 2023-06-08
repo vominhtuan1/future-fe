@@ -16,6 +16,7 @@ import {
 import RadioButton from "../components/form/radio-button/radio-button";
 import clsx from "clsx";
 import { Dialog, Transition } from "@headlessui/react";
+import { toast } from "react-hot-toast";
 
 interface FormValue {
   phone: string;
@@ -53,25 +54,36 @@ export default function Addresses() {
     watch,
     setValue,
     getValues,
+    reset,
   } = useForm<FormValue>();
 
-  const onSubmit = (value: FormValue) => {
-    console.log("value: ", value);
-    if (isEdit) {
-      dispatch(
-        updateAddress({
-          _id: selectedAddress?._id,
-          default: value.default === "true" ? true : false,
-          district: value.district,
-          phone: value.phone,
-          province: value.province,
-          receiver: value.receiver,
-          specificAddress: value.specificAddress,
-          ward: value.ward,
-        })
-      );
-    } else {
-      dispatch(createAddress(value));
+  const onSubmit = async (value: FormValue) => {
+    try {
+      if (isEdit) {
+        await dispatch(
+          updateAddress({
+            _id: selectedAddress?._id,
+            default: value.default === "true" ? true : false,
+            district: value.district,
+            phone: value.phone,
+            province: value.province,
+            receiver: value.receiver,
+            specificAddress: value.specificAddress,
+            ward: value.ward,
+          })
+        );
+        toast.success("Cập nhật địa chỉ thành công");
+      } else {
+        dispatch(createAddress(value));
+        toast.success("Tạo địa chỉ thành công");
+      }
+      reset();
+      const addressTitle = document.getElementById("addressTitle");
+      if (addressTitle) {
+        addressTitle.scrollIntoView({ behavior: "smooth" });
+      }
+    } catch (error) {
+      toast.error((error as IResponseError).error);
     }
   };
 
@@ -135,7 +147,9 @@ export default function Addresses() {
   };
 
   useEffect(() => {
-    dispatch(getAddresses()).unwrap();
+    if (addresses.length === 0) {
+      dispatch(getAddresses()).unwrap();
+    }
   }, []);
 
   useEffect(() => {
@@ -160,12 +174,14 @@ export default function Addresses() {
 
   return (
     <div className="px-[75px]">
-      <h3 className="text-center text-heading-3 mt-[50px]">Your Addresses</h3>
+      <h3 id="addressTitle" className="text-center text-heading-3 mt-[50px]">
+        Sổ địa chỉ
+      </h3>
 
       <div className="flex justify-end">
         <Button
           onClick={handleAddNewClick}
-          title="Add Address"
+          title="Thêm địa chỉ"
           variant="primary"
           className="px-6 py-2 mt-20"
         />
@@ -184,7 +200,7 @@ export default function Addresses() {
       </div>
       <div id="create-and-update" className="mt-24 space-y-8">
         <h3 className="text-heading-6">
-          {isEdit ? "Edit Address" : "Add New Address"}
+          {isEdit ? "Cập nhật địa chỉ" : "Thêm mới địa chỉ"}
         </h3>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -196,9 +212,14 @@ export default function Addresses() {
             variation="outlined"
             className="w-full"
             error={errors.receiver?.message}
-            option={{ required: { value: true, message: "Fill out the name" } }}
-            label="Name of receiver"
-            placeholder="John"
+            option={{
+              required: {
+                value: true,
+                message: "Vui lòng nhập tên người nhận",
+              },
+            }}
+            label="Tên người nhận"
+            placeholder="Nguyễn Văn A"
           />
           <Input
             register={register}
@@ -206,20 +227,25 @@ export default function Addresses() {
             variation="outlined"
             error={errors.phone?.message}
             option={{
-              required: { value: true, message: "Fill out phone number" },
+              required: { value: true, message: "Vui lòng nhập số điện thoại" },
             }}
             className="w-full"
-            label="Phone of receiver"
+            label="Số điện thoại người nhận"
             placeholder="0987654321"
           />
           <Select
             register={register}
             name="province"
-            label="Province"
-            placeholder="Select province"
+            label="Tỉnh/Thành phố"
+            placeholder="Chọn tỉnh/thành phố"
             error={errors.province?.message}
             value={selectedProvince}
-            rules={{ required: { value: true, message: "Select province" } }}
+            rules={{
+              required: {
+                value: true,
+                message: "Vui lòng chọn tỉnh/thành phố",
+              },
+            }}
             options={adminstrative.map((item) => ({
               value: item.provinceName,
               label: item.provinceName,
@@ -229,12 +255,14 @@ export default function Addresses() {
           />
           <Select
             register={register}
-            label="District"
-            placeholder="Select district"
+            label="Quận/Huyện"
+            placeholder="Chọn quận/huyện"
             name="district"
             error={errors.district?.message}
             value={selectedDistrict}
-            rules={{ required: { value: true, message: "Select district" } }}
+            rules={{
+              required: { value: true, message: "vui lòng chọn quận/huyện" },
+            }}
             options={
               availabelDistricts?.districts.map((item) => ({
                 value: item.districtName,
@@ -246,12 +274,14 @@ export default function Addresses() {
           />
           <Select
             register={register}
-            label="Ward"
-            placeholder="Select ward"
+            label="Xã/Thị trấn"
+            placeholder="Chọn xã/thị trấn"
             name="ward"
             error={errors.ward?.message}
             value={selectedWard}
-            rules={{ required: { value: true, message: "Select ward" } }}
+            rules={{
+              required: { value: true, message: "Vui lòng chọn xã/thị trấn" },
+            }}
             options={
               availableWards?.wards.map((item) => ({
                 value: item.wardName,
@@ -266,12 +296,15 @@ export default function Addresses() {
             register={register}
             name="specificAddress"
             className="w-full"
-            label="Specific Address"
+            label="Địa chỉ cụ thể"
             option={{
-              required: { value: true, message: "Write your specific address" },
+              required: {
+                value: true,
+                message: "Vui lòng nhập địa chỉ cụ thể",
+              },
             }}
             error={errors.specificAddress?.message}
-            placeholder="Write your specific address..."
+            placeholder="Nhập địa chỉ cụ thể..."
             variation="outlined"
           />
           {isEdit && !selectedAddress?.default && (
@@ -282,19 +315,22 @@ export default function Addresses() {
                   errors.default?.message && "text-red-500"
                 )}
               >
-                Default
+                Mặc định
               </h3>
               <div className="flex gap-x-4">
                 {["true", "false"].map((item) => (
                   <RadioButton
                     key={item}
                     option={{
-                      required: { value: true, message: "Is it default?" },
+                      required: {
+                        value: true,
+                        message: "Nó có phải địa chỉ mặc định không?",
+                      },
                     }}
                     name="default"
                     register={register}
                     defaultChecked={isDefault === item}
-                    label={item}
+                    label={item === "true" ? "Có" : "Không"}
                     value={item}
                   />
                 ))}
@@ -304,7 +340,7 @@ export default function Addresses() {
 
           <Button
             className="col-start-2 py-5"
-            title="Submit"
+            title="Xong"
             type="submit"
             variant="primary"
           />
@@ -325,7 +361,7 @@ export default function Addresses() {
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
+            <div className="flex items-center justify-center min-h-full p-4 text-center">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -335,19 +371,19 @@ export default function Addresses() {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-md p-6 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl">
                   <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Do you want to delete it?
+                    Bạn có muốn xóa nó không?
                   </Dialog.Title>
 
-                  <div className="mt-4 flex justify-end">
+                  <div className="flex justify-end mt-4">
                     <Button
                       onClick={handleDelete}
                       className="px-6 py-2 bg-red-accent"
-                      title="Yes"
+                      title="Có"
                       variant="teritary"
                       type="button"
                     />

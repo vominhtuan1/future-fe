@@ -19,7 +19,7 @@ export default function AddressCard({
     <div className="relative group border-[1px] px-4 py-3 border-light-gray overflow-hidden">
       {address.default && (
         <div className="absolute p-2 text-white rounded top-3 right-4 bg-dark-slate-gray text-heading-10">
-          Default
+          Mặc định
         </div>
       )}
 

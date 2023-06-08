@@ -24,16 +24,16 @@ export default function OrderHistoryCard({ order }: Props) {
       />
       {order.orderItemsLength > 1 && (
         <p className="text-heading-8">
-          and{" "}
+          và{" "}
           <span className="font-bold">
-            {order.orderItemsLength - 1} other
+            {order.orderItemsLength - 1} khác
             {order.orderItemsLength - 1 > 1 ? " products" : " product"}
           </span>
         </p>
       )}
       <Button
         className="absolute px-5 py-2 right-5 bottom-5"
-        title="See Detail"
+        title="Xem chi tiết"
         variant="secondary"
       />
     </div>
