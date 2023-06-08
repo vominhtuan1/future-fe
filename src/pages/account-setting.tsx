@@ -70,10 +70,10 @@ export default function AccountSettingPage() {
       setUserInfo(res);
       setUserAvatar(res.avatar);
       setIsChange(false);
-      toast.success("Update user info successful");
+      toast.success("Cập nhập thông tin thành công");
     } catch (error) {
       console.log(error);
-      toast.error("Update user info fail");
+      toast.error("Cập nhập thông tin thất bại");
     }
   };
   useEffect(() => {
@@ -100,7 +100,7 @@ export default function AccountSettingPage() {
               onChange={handleAvatarInput}
             />
             <Button
-              title="Choose file"
+              title="Chọn ảnh"
               variant="secondary"
               className="px-2 py-3 text-heading-10"
               onClick={handleChangeAvatar}
@@ -119,7 +119,7 @@ export default function AccountSettingPage() {
           <div className="flex flex-col justify-between mr-4">
             <div className="flex items-center mb-4">
               <h3 className="w-[100px] leading-[35px] font-bold mr-[50px]">
-                Name
+                Tên
               </h3>
               <div className="flex items-center">
                 {isChange ? (
@@ -159,7 +159,7 @@ export default function AccountSettingPage() {
             </div>
             <div className="flex items-center mb-4">
               <h3 className="w-[100px] leading-[35px] font-bold mr-[50px]">
-                Birthday
+                Ngày sinh
               </h3>
               <div className="flex items-center">
                 {isChange ? (
@@ -185,7 +185,7 @@ export default function AccountSettingPage() {
               <React.Fragment></React.Fragment>
             ) : (
               <Button
-                title="Change your info"
+                title="Cập nhập thông tin"
                 variant="secondary"
                 className="px-2 py-3 text-heading-10"
                 onClick={handleChange}
@@ -196,7 +196,7 @@ export default function AccountSettingPage() {
         {isChange ? (
           <div className="flex justify-end">
             <Button
-              title="Confirm"
+              title="Xác nhận"
               variant="primary"
               className="py-3 font-medium text-white px-14"
               // onClick={handleConfirm}

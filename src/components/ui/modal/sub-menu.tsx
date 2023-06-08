@@ -58,6 +58,20 @@ export default function SubMenu() {
               {({ active }) => (
                 <button
                   onClick={() => {
+                    navigate("/addresses");
+                  }}
+                  className={`${
+                    active ? "bg-dark-slate-gray text-white" : "text-gray-900"
+                  } group flex w-full items-center px-4 py-2 text-sm whitespace-nowrap`}
+                >
+                  Sổ địa chỉ
+                </button>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <button
+                  onClick={() => {
                     navigate("/wishlist");
                   }}
                   className={`${

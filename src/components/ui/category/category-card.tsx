@@ -22,7 +22,7 @@ export default function CategoryCard({ title, subTitle, image, _id }: Props) {
           onClick={() => {
             navigate(`/shop?categoryName=${title}`);
           }}
-          title="Shop now"
+          title="Mua ngay"
           variant="secondary"
           className="px-10 py-3 mb-6 capitalize"
         />

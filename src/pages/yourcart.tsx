@@ -47,38 +47,38 @@ export default function YourCart() {
             </div>
           </div>
           <div className="bg-scarlet py-[30px] px-[27px] h-fit ">
-            <h5 className="text-[20px] leading-[35px] font-bold mb-[30px]">
-              Cart Total
+            <h5 className="text-[24px] leading-[35px] font-bold mb-[30px]">
+              Tổng giỏ hàng
             </h5>
             <div className="space-y-[25px]">
               <div className="flex justify-between">
-                <p className="text-[20px] leading-[35px] text-philippine-gray ">
-                  Subtotal
+                <p className="text-[18px] leading-[35px] text-philippine-gray ">
+                  Giá trị sản phẩm
                 </p>
-                <p className="text-[20px] leading-[30px] font-semibold">
+                <p className="text-[18px] leading-[30px] font-semibold">
                   {formatPrice(subToTal)}
                 </p>
               </div>
               <div className="flex justify-between">
-                <p className="text-[20px] leading-[35px] text-philippine-gray ">
-                  Shipping fee
+                <p className="text-[18px] leading-[35px] text-philippine-gray ">
+                  Phí giao hàng
                 </p>
-                <p className="text-[20px] leading-[30px] font-semibold">
+                <p className="text-[18px] leading-[30px] font-semibold">
                   {formatPrice(shippingFee)}
                 </p>
               </div>
               <div className="border-b-[1px] border-black "></div>
               <div className="flex justify-between">
-                <p className="text-[20px] leading-[35px] text-philippine-gray ">
-                  Total
+                <p className="text-[18px] leading-[35px] text-philippine-gray ">
+                  Thành tiền
                 </p>
-                <p className="text-[20px] leading-[30px] font-semibold">
+                <p className="text-[18px] leading-[30px] font-semibold">
                   {formatPrice(subToTal + shippingFee)}
                 </p>
               </div>
               <Button
                 onClick={handleCheckout}
-                title="Checkout Now"
+                title="Mua ngay "
                 variant="primary"
                 className="py-[15px] w-full"
               />

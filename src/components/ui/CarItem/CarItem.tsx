@@ -43,7 +43,7 @@ const CartItem = ({ cartItem }: Props) => {
           />
         </div>
         <div>
-          <h2 className="text-[20px] leading-[35px] font-bold mb-[15px] line-clamp-2">
+          <h2 className="text-[18px] leading-[35px] font-bold mb-[15px] line-clamp-2">
             {cartItem.name}
           </h2>
           <p className="text-green-600 text-[20px] leading-[30px] font-bold">

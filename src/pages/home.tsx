@@ -48,9 +48,7 @@ export default function Home() {
                   _id={item._id}
                   image={item.image}
                   title={item.name}
-                  subTitle={
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit."
-                  }
+                  subTitle={"Sản phẩm đa dạng, đáp ứng nhu cầu của bạn."}
                 />
               </SwiperSlide>
             ))}
@@ -59,9 +57,12 @@ export default function Home() {
       {/* Newest Products */}
       <div className="mb-[100px]">
         <div className="mx-auto text-center w-fit mb-[50px]">
-          <h3 className="mb-4 font-bold text-heading-5">Our Newest Product</h3>
+          <h3 className="mb-4 font-bold text-heading-5">
+            Sản phẩm mới nhất của chúng tôi
+          </h3>
           <p className="text-body-1 w-[471px] text-philippine-gray">
-            Made of the best materials and with a design that follows the times
+            Được làm từ những chất liệu tốt nhất với thiết kế hợp xung hướng
+            hiện tại
           </p>
         </div>
 

@@ -7,14 +7,14 @@ export default function BannerHome() {
   return (
     <div className="grid grid-cols-2 px-[75px] gap-x-28 bg-scarlet">
       <div className="flex flex-col justify-center">
-        <p className="capitalize text-body-1">Interior Needs</p>
+        <p className="capitalize text-body-1">Trang Trí</p>
         <h3 className="text-heading-3 mt-5 leading-[60px] mb-[30px] font-bold">
-          Various
-          <TextCustomUnderline text=" new collections " />
-          of furniture to decorate the corner of your house.
+          Nhiều
+          <TextCustomUnderline text=" bộ sưu tập mới " />
+          để trang trí căn phòng của bạn.
         </h3>
         <Button
-          title="Shop now"
+          title="Mua ngay"
           variant="secondary"
           className="px-[60px] w-fit py-5 capitalize text-heading-6"
         />
@@ -51,26 +51,6 @@ export default function BannerHome() {
           ></path>
           <image xlinkHref="/vase.jpg" clipPath="url(#shape)" />
         </svg>
-
-        {/* <svg
-					xmlns="http://www.w3.org/2000/svg"
-					version="1.1"
-					xmlns:xlink="http://www.w3.org/1999/xlink"
-					xmlns:svgjs="http://svgjs.dev/svgjs"
-					viewBox="0 0 600 600"
-					opacity="1"
-				>
-					<path
-						d="M294.1068536455309 108.28835662058236C259.22661225148795 117.86919514190397 225.99308157114942 133.43805932850879 206.98110596486686 164.87518675974252C187.9691303585843 196.31231419097625 167.4601480180895 260.38417672963186 180.0350000078356 296.9111212079847C192.6098519975817 333.43806568633755 239.76554759491242 381.04284524769827 282.4302179033434 384.0368536298597C325.0948882117744 387.03086201202115 416.4122430498278 343.91708739450814 436.02302185842154 314.87517150095346C455.6338006670153 285.83325560739877 403.38830200978873 244.36619424672168 400.0948907549059 209.78535826853158C396.8014795000231 175.2045222903415 433.92722718068717 124.3063225731377 416.26255432912467 107.39015563181283C398.59788147756217 90.47398869048796 328.9870950395739 98.70751809926075 294.1068536455309 108.28835662058236C259.22661225148795 117.86919514190397 225.99308157114942 133.43805932850879 206.98110596486686 164.87518675974252 "
-						fill="hsl(340, 45%, 50%)"
-						transform="matrix(1.782421047822822,0,0,1.782421047822822,-250.40259540839077,-128.492676335819)"
-						stroke-width="0"
-						stroke="hsl(340, 45%, 30%)"
-						fill-opacity="1"
-					></path>
-					
-					<defs></defs>
-				</svg> */}
       </div>
     </div>
   );

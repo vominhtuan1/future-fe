@@ -43,13 +43,15 @@ export default function FormComment({ defaultValue, onSubmit }: Props) {
 
   return (
     <form onSubmit={handleSubmit(handleSubmitComment)}>
-      <h3 className="mb-10 text-center text-heading-6">Write your review</h3>
+      <h3 className="mb-10 text-center text-heading-6">
+        Cảm nhận của bạn về sản phẩm
+      </h3>
 
       <Controller
         name={"rate"}
         defaultValue={0}
         rules={{
-          required: { value: true, message: "Rate is required" },
+          required: { value: true, message: "Hãy chọn sao cho sản phẩm" },
           min: { value: 1, message: "Rate from 1 to 5 stars" },
         }}
         control={control}
@@ -64,7 +66,7 @@ export default function FormComment({ defaultValue, onSubmit }: Props) {
                 invalid && "text-red-accent"
               )}
             >
-              Your Rating
+              Số sao
             </h5>
             <StyledRating
               value={Number(value)}
@@ -90,18 +92,20 @@ export default function FormComment({ defaultValue, onSubmit }: Props) {
         )}
       />
       <TextArea
-        label="Your Review"
-        placehodler="Write your review here...."
+        label="Đánh giá của bạn"
+        placehodler="Viết đánh giá của bạn tại đây...."
         className="w-full text-body-3 py-[13px] px-[22px]"
         labelClassName="text-heading-8"
         register={register}
         name="review"
-        option={{ required: { value: true, message: "Review is required" } }}
+        option={{
+          required: { value: true, message: "Bạn hãy nhập bình luận" },
+        }}
         error={errors.review?.message}
       />
       <Button
         type="submit"
-        title="Submit"
+        title="Xong"
         variant="primary"
         className="py-[13px] px-[50px] text-[16px] mt-[30px]"
       />
