@@ -128,9 +128,7 @@ const DescriptionReview = ({ decription, comments }: Props) => {
                 _id={item._id}
                 image={item.image}
                 title={item.name}
-                subTitle={
-                  "Lorem ipsum dolor sit amet consectetur adipisicing elit."
-                }
+                subTitle={"Sản phẩm đa dạng, phù hợp với nhu cầu của bạn"}
               />
             </SwiperSlide>
           ))}

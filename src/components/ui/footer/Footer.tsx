@@ -18,9 +18,9 @@ const Footer = () => {
             <FutureIcon />
           </div>
           <p className="mb-[30px]">
-            Lorem ipsum dolor sit amet litam consectetur adipiscing elit,
-            facilisi vivamus proin lit laoreet phasel alilus porttitor inter,
-            facilisis condiment tarime egestas rhoncus dapibus iaculis alemir.
+            Cửa hàng chúng tôi chuyên cung cấp các sản phẩm trang trí phòng như
+            đèn, tranh treo tường, đồng hồ, thảm, cốc, ... Hãy truy cập vào
+            website để khám phá thêm nhiều sản phẩm hấp dẫn khác.
           </p>
           <div className="flex gap-x-5">
             <CircleBtn type="wheat">
@@ -40,31 +40,31 @@ const Footer = () => {
 
         <div>
           <h5 className="text-heading-7 leading-[35px] font-semibold mb-5">
-            Customer
+            Khách hàng
           </h5>
           <ul className="space-y-5 text-heading-9 whitespace-nowrap">
-            <li>Order Status</li>
-            <li>Collections</li>
-            <li>Our Story</li>
-            <li>Affiliates</li>
-            <li>Security</li>
+            <li>Trạng thái đơn hàng</li>
+            <li>Bộ sưu tập</li>
+            <li>Blog</li>
+            <li>Chi nhánh</li>
+            <li>Bảo mật</li>
           </ul>
         </div>
 
         <div>
           <h5 className="text-heading-7 leading-[35px] font-semibold mb-5">
-            Information
+            Thông tin
           </h5>
           <ul className="space-y-5 text-heading-9 whitespace-nowrap">
-            <li>Customer Service</li>
-            <li>Careers</li>
+            <li>Chăm sóc khách hàng</li>
+            <li>Tuyển dụng</li>
             <li>FAQ</li>
           </ul>
         </div>
 
         <div className="shrink-0">
           <h5 className="text-heading-7 leading-[35px] font-semibold mb-5">
-            Follow Us
+            Theo dõi chúng tôi
           </h5>
 
           <div className="grid grid-cols-3 gap-x-[15px] gap-y-5">

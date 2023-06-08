@@ -26,11 +26,11 @@ const ProductCard = ({ product }: Props) => {
   const handleFavorite = async () => {
     if (!love) {
       await userApi.insertWishlistItem(product._id);
-      toast.success("Insert wishlist item success!");
+      toast.success("Thêm sản phẩm yêu thích thành công!");
       setLove(true);
     } else {
       await userApi.deleteWishlistItem(product._id);
-      toast.success("Delete wishlist item success!");
+      toast.success("Xóa sản phẩm yêu thích thành công!");
       setLove(false);
     }
   };
@@ -64,7 +64,7 @@ const ProductCard = ({ product }: Props) => {
         className="absolute text-body-3 leading-[21px] px-2 
             py-[2px] text-white bg-red-600 rounded-lg top-5 right-4"
       >
-        New
+        Mới
       </span>
 
       <div className="absolute transition-all duration-300 inset-y-32 group-hover:right-3 -right-12">

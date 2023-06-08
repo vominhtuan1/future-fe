@@ -6,24 +6,23 @@ function Strengths() {
     <div className="flex gap-x-[85px]">
       <div className="w-1/2">
         <h1 className="font-bold text-heading-3">
-          We guarantee the safety of your shopping
+          Chúng tôi đảm bảo cho đơn hàng của bạn
         </h1>
         <div className="mt-[50px] grid grid-cols-2 gap-[50px]">
-          <AboutCard title="Fast Shipping" icon="rocket">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry Lorem Ipsum has
+          <AboutCard title="Giao hàng nhanh" icon="rocket">
+            Liên kết với các đơn vị vận chuyển như Grab, Ninja Van, Giao hàng
+            tiết kiệm. Đảm bảo đơn hàng giao đúng hẹn.
           </AboutCard>
-          <AboutCard title="Safe Delivery" icon="lock">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry Lorem Ipsum has
+          <AboutCard title="Giao hàng an toàn" icon="lock">
+            Sản phẩm bạn mua được vận chuyển cẩn thận. Đảm bảo không bị móp méo
+            hay hư hỏng.
           </AboutCard>
-          <AboutCard title="365 Days Return" icon="reload">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry Lorem Ipsum has
+          <AboutCard title="7 ngày đổi trả" icon="reload">
+            Khách hàng có thể đổi trả trong vòng 7 ngày kể từ ngày nhận hàng.
           </AboutCard>
-          <AboutCard title="24 Hours CS" icon="phone">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry Lorem Ipsum has
+          <AboutCard title="Sẵn sàng tư vấn 24/7" icon="phone">
+            Đội ngũ tư vấn luôn có mặt để giải đáp thắc mắc của bạn mọi lúc, mọi
+            nơi.
           </AboutCard>
         </div>
       </div>
